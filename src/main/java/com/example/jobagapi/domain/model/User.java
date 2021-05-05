@@ -21,7 +21,7 @@ public class User extends AuditModel{
     @NotNull
     private String email;
     @NotNull
-    private String number;
+    private Long number;
     @NotNull
     private String password;
 
@@ -57,11 +57,11 @@ public class User extends AuditModel{
         this.email = email;
     }
 
-    public String getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
