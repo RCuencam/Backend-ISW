@@ -14,7 +14,11 @@ public class User extends AuditModel{
     private Long id;  //SOLOID
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="postulant_id",referencedColumnName = "id")
-    public Postulant postulant;
+    private Postulant postulant;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="employeer_id",referencedColumnName = "id")
+    private Employeer employeer;
 
     @NotNull
     private String firstname;
@@ -85,5 +89,13 @@ public class User extends AuditModel{
 
     public void setPostulant(Postulant postulant) {
         this.postulant = postulant;
+    }
+
+    public Employeer getEmployeer() {
+        return employeer;
+    }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
     }
 }

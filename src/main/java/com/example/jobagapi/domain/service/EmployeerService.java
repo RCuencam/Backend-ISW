@@ -10,6 +10,6 @@ public interface EmployeerService {
     Page<Employeer> getAllEmployeers(Pageable pageable);
     Employeer getEmployeerById(Long employeerId);
     Employeer createEmployeer(Employeer employeer);
-    Employeer updateEmployeer(Long employeerId,Employeer postRequest);
+
     ResponseEntity<?> deleteEmployeer(Long employeerId);
 }
