@@ -5,32 +5,21 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "postulants")
+@Table(name = "postulant")
 public class Postulant extends AuditModel{
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        public Long id;
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "id")
+        private Long id;
+        @OneToOne(mappedBy = "postulant")
+        private User user;
 
-        @NotNull
-        private String firstname;
-
-        @NotNull
-        private String lastname;
-
-        @Column(unique = true)
-        @NotNull
-        private String email;
-
-        @NotNull
-        private Long number;
-
-        @NotNull
-        private String password;
 
         @NotNull
         public String document;
-
+        @NotNull
+        public String password;
         @NotNull
         public Date birthday;
         @NotNull
@@ -45,37 +34,7 @@ public class Postulant extends AuditModel{
             this.id = id;
         }
 
-        public String getFirstname() {
-            return firstname;
-        }
 
-        public void setFirstname(String firstname) {
-            this.firstname = firstname;
-        }
-
-        public String getLastname() {
-            return lastname;
-        }
-
-        public void setLastname(String lastname) {
-            this.lastname = lastname;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public Long getNumber() {
-            return number;
-        }
-
-        public void setNumber(Long number) {
-            this.number = number;
-        }
 
         public String getPassword() {
             return password;
