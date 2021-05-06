@@ -4,14 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Inheritance(strategy =InheritanceType.JOINED) //herencia preguntar profe
 @Table(name = "users")
 
 public class User extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
+    @Column(name="id")
     private Long id;  //SOLOID
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="postulant_id",referencedColumnName = "id")
+    public Postulant postulant;
 
     @NotNull
     private String firstname;
@@ -24,6 +27,9 @@ public class User extends AuditModel{
     private Long number;
     @NotNull
     private String password;
+
+
+
 
     public Long getId() {
         return id;
@@ -71,5 +77,13 @@ public class User extends AuditModel{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Postulant getPostulant() {
+        return postulant;
+    }
+
+    public void setPostulant(Postulant postulant) {
+        this.postulant = postulant;
     }
 }

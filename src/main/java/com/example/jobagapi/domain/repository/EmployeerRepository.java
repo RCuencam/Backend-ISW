@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeerRepository extends JpaRepository<Employeer,Long> {
-    Page<Employeer> findByCompanyProfileId(Long company_profile_id,Pageable pageable );
 }
