@@ -24,7 +24,7 @@ public class CompanyProfile {
     @NotNull
     private String country;
 
-    @JoinColumn(name="employeer_id")
+    @JoinColumn(name="id")
     @OneToOne(fetch = FetchType.LAZY)
     private Employeer employeer;
 

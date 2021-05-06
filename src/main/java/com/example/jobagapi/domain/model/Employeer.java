@@ -9,6 +9,7 @@ public class Employeer extends AuditModel{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+
         public Long id;
 
         @NotNull
@@ -31,6 +32,7 @@ public class Employeer extends AuditModel{
         private String password;
 
         @OneToOne(mappedBy = "employeer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @PrimaryKeyJoinColumn
         private CompanyProfile company_profile;
 
         public Employeer(){}
