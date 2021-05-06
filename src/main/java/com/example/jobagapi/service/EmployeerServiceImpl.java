@@ -36,18 +36,7 @@ public class EmployeerServiceImpl implements EmployeerService {
         return employeerRepository.save(employeer);
     }
 
-    @Override
-    public Employeer updateEmployeer(Long employeerId, Employeer postRequest) {
-        Employeer employeer =employeerRepository.findById(employeerId)
-                .orElseThrow(()->new ResourceNotFoundException("Employeer","Id",employeerId));
-        return employeerRepository.save(
-                employeer.setFirstname(postRequest.getFirstname())
-                .setPosicion(postRequest.getPosicion())
-                .setLastname(postRequest.getLastname())
-                .setEmail(postRequest.getEmail())
-                .setNumber(postRequest.getNumber())
-                .setPassword(postRequest.getPassword()));
-    }
+    
 
     @Override
     public ResponseEntity<?> deleteEmployeer(Long employeerId) {

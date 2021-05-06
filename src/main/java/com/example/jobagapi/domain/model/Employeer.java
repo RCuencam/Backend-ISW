@@ -8,42 +8,21 @@ import javax.validation.constraints.NotNull;
 public class Employeer extends AuditModel{
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-        public Long id;
-
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "id")
+        private Long id;
+        @OneToOne(mappedBy = "employeer")
+        private User user;
         @NotNull
         public String posicion;
 
-        @NotNull
-        private String firstname;
 
-        @NotNull
-        private String lastname;
-
-        @Column(unique = true)
-        @NotNull
-        private String email;
-
-        @NotNull
-        private Long number;
-
-        @NotNull
-        private String password;
-
-        @OneToOne(mappedBy = "employeer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @PrimaryKeyJoinColumn
-        private CompanyProfile company_profile;
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name ="company_profile_id",referencedColumnName = "id")
+        private CompanyProfile companyProfile;
 
         public Employeer(){}
-        public Employeer(@NotNull String posicion, @NotNull String firstname, @NotNull String lastname, @NotNull String email, @NotNull Long number, @NotNull String password) {
-                this.posicion = posicion;
-                this.firstname = firstname;
-                this.lastname = lastname;
-                this.email = email;
-                this.number = number;
-                this.password = password;
-        }
+
 
         public Long getId() {
                 return id;
@@ -63,48 +42,5 @@ public class Employeer extends AuditModel{
                 return this;
         }
 
-        public String getFirstname() {
-                return firstname;
-        }
 
-        public Employeer setFirstname(String firstname) {
-                this.firstname = firstname;
-                return this;
-        }
-
-        public String getLastname() {
-                return lastname;
-        }
-
-        public Employeer setLastname(String lastname) {
-                this.lastname = lastname;
-                return this;
-        }
-
-        public String getEmail() {
-                return email;
-        }
-
-        public Employeer setEmail(String email) {
-                this.email = email;
-                return this;
-        }
-
-        public Long getNumber() {
-                return number;
-        }
-
-        public Employeer setNumber(Long number) {
-                this.number = number;
-                return this;
-        }
-
-        public String getPassword() {
-                return password;
-        }
-
-        public Employeer setPassword(String password) {
-                this.password = password;
-                return this;
-        }
 }

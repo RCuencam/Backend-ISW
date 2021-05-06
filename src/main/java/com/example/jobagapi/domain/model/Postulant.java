@@ -16,14 +16,17 @@ public class Postulant extends AuditModel{
         private User user;
 
 
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name ="Professional_Profile_Id",referencedColumnName = "id")
+        private ProfessionalProfile profesionalId;
+
+
         @NotNull
-        public String document;
+        private String document;
         @NotNull
-        public String password;
+        private Date birthday;
         @NotNull
-        public Date birthday;
-        @NotNull
-        public String civil_status;
+        private String civil_status;
 
 
         public Long getId() {
@@ -35,14 +38,6 @@ public class Postulant extends AuditModel{
         }
 
 
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
 
         public String getDocument() {
             return document;

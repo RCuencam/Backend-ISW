@@ -7,10 +7,13 @@ import java.util.Date;
 
 @Entity
 @Table(name = "company_profile")
-public class CompanyProfile {
+public class CompanyProfile extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+    @OneToOne(mappedBy = "companyProfile")
+    private Employeer employeer;
 
     @NotNull
     private String direction;
@@ -24,9 +27,7 @@ public class CompanyProfile {
     @NotNull
     private String country;
 
-    @JoinColumn(name="id")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Employeer employeer;
+
 
     public Long getId() {
         return id;
