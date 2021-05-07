@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/employeers")
+@RequestMapping("/api")
 public class EmployeerController {
     @Autowired
     private EmployeerService employeerService;
@@ -43,8 +43,8 @@ public class EmployeerController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @PostMapping("/posts")
-    public EmployeerResource createPost(@Valid @RequestBody SaveEmployeerResource resource) {
+    @PostMapping("/employeers")
+    public EmployeerResource createEmployeer(@Valid @RequestBody SaveEmployeerResource resource) {
         Employeer employeer = convertToEntity(resource);
         return convertToResource(employeerService.createEmployeer(employeer));
     }
