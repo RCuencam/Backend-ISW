@@ -2,6 +2,7 @@ package com.example.jobagapi.domain.controller;
 
 import com.example.jobagapi.domain.model.Employeer;
 import com.example.jobagapi.domain.resource.EmployeerResource;
+import com.example.jobagapi.domain.resource.SaveEmployeerResource;
 import com.example.jobagapi.domain.service.EmployeerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -42,7 +43,15 @@ public class EmployeerController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
+    @PostMapping("/posts")
+    public EmployeerResource createPost(@Valid @RequestBody SaveEmployeerResource resource) {
+        Employeer employeer = convertToEntity(resource);
+        return convertToResource(employeerService.createEmployeer(employeer));
+    }
 
+    private Employeer convertToEntity(SaveEmployeerResource resource) {
+        return mapper.map(resource, Employeer.class);
+    }
     private EmployeerResource convertToResource(Employeer entity)
     {
         return mapper.map(entity, EmployeerResource.class);
