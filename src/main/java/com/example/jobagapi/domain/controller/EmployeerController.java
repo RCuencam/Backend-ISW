@@ -16,30 +16,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/empl")
+@RequestMapping("/employeers")
 public class EmployeerController {
     @Autowired
     private EmployeerService employeerService;
 
+    @Autowired
+    private ModelMapper mapper;
+
     @Operation(summary="Get Employeers", description="Get All Employeers", tags={"employeers"})
-    @ApiResponses(value={
-            @ApiResponse(responseCode="200",description="All employeers returned",content=@Content(mediaType = "application/json"))
-    })
     @GetMapping("/employeers")
-    public Page<Employeer> getAllEmployeers(Pageable pageable){
+    public Page<EmployeerResource> getAllEmployeers(Pageable pageable){
         Page<Employeer> employeerPage = employeerService.getAllEmployeers(pageable);
-        return employeerPage;
-        /*List<EmployeerResource> resources = employeerPage.getContent()
+        List<EmployeerResource> resources = employeerPage.getContent()
                 .stream()
-                .map(this::ConvertToResource)
+                .map(this::convertToResource)
                 .collect(Collectors.toList());
 
-        return new PageImpl<>(resources, pageable, resources.size());*/
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    private EmployeerResource convertToResource(Employeer entity)
+    {
+        return mapper.map(entity, EmployeerResource.class);
     }
 }
