@@ -68,4 +68,8 @@ public class CompanyProfile extends AuditModel{
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
+    }
 }
