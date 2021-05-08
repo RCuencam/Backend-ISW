@@ -13,4 +13,5 @@ public interface EmployeerService {
     Employeer createEmployeer(Employeer employeer);
 
     ResponseEntity<?> deleteEmployeer(Long employeerId);
+    Employeer getEmployeerByPosicion(String posicion);
 }

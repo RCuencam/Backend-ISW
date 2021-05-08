@@ -4,8 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class SaveUserResource {
 
-    @NotNull
-    public Long id;
+
     @NotNull
     private String firstname;
     @NotNull
@@ -17,13 +16,7 @@ public class SaveUserResource {
     @NotNull
     private String password;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;

@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EmployeerServiceImpl implements EmployeerService {
     @Autowired
@@ -42,5 +44,11 @@ public class EmployeerServiceImpl implements EmployeerService {
         return ResponseEntity.ok().build();
     }
 
+
+    @Override
+    public Employeer getEmployeerByPosicion(String posicion) {
+        return employeerRepository.findByPosicion(posicion)
+                .orElseThrow(() -> new ResourceNotFoundException("Employeer", "Posicion", posicion));
+    }
 
 }
