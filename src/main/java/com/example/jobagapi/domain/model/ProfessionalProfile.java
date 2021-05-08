@@ -2,6 +2,7 @@ package com.example.jobagapi.domain.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "professional_profile")
@@ -10,9 +11,10 @@ public class ProfessionalProfile extends AuditModel{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    @OneToOne(mappedBy = "profesionalId")
-    private Postulant postulant;
 
+
+    @OneToOne(mappedBy = "professionalProfile")
+    private Postulant postulant;
 
     private String ocupation;
     private String video;
@@ -26,13 +28,7 @@ public class ProfessionalProfile extends AuditModel{
         this.id = id;
     }
 
-    public Postulant getPostulant() {
-        return postulant;
-    }
 
-    public void setPostulant(Postulant postulant) {
-        this.postulant = postulant;
-    }
 
     public String getOcupation() {
         return ocupation;
