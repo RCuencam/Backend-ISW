@@ -1,6 +1,8 @@
 package com.example.jobagapi.domain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -25,6 +27,10 @@ public class Interview extends AuditModel {
     @NotNull
     public Date date;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "interviews_id", nullable = false)
+    @JsonIgnore
+    private Postulant postulant;
 
     public long getId() {
         return id;
