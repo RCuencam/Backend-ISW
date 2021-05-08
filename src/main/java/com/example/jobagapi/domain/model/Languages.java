@@ -11,7 +11,6 @@ public class Languages extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @NotNull
     private Long id;
 
     @NotNull
@@ -25,9 +24,9 @@ public class Languages extends AuditModel{
     }
 
     //Relacion
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "languages_id", referencedColumnName = "id", nullable = false)
-    private ProfessionalProfile professionalProfile;
+    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "professional_profile", referencedColumnName = "id", nullable = false)
+    private ProfessionalProfile professionalProfile;*/
 
     public Languages setId(Long id) {
         this.id = id;

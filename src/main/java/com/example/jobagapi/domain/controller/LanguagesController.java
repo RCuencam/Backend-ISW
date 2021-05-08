@@ -25,7 +25,7 @@ public class LanguagesController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary = "Get Languages", description = "Get All Languages", tags = {"languages"})
+    @Operation(summary = "Get Languages", description = "Get All Languages", tags = {"Languages"})
     @GetMapping("/languages")
     public Page<LanguagesResource> getAllLanguages(Pageable pageable){
         Page<Languages> languagesPage = languagesService.getAllLanguages(pageable);
@@ -35,20 +35,22 @@ public class LanguagesController {
                 .collect(Collectors.toList());
         return new PageImpl<>(resources,pageable, resources.size());
     }
-
+    @Operation(summary = "Post Languages", description = "Post Languages", tags = {"Languages"})
     @PostMapping("/languages")
     public LanguagesResource createLanguages(@Valid @RequestBody SaveLanguaguesResource resource){
         Languages languages = convertToEntity(resource);
         return  convertToResource(languagesService.createLanguages(languages));
     }
 
+    @Operation(summary = "Get Languages by Id", description = "Get Languages by Id", tags = {"Languages"})
     @GetMapping("/languages/{languagesId}")
     public LanguagesResource gerLanguaesById(@PathVariable Long languagesId){
         return convertToResource(languagesService.getLanguagesById(languagesId));
     }
-
-    public ResponseEntity<?> deleteLanguages(@PathVariable Long languageId){
-        return languagesService.deleteLanguages(languageId);
+    @Operation(summary = "Delete Language", description = "Delete Language", tags = {"Languages"})
+    @DeleteMapping("/languages/{languagesId}")
+    public ResponseEntity<?> deleteLanguage(@PathVariable Long languagesId) {
+        return languagesService.deleteLanguages(languagesId);
     }
 
     private Languages convertToEntity(SaveLanguaguesResource resource){

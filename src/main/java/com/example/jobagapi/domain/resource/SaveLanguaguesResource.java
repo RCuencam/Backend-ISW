@@ -4,20 +4,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class SaveLanguaguesResource {
-    @NotNull
-    private Long id;
+
     @NotNull
     private String name;
     @NotNull
     private Long level;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
