@@ -13,38 +13,50 @@ public class Skill extends AuditModel{
     @Column(name = "id")
     private Long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "skill_id", nullable = false)
+//    @JsonIgnore
+//    private ProfessionalProfile professionalProfile;
+//    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+
+
     @NotNull
     private String name;
 
     @NotNull
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "skill_id", nullable = false)
-    @JsonIgnore
-    private ProfessionalProfile professionalProfile;
+    public Skill () {}
+
+  //  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  //  @JoinColumn(name = "skill_id", nullable = false)
+  //  @JsonIgnore
+  //  private ProfessionalProfile professionalProfile;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Skill setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Skill setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Skill setDescription(String description) {
         this.description = description;
+        return this;
     }
 }
