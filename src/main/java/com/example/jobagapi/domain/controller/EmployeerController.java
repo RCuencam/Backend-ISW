@@ -49,6 +49,14 @@ public class EmployeerController {
         return convertToResource(employeerService.createEmployeer(employeer));
     }
 
+
+
+    @GetMapping("/employeer/{employeerId}}")
+    public EmployeerResource getEmployeerById(@PathVariable Long employeerId) {
+        return convertToResource(employeerService.getEmployeerById(employeerId));
+    }
+
+
     private Employeer convertToEntity(SaveEmployeerResource resource) {
         return mapper.map(resource, Employeer.class);
     }
@@ -56,4 +64,12 @@ public class EmployeerController {
     {
         return mapper.map(entity, EmployeerResource.class);
     }
+
+    @DeleteMapping("/employeer/{employeerId}}")
+
+    public ResponseEntity<?> deleteEmployeer(@PathVariable Long employeerId) {
+        return employeerService.deleteEmployeer(employeerId);
+    }
+
+
 }
