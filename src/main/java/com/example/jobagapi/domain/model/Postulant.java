@@ -6,19 +6,18 @@ import java.util.Date;
 
 @Entity
 @Table(name = "postulant")
-public class    Postulant extends AuditModel{
+public class Postulant extends AuditModel{
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "id")
         private Long id;
-        @OneToOne(mappedBy = "postulant")
-        private User user;
 
 
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name ="Professional_Profile_Id",referencedColumnName = "id")
-        private ProfessionalProfile profesionalId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="professional_profile_id",referencedColumnName = "id")
+    private ProfessionalProfile professionalProfile;
 
 
         @NotNull
@@ -43,24 +42,27 @@ public class    Postulant extends AuditModel{
             return document;
         }
 
-        public void setDocument(String document) {
+        public Postulant setDocument(String document) {
             this.document = document;
+            return this;
         }
 
         public Date getBirthday() {
             return birthday;
         }
 
-        public void setBirthday(Date birthday) {
+        public Postulant setBirthday(Date birthday) {
             this.birthday = birthday;
+            return this;
         }
 
         public String getCivil_status() {
             return civil_status;
         }
 
-        public void setCivil_status(String civil_status) {
+        public Postulant setCivil_status(String civil_status) {
             this.civil_status = civil_status;
+            return this;
         }
 }
 
