@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserImpl implements UserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -41,5 +41,11 @@ public class UserImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
         userRepository.delete(user);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public User getUserByFirstname(String firstname) {
+        return userRepository.findByFirstname(firstname)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Firstname", firstname));
     }
 }

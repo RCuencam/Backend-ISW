@@ -51,7 +51,22 @@ public class EmployeerServiceImplTest {
 
     }
 
+    @Test
+    @DisplayName("When getEmployeerByPosicion With Valid Title Then Returns Employeer")
+    public void whenGetEmployeerByPosicionWithValidPosicionThenReturnsEmployeer() {
+        // Arrange
+        String posicion = "aea";
+        Employeer employeer = new Employeer().setPosicion(posicion);
+        when(employeerRepository.findByPosicion(posicion))
+                .thenReturn(Optional.of(employeer));
 
+        // Act
+        Employeer foundEmployeer = employeerService.getEmployeerByPosicion(posicion);
+
+        // Assert
+        assertThat(foundEmployeer.getPosicion()).isEqualTo(posicion);
+
+    }
 
 
 

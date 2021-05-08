@@ -1,5 +1,6 @@
 package com.example.jobagapi.domain.service;
 
+import com.example.jobagapi.domain.model.Employeer;
 import com.example.jobagapi.domain.model.Postulant;
 import com.example.jobagapi.domain.model.User;
 import org.springframework.data.domain.Page;
@@ -12,4 +13,5 @@ public interface UserService {
     User createUser(User user);
 
     ResponseEntity<?> deleteUser(Long postulantId);
+    User getUserByFirstname(String firstname);
 }
