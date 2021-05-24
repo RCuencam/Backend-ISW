@@ -1,5 +1,6 @@
 package com.example.jobagapi.service;
 
+import com.example.jobagapi.domain.model.Sector;
 import com.example.jobagapi.domain.model.Studies;
 import com.example.jobagapi.domain.repository.StudiesRepository;
 import com.example.jobagapi.domain.service.StudiesService;
@@ -26,6 +27,15 @@ public class StudiesServiceImpl implements StudiesService {
 
     @Override
     public Studies createStudies(Studies studies) { return studiesRepository.save(studies); }
+
+    @Override
+    public Studies updateStudies(Long studiesId, Studies studiesRequest) {
+        Studies studies = studiesRepository.findById(studiesId)
+                .orElseThrow(() -> new ResourceNotFoundException("Studies","Id",studiesId));
+        return studiesRepository.save(
+                studies.setName(studiesRequest.getName())
+                        .setDegree(studiesRequest.getDegree()));
+    }
 
     @Override
     public ResponseEntity<?> deleteStudies(Long studiesId) {

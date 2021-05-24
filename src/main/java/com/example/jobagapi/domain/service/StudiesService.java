@@ -9,5 +9,6 @@ public interface StudiesService {
     Page<Studies> getAllStudies(Pageable pageable);
     Studies getStudiesById(Long studiesId);
     Studies createStudies(Studies studies);
+    Studies updateStudies(Long studiesId, Studies studiesRequest);
     ResponseEntity<?> deleteStudies(Long studiesId);
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "studies")
@@ -14,6 +15,7 @@ public class Studies extends AuditModel{
     private Long id;
 
     @NotNull
+    @Size(max = 30)
     private String name;
 
     @NotNull

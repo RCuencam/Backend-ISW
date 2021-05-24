@@ -1,12 +1,10 @@
 package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Languages;
+import com.example.jobagapi.domain.model.Sector;
 import com.example.jobagapi.domain.model.Studies;
 import com.example.jobagapi.domain.service.StudiesService;
-import com.example.jobagapi.resource.LanguagesResource;
-import com.example.jobagapi.resource.SaveLanguaguesResource;
-import com.example.jobagapi.resource.SaveStudiesResource;
-import com.example.jobagapi.resource.StudiesResource;
+import com.example.jobagapi.resource.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,13 @@ public class StudiesController {
     private StudiesService studiesService;
     @Autowired
     private ModelMapper mapper;
+
+    @Operation(summary="Update Studies", description="Update Studies", tags={"Studies"})
+    @PutMapping("/studies/{studiesId}")
+    public StudiesResource updateStudies(@PathVariable Long studiesId, @Valid @RequestBody SaveStudiesResource resource){
+        Studies studies = convertToEntity(resource);
+        return convertToResource(studiesService.updateStudies(studiesId,studies));
+    }
 
     @Operation(summary = "Get Studies", description = "Get All Studies", tags = {"Studies"})
     @GetMapping("/studies")

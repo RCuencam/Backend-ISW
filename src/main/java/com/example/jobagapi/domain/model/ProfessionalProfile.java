@@ -11,8 +11,6 @@ public class ProfessionalProfile extends AuditModel{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-
     private String ocupation;
     private String video;
     private String experience;

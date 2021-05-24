@@ -2,10 +2,11 @@ package com.example.jobagapi.resource;
 
 import com.sun.istack.NotNull;
 
+import javax.validation.constraints.Size;
+
 public class SaveSectorResource {
-    @NotNull
     private String name;
-    @NotNull
+    @Size(max = 70)
     private String description;
 
     public String getName() {

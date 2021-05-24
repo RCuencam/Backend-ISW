@@ -2,10 +2,11 @@ package com.example.jobagapi.resource;
 
 import com.sun.istack.NotNull;
 
+import javax.validation.constraints.Size;
+
 public class SaveStudiesResource {
-    @NotNull
+    @Size(max = 30)
     private String name;
-    @NotNull
     private Long degree;
 
     public String getName() {

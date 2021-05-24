@@ -31,6 +31,15 @@ public class SectorServiceImpl implements SectorService {
         return sectorRepository.save(sector);
     }
 
+    @Override
+    public Sector updateSector(Long sectorId, Sector sectorRequest) {
+        Sector sector = sectorRepository.findById(sectorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Sector","Id",sectorId));
+        return sectorRepository.save(
+                sector.setName(sectorRequest.getName())
+                .setDescription(sectorRequest.getDescription()));
+    }
+
 
     @Override
     public ResponseEntity<?> deleteSector(Long sectorId) {
