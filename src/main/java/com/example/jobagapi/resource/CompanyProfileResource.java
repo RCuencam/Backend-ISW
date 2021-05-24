@@ -1,11 +1,7 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
 import com.example.jobagapi.domain.model.AuditModel;
 import com.example.jobagapi.domain.model.Employeer;
-
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class CompanyProfileResource extends AuditModel {
     private Long id;

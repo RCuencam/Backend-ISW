@@ -1,12 +1,8 @@
-package com.example.jobagapi.domain.controller;
+package com.example.jobagapi.controller;
 
-import com.example.jobagapi.domain.model.Postulant;
 import com.example.jobagapi.domain.model.User;
-import com.example.jobagapi.domain.resource.PostulantResource;
-import com.example.jobagapi.domain.resource.SavePostulantResource;
-import com.example.jobagapi.domain.resource.SaveUserResource;
-import com.example.jobagapi.domain.resource.UserResource;
-import com.example.jobagapi.domain.service.PostulantService;
+import com.example.jobagapi.resource.SaveUserResource;
+import com.example.jobagapi.resource.UserResource;
 import com.example.jobagapi.domain.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;

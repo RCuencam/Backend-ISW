@@ -1,20 +1,6 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
-import com.example.jobagapi.domain.model.ProfessionalProfile;
-import com.example.jobagapi.domain.model.User;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.util.Date;
-import com.example.jobagapi.domain.model.Skill;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.util.Date;
 
 public class SaveSkillResource {
     @NotNull

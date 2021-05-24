@@ -1,8 +1,6 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class SaveEmployeerResource {
     @NotNull

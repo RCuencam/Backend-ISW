@@ -1,28 +1,29 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
-import javax.validation.constraints.NotNull;
+public class UserResource {
 
-public class SaveUserResource {
-
-
-    @NotNull
+    public Long id;
     private String firstname;
-    @NotNull
     private String lastname;
-    @NotNull
     private String email;
-    @NotNull
     private Long number;
-    @NotNull
     private String password;
 
 
+    public Long getId() {
+        return id;
+
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public SaveUserResource setFirstname(String firstname) {
+    public UserResource setFirstname(String firstname) {
         this.firstname = firstname;
         return this;
     }
@@ -31,7 +32,7 @@ public class SaveUserResource {
         return lastname;
     }
 
-    public SaveUserResource setLastname(String lastname) {
+    public UserResource setLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
@@ -40,7 +41,7 @@ public class SaveUserResource {
         return email;
     }
 
-    public SaveUserResource setEmail(String email) {
+    public UserResource setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -49,16 +50,15 @@ public class SaveUserResource {
         return number;
     }
 
-    public SaveUserResource setNumber(Long number) {
+    public void setNumber(Long number) {
         this.number = number;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public SaveUserResource setPassword(String password) {
+    public UserResource setPassword(String password) {
         this.password = password;
         return this;
     }

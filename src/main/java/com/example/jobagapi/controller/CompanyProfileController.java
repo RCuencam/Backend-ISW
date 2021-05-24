@@ -1,8 +1,8 @@
-package com.example.jobagapi.domain.controller;
+package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.CompanyProfile;
-import com.example.jobagapi.domain.resource.CompanyProfileResource;
-import com.example.jobagapi.domain.resource.SaveCompanyProfileResource;
+import com.example.jobagapi.resource.CompanyProfileResource;
+import com.example.jobagapi.resource.SaveCompanyProfileResource;
 import com.example.jobagapi.domain.service.CompanyProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;

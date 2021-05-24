@@ -1,6 +1,4 @@
-package com.example.jobagapi.domain.resource;
-
-import com.example.jobagapi.domain.model.Employeer;
+package com.example.jobagapi.resource;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

@@ -1,9 +1,6 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
 import com.example.jobagapi.domain.model.AuditModel;
-
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
 
 public class SkillResource extends AuditModel {
     public Long id;

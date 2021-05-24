@@ -1,40 +1,41 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
 
-import com.example.jobagapi.domain.model.AuditModel;
-import com.example.jobagapi.domain.model.ProfessionalProfile;
-import com.example.jobagapi.domain.model.User;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class PostulantResource extends AuditModel {
-
+public class SavePostulantResource {
+    @NotNull
     private Long id;
+    @NotNull
     private String firstname;
+    @NotNull
     private String lastname;
+    @NotNull
     private String email;
+    @NotNull
     private Long number;
+    @NotNull
     private String password;
+    @NotNull
     private String document;
+    @NotNull
     private Date birthday;
+    @NotNull
     private String civil_status;
-
 
     public Long getId() {
         return id;
     }
 
-    public PostulantResource setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public PostulantResource setFirstname(String firstname) {
+    public SavePostulantResource setFirstname(String firstname) {
         this.firstname = firstname;
         return this;
     }
@@ -43,7 +44,7 @@ public class PostulantResource extends AuditModel {
         return lastname;
     }
 
-    public PostulantResource setLastname(String lastname) {
+    public SavePostulantResource setLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
@@ -52,7 +53,7 @@ public class PostulantResource extends AuditModel {
         return email;
     }
 
-    public PostulantResource setEmail(String email) {
+    public SavePostulantResource setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -61,7 +62,7 @@ public class PostulantResource extends AuditModel {
         return number;
     }
 
-    public PostulantResource setNumber(Long number) {
+    public SavePostulantResource setNumber(Long number) {
         this.number = number;
         return this;
     }
@@ -70,7 +71,7 @@ public class PostulantResource extends AuditModel {
         return password;
     }
 
-    public PostulantResource setPassword(String password) {
+    public SavePostulantResource setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -79,7 +80,7 @@ public class PostulantResource extends AuditModel {
         return document;
     }
 
-    public PostulantResource setDocument(String document) {
+    public SavePostulantResource setDocument(String document) {
         this.document = document;
         return this;
     }
@@ -88,7 +89,7 @@ public class PostulantResource extends AuditModel {
         return birthday;
     }
 
-    public PostulantResource setBirthday(Date birthday) {
+    public SavePostulantResource setBirthday(Date birthday) {
         this.birthday = birthday;
         return this;
     }
@@ -97,7 +98,7 @@ public class PostulantResource extends AuditModel {
         return civil_status;
     }
 
-    public PostulantResource setCivil_status(String civil_status) {
+    public SavePostulantResource setCivil_status(String civil_status) {
         this.civil_status = civil_status;
         return this;
     }
