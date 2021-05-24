@@ -38,11 +38,12 @@ public class UserController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="User users", description="User users", tags={"Users"})
-    @PostMapping("/users")
-    public UserResource createUser(@Valid @RequestBody SaveUserResource resource) {
+
+    @Operation(summary="Update Users", description="Update Users", tags={"Users"})
+    @PutMapping("/users/{userId}")
+    public UserResource updateUser(@PathVariable Long userId, @Valid @RequestBody SaveUserResource resource) {
         User user = convertToEntity(resource);
-        return convertToResource(userService.createUser(user));
+        return convertToResource(userService.updateUser(userId, user));
     }
 
     @Operation(summary="Get UsersById", description="Get UsersById", tags={"Users"})
@@ -50,16 +51,6 @@ public class UserController {
     public UserResource getUserById(@PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
-
-    @Operation(summary="Delete User By Id", description="DeleteUserById", tags={"Users"})
-    @DeleteMapping("/user/{postId}}")
-
-    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
-        return userService.deleteUser(userId);
-    }
-
-
-
 
 
 

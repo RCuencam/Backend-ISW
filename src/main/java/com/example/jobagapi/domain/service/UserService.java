@@ -10,8 +10,5 @@ import org.springframework.http.ResponseEntity;
 public interface UserService {
     Page<User> getAllUsers(Pageable pageable);
     User getUserById(Long userId);
-    User createUser(User user);
-
-    ResponseEntity<?> deleteUser(Long postulantId);
-    User getUserByFirstname(String firstname);
+    User updateUser(Long userId, User userRequest);
 }

@@ -5,53 +5,55 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class User extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="id")
-    private Long id;  //SOLOID
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="postulant_id",referencedColumnName = "id")
-    private Postulant postulant;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="employeer_id",referencedColumnName = "id")
-    private Employeer employeer;
+    private Long id;
 
     @NotNull
-    @Column(unique = true)
     private String firstname;
+
     @NotNull
     private String lastname;
+
     @Column(unique = true)
     @NotNull
     private String email;
+
     @NotNull
     private Long number;
+
     @NotNull
     private String password;
 
-    public User (){}
-    public User(@NotNull Long id, @NotNull Postulant postulant, @NotNull Employeer employeer,@NotNull String firstname, @NotNull String lastname,@NotNull String email, @NotNull Long number,@NotNull String password) {
+    private String document;
+
+
+    public User (){
+        super();
+    }
+
+
+    public User(Long id,  @NotNull String firstname,  @NotNull String lastname,  @NotNull String email, @NotNull Long number, @NotNull String password, String document) {
+       super();
         this.id = id;
-        this.postulant = postulant;
-        this.employeer = employeer;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.number = number;
         this.password = password;
+        this.document = document;
     }
-
 
     public Long getId() {
         return id;
     }
 
     public User setId(Long id) {
-        this.id = id;return this;
+        this.id = id;
+        return this;
     }
 
     public String getFirstname() {
@@ -65,7 +67,6 @@ public class User extends AuditModel{
 
     public String getLastname() {
         return lastname;
-
     }
 
     public User setLastname(String lastname) {
@@ -100,20 +101,12 @@ public class User extends AuditModel{
         return this;
     }
 
-    public Postulant getPostulant() {
-        return postulant;
+    public String getDocument() {
+        return document;
     }
 
-    public void setPostulant(Postulant postulant) {
-        this.postulant = postulant;
-
-    }
-
-    public Employeer getEmployeer() {
-        return employeer;
-    }
-
-    public void setEmployeer(Employeer employeer) {
-        this.employeer = employeer;
+    public User setDocument(String document) {
+        this.document = document;
+        return this;
     }
 }

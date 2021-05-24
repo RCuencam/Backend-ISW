@@ -1,3 +1,4 @@
+
 package com.example.jobagapi.domain.repository;
 
 import com.example.jobagapi.domain.model.Employeer;

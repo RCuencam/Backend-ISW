@@ -13,8 +13,7 @@ public class ProfessionalProfile extends AuditModel{
     private Long id;
 
 
-    @OneToOne(mappedBy = "professionalProfile")
-    private Postulant postulant;
+
 
     private String ocupation;
     private String video;

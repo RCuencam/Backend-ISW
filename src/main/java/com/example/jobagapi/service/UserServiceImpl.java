@@ -31,21 +31,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public User updateUser(Long userId, User userRequest) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() ->new ResourceNotFoundException("User","Id",userId));
+        return userRepository.save(
+                user.setFirstname(userRequest.getFirstname())
+                        .setLastname(userRequest.getLastname())
+                        .setEmail(userRequest.getEmail())
+                        .setNumber(userRequest.getNumber())
+                        .setPassword(userRequest.getPassword())
+                        .setDocument(userRequest.getDocument())
+                       );
     }
 
-    @Override
-    public ResponseEntity<?> deleteUser(Long userId) {
-        User user=userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
-        userRepository.delete(user);
-        return ResponseEntity.ok().build();
-    }
 
-    @Override
-    public User getUserByFirstname(String firstname) {
-        return userRepository.findByFirstname(firstname)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "Firstname", firstname));
-    }
 }

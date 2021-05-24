@@ -1,41 +1,30 @@
 package com.example.jobagapi.domain.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "employeers")
-public class Employeer extends AuditModel{
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id")
-        private Long id;
-        @OneToOne(mappedBy = "employeer")
-        private User user;
+@PrimaryKeyJoinColumn(referencedColumnName="id")
+@OnDelete(action = OnDeleteAction.CASCADE)
+public class Employeer extends User{
 
         @NotNull
         @Column(unique = true)
         private String posicion;
 
 
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name ="company_profile_id",referencedColumnName = "id")
-        private CompanyProfile companyProfile;
+        public Employeer(){
+                super();
+        }
 
-        public Employeer(){}
-
-        public Employeer(@NotNull Long id, @NotNull User user,@NotNull String posicion) {
-                this.id = id;
-                this.user = user;
+        public Employeer(Long id,  @NotNull String firstname,  @NotNull String lastname,  @NotNull String email, @NotNull Long number, @NotNull String password, String document,String posicion) {
+                super(id, firstname, lastname, email, number, password, document);
                 this.posicion = posicion;
+
         }
-
-
-        public Long getId() {
-                return id;
-        }
-
 
 
         public String getPosicion() {
@@ -48,17 +37,7 @@ public class Employeer extends AuditModel{
         }
 
 
-        public Employeer setId(Long id) {
-                this.id = id;
-                return this;
-        }
 
 
-        public CompanyProfile getCompanyProfile() {
-                return companyProfile;
-        }
 
-        public void setCompanyProfile(CompanyProfile companyProfile) {
-                this.companyProfile = companyProfile;
-        }
 }

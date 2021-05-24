@@ -2,24 +2,12 @@ package com.example.jobagapi.resource;
 
 import com.example.jobagapi.domain.model.AuditModel;
 
-public class EmployeerResource extends AuditModel {
+import javax.validation.constraints.NotNull;
 
-    public Long id;
+public class EmployeerResource extends UserResource {
+
+
     public String posicion;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private Long number;
-    private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public EmployeerResource setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getPosicion() {
         return posicion;
@@ -30,48 +18,14 @@ public class EmployeerResource extends AuditModel {
         return this;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public EmployeerResource(){
+        super();
     }
 
-    public EmployeerResource setFirstname(String firstname) {
-        this.firstname = firstname;
-        return this;
+    public EmployeerResource(Long id, @NotNull String firstname, @NotNull String lastname, @NotNull String email, @NotNull Long number, @NotNull String password, String document, String posicion) {
+        super(id, firstname, lastname, email, number, password, document);
+        this.posicion = posicion;
+
     }
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public EmployeerResource setLastname(String lastname) {
-        this.lastname = lastname;
-        return this;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public EmployeerResource setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public EmployeerResource setNumber(Long number) {
-        this.number = number;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public EmployeerResource setPassword(String password) {
-        this.password = password;
-        return this;
-    }
 }

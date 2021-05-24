@@ -63,8 +63,6 @@ public class PostulantController {
 
 
 
-
-
     private Postulant convertToEntity(SavePostulantResource resource) {
         return mapper.map(resource, Postulant.class);
     }

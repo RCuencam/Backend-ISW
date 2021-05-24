@@ -1,5 +1,6 @@
 package com.example.jobagapi.service;
 import com.example.jobagapi.domain.model.Employeer;
+import com.example.jobagapi.domain.repository.CompanyRepository;
 import com.example.jobagapi.domain.repository.EmployeerRepository;
 import com.example.jobagapi.domain.service.EmployeerService;
 import com.example.jobagapi.exception.ResourceNotFoundException;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class EmployeerServiceImpl implements EmployeerService {
+
     @Autowired
     private EmployeerRepository employeerRepository;
 
@@ -34,7 +36,6 @@ public class EmployeerServiceImpl implements EmployeerService {
         return employeerRepository.save(employeer);
     }
 
-    
 
     @Override
     public ResponseEntity<?> deleteEmployeer(Long employeerId) {
@@ -43,12 +44,4 @@ public class EmployeerServiceImpl implements EmployeerService {
         employeerRepository.delete(employeer);
         return ResponseEntity.ok().build();
     }
-
-
-    @Override
-    public Employeer getEmployeerByPosicion(String posicion) {
-        return employeerRepository.findByPosicion(posicion)
-                .orElseThrow(() -> new ResourceNotFoundException("Employeer", "Posicion", posicion));
-    }
-
 }

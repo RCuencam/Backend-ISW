@@ -2,24 +2,11 @@ package com.example.jobagapi.resource;
 
 import javax.validation.constraints.NotNull;
 
-public class SaveEmployeerResource {
+public class SaveEmployeerResource extends SaveUserResource{
     @NotNull
     public String posicion;
 
-    @NotNull
-    private String firstname;
 
-    @NotNull
-    private String lastname;
-
-    @NotNull
-    private String email;
-
-    @NotNull
-    private Long number;
-
-    @NotNull
-    private String password;
 
     public String getPosicion() {
         return posicion;
@@ -30,48 +17,13 @@ public class SaveEmployeerResource {
         return this;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public SaveEmployeerResource(){
+        super();
     }
 
-    public SaveEmployeerResource setFirstname(String firstname) {
-        this.firstname = firstname;
-        return this;
-    }
+    public SaveEmployeerResource(@NotNull String firstname, @NotNull String lastname, @NotNull String email, @NotNull Long number, @NotNull String password, String document, String posicion) {
+        super(firstname, lastname, email, number, password, document);
+        this.posicion = posicion;
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public SaveEmployeerResource setLastname(String lastname) {
-        this.lastname = lastname;
-        return this;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public SaveEmployeerResource setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public SaveEmployeerResource setNumber(Long number) {
-        this.number = number;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public SaveEmployeerResource setPassword(String password) {
-        this.password = password;
-        return this;
     }
 }
