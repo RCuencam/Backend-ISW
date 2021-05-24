@@ -47,7 +47,7 @@ public class CompanyController {
 
     @PostMapping("/employeers/{employeerId}/companys")
     public CompanyResource createCompany(
-            @PathVariable Long employeerId,@Valid @RequestBody SaveCompanyResource resource) {
+            @PathVariable Long employeerId, @PathVariable Long sectorId,@Valid @RequestBody SaveCompanyResource resource) {
         return convertToResource(companyService.createCompany(employeerId, convertToEntity(resource)));
     }
 

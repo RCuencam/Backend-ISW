@@ -21,9 +21,7 @@ public class Company {
     @NotNull
     @Length(max = 100)
     private String description;
-    @NotNull
-    @Length(max = 100)
-    private  String sector;
+
     @NotNull
     @Length(max = 100)
     private String logo;
@@ -43,15 +41,18 @@ public class Company {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
 
-    public Company(Long id, String name, String description, String sector, String logo, Long ruc, String dirección, Employeer employeer) {
+
+
+
+    public Company(Long id, String name, String description,  String logo, Long ruc, String dirección, Employeer employeer) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.sector = sector;
         this.logo = logo;
         this.ruc = ruc;
         this.dirección = dirección;
         this.employeer = employeer;
+
     }
 
     public Company(){}
@@ -80,13 +81,7 @@ public class Company {
         this.description = description;
     }
 
-    public String getSector() {
-        return sector;
-    }
 
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
 
     public String getLogo() {
         return logo;
@@ -119,4 +114,6 @@ public class Company {
     public void setEmployeer(Employeer employeer) {
         this.employeer = employeer;
     }
+
+
 }

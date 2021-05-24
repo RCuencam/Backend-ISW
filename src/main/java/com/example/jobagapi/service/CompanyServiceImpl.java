@@ -38,6 +38,16 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public Page<Company> getAllCompanysBySectorId(Long sectorId, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Company getCompanyByIdAndSectorId(Long sectorId, Long companysId) {
+        return null;
+    }
+
+    @Override
     public Company createCompany(Long employeerId, Company company) {
 
         return employeerRepository.findById(employeerId).map(employeer -> {
