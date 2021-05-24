@@ -41,10 +41,13 @@ public class Company {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
 
+    @ManyToOne( fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sector_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Sector sector;
 
 
-
-    public Company(Long id, String name, String description,  String logo, Long ruc, String dirección, Employeer employeer) {
+    public Company(Long id, String name, String description,  String logo, Long ruc, String dirección, Employeer employeer,Sector sector) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -52,7 +55,7 @@ public class Company {
         this.ruc = ruc;
         this.dirección = dirección;
         this.employeer = employeer;
-
+        this.sector =sector;
     }
 
     public Company(){}
@@ -115,5 +118,11 @@ public class Company {
         this.employeer = employeer;
     }
 
+    public Sector getSector() {
+        return sector;
+    }
 
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
 }
