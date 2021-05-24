@@ -15,7 +15,6 @@ public class SectorServiceImpl implements SectorService {
     @Autowired
     private SectorRepository sectorRepository;
 
-
     @Override
     public Page<Sector> getAllSectors(Pageable pageable) {
         return sectorRepository.findAll(pageable);

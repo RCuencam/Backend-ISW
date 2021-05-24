@@ -1,6 +1,6 @@
 package com.example.jobagapi.resource;
 
-import javax.validation.constraints.NotNull;
+import com.sun.istack.NotNull;
 
 public class SaveSkillResource {
     @NotNull

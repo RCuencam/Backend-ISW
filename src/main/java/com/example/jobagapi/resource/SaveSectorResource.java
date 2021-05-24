@@ -1,9 +1,11 @@
 package com.example.jobagapi.resource;
 
+import com.sun.istack.NotNull;
+
 public class SaveSectorResource {
-
-
+    @NotNull
     private String name;
+    @NotNull
     private String description;
 
     public String getName() {

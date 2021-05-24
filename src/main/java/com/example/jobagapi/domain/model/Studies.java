@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "studies")
 public class Studies extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -19,32 +19,36 @@ public class Studies extends AuditModel{
     @NotNull
     private Long degree;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "studies_id", nullable = false)
-    @JsonIgnore
-    private ProfessionalProfile professionalProfile;
+    //Relación
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "studies_id", nullable = false)
+    //@JsonIgnore
+    //private ProfessionalProfile professionalProfile;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Studies setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Studies setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Long getDegree() {
         return degree;
     }
 
-    public void setDegree(Long degree) {
+    public Studies setDegree(Long degree) {
         this.degree = degree;
+        return this;
     }
 }

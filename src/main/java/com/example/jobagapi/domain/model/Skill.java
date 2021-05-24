@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "skill")
 public class Skill extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
