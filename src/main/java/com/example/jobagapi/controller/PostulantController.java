@@ -53,7 +53,7 @@ public class PostulantController {
     }
 
     @Operation(summary="Delete Postulant By Id", description="DeletePostulantById", tags={"Postulants"})
-    @DeleteMapping("/postulant/{postId}}")
+    @DeleteMapping("/postulant/{postulantId}}")
 
     public ResponseEntity<?> deletePostulant(@PathVariable Long postId) {
         return postulantService.deletePostulant(postId);

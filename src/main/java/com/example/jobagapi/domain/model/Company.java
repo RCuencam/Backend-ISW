@@ -9,31 +9,31 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name ="company")
-public class Company extends AuditModel{
+@Table(name ="companys")
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NotNull
     @Length(max = 100)
-    String name;
+    private String name;
     @NotNull
     @Length(max = 100)
-    String description;
+    private String description;
     @NotNull
     @Length(max = 100)
-    String sector;
+    private  String sector;
     @NotNull
     @Length(max = 100)
-    String logo;
+    private String logo;
 
 
-    Long ruc;
+    private Long ruc;
 
     @NotNull
     @Length(max = 100)
-    String dirección;
+    private String dirección;
 
 
 

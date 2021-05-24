@@ -18,8 +18,7 @@ public class PostulantServiceImpl implements PostulantService {
 
     @Autowired
     private PostulantRepository postulantRepository;
-    @Autowired
-    private UserRepository userRepository;
+
 
 
     @Override
@@ -30,7 +29,7 @@ public class PostulantServiceImpl implements PostulantService {
     @Override
     public Postulant getPostulantById(Long postulantId) {
         return postulantRepository.findById(postulantId)
-                .orElseThrow(()->new ResourceNotFoundException("Employeer","Id",postulantId));
+                .orElseThrow(()->new ResourceNotFoundException("Postulant","Id",postulantId));
     }
 
     @Override
