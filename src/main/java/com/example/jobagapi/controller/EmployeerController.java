@@ -1,8 +1,8 @@
-package com.example.jobagapi.domain.controller;
+package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Employeer;
-import com.example.jobagapi.domain.resource.EmployeerResource;
-import com.example.jobagapi.domain.resource.SaveEmployeerResource;
+import com.example.jobagapi.resource.EmployeerResource;
+import com.example.jobagapi.resource.SaveEmployeerResource;
 import com.example.jobagapi.domain.service.EmployeerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,6 +32,8 @@ public class EmployeerController {
     @Autowired
     private ModelMapper mapper;
 
+
+
     @Operation(summary="Get Employeers", description="Get All Employeers", tags={"Employeers"})
     @GetMapping("/employeers")
     public Page<EmployeerResource> getAllEmployeers(Pageable pageable){
@@ -43,26 +45,28 @@ public class EmployeerController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Employeer", description="Post Employeer", tags={"Employeers"})
+    @Operation(summary="Post Employeers", description="Post Employeers", tags={"Employeers"})
     @PostMapping("/employeers")
     public EmployeerResource createEmployeer(@Valid @RequestBody SaveEmployeerResource resource) {
         Employeer employeer = convertToEntity(resource);
         return convertToResource(employeerService.createEmployeer(employeer));
     }
 
-
-    @Operation(summary="Get Employeer By Id", description="Get Employeer", tags={"Employeers"})
-    @GetMapping("/employeer/{employeerId}}")
-    public EmployeerResource getEmployeerById(@PathVariable Long employeerId) {
+    @Operation(summary="Get EmployeersById", description="Get EmployeersById", tags={"Employeers"})
+    @GetMapping("/employeer/{id}")
+    public EmployeerResource getEmployeerById(@PathVariable(name = "id") Long employeerId) {
         return convertToResource(employeerService.getEmployeerById(employeerId));
     }
 
-    @Operation(summary="Delete Employeer", description="Delete Employeer", tags={"Employeers"})
-    @DeleteMapping("/employeer/{employeerId}}")
+    @Operation(summary="Delete Employeer By Id", description="DeleteEmployeerById", tags={"Employeers"})
+    @DeleteMapping("/employeer/{postId}}")
 
-    public ResponseEntity<?> deleteEmployeer(@PathVariable Long employeerId) {
-        return employeerService.deleteEmployeer(employeerId);
+    public ResponseEntity<?> deleteEmployeer(@PathVariable Long postId) {
+        return employeerService.deleteEmployeer(postId);
     }
+
+
+
 
 
     private Employeer convertToEntity(SaveEmployeerResource resource) {
@@ -72,6 +76,7 @@ public class EmployeerController {
     {
         return mapper.map(entity, EmployeerResource.class);
     }
+
 
 
 }

@@ -1,3 +1,5 @@
+
+
 package com.example.jobagapi.domain.service;
 
 import com.example.jobagapi.domain.model.Employeer;
@@ -10,8 +12,7 @@ public interface EmployeerService {
 
     Page<Employeer> getAllEmployeers(Pageable pageable);
     Employeer getEmployeerById(Long employeerId);
-    Employeer createEmployeer(Employeer employeer);
+    Employeer createEmployeer(Employeer employeer );
 
     ResponseEntity<?> deleteEmployeer(Long employeerId);
-    Employeer getEmployeerByPosicion(String posicion);
 }

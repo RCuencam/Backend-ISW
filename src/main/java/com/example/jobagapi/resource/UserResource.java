@@ -1,22 +1,54 @@
-package com.example.jobagapi.domain.resource;
+package com.example.jobagapi.resource;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 public class UserResource {
 
-    public Long id;
+    private Long id;
+
+
+    @NotNull
     private String firstname;
+
+    @NotNull
     private String lastname;
+
+    @Column(unique = true)
+    @NotNull
     private String email;
+
+    @NotNull
     private Long number;
+
+    @NotNull
     private String password;
 
+    private String document;
+
+    public UserResource (){
+        super();
+    }
+
+
+    public UserResource(Long id,  @NotNull String firstname,  @NotNull String lastname,  @NotNull String email, @NotNull Long number, @NotNull String password, String document) {
+        super();
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.number = number;
+        this.password = password;
+        this.document = document;
+    }
 
     public Long getId() {
         return id;
-
     }
 
-    public void setId(Long id) {
+    public UserResource setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstname() {
@@ -50,8 +82,9 @@ public class UserResource {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public UserResource setNumber(Long number) {
         this.number = number;
+        return this;
     }
 
     public String getPassword() {
@@ -60,6 +93,15 @@ public class UserResource {
 
     public UserResource setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public UserResource setDocument(String document) {
+        this.document = document;
         return this;
     }
 }

@@ -1,11 +1,8 @@
-package com.example.jobagapi.domain.controller;
+package com.example.jobagapi.controller;
 
-import com.example.jobagapi.domain.model.Employeer;
 import com.example.jobagapi.domain.model.Postulant;
-import com.example.jobagapi.domain.resource.EmployeerResource;
-import com.example.jobagapi.domain.resource.PostulantResource;
-import com.example.jobagapi.domain.resource.SaveEmployeerResource;
-import com.example.jobagapi.domain.resource.SavePostulantResource;
+import com.example.jobagapi.resource.PostulantResource;
+import com.example.jobagapi.resource.SavePostulantResource;
 import com.example.jobagapi.domain.service.PostulantService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
@@ -56,13 +53,11 @@ public class PostulantController {
     }
 
     @Operation(summary="Delete Postulant By Id", description="DeletePostulantById", tags={"Postulants"})
-    @DeleteMapping("/postulant/{postId}}")
+    @DeleteMapping("/postulant/{postulantId}}")
 
     public ResponseEntity<?> deletePostulant(@PathVariable Long postId) {
         return postulantService.deletePostulant(postId);
     }
-
-
 
 
 

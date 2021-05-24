@@ -1,68 +1,42 @@
 package com.example.jobagapi.domain.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "postulant")
-public class Postulant extends AuditModel{
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "id")
-        private Long id;
+@PrimaryKeyJoinColumn(referencedColumnName="id")
+@OnDelete(action = OnDeleteAction.CASCADE)
+public class Postulant extends User{
 
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="professional_profile_id",referencedColumnName = "id")
-    private ProfessionalProfile professionalProfile;
-
-
-        @NotNull
-        private String document;
-        @NotNull
-        private Date birthday;
-        @NotNull
-        private String civil_status;
-
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
+    private String civil_status;
 
 
 
-        public String getDocument() {
-            return document;
-        }
+    public Postulant(){
+        super();
+    }
 
-        public Postulant setDocument(String document) {
-            this.document = document;
-            return this;
-        }
+    public Postulant(Long id,  @NotNull String firstname,  @NotNull String lastname,  @NotNull String email, @NotNull Long number, @NotNull String password, String document,String civil_status) {
+        super(id, firstname, lastname, email, number, password, document);
+        this.civil_status = civil_status;
 
-        public Date getBirthday() {
-            return birthday;
-        }
+    }
 
-        public Postulant setBirthday(Date birthday) {
-            this.birthday = birthday;
-            return this;
-        }
 
-        public String getCivil_status() {
-            return civil_status;
-        }
+    public String getCivil_status() {
+        return civil_status;
+    }
 
-        public Postulant setCivil_status(String civil_status) {
-            this.civil_status = civil_status;
-            return this;
-        }
+    public Postulant setCivil_status(String civil_status) {
+        this.civil_status = civil_status;
+        return this;
+    }
+
+
 }
 

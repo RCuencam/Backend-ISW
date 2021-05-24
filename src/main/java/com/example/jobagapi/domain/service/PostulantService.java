@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 public interface PostulantService {
     Page<Postulant> getAllPostulants(Pageable pageable);
     Postulant getPostulantById(Long postulantId);
-    Postulant createPostulant(Postulant postulant);
-
+    Postulant createPostulant(Postulant postulant );
+    Postulant updatePostulant(Long postulantId, Postulant postulantRequest);
     ResponseEntity<?> deletePostulant(Long postulantId);
 }

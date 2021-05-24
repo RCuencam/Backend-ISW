@@ -1,14 +1,10 @@
-package com.example.jobagapi.domain.controller;
+package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Skill;
-import com.example.jobagapi.domain.resource.SavePostulantResource;
-import com.example.jobagapi.domain.resource.SkillResource;
-import com.example.jobagapi.domain.resource.SaveSkillResource;
+import com.example.jobagapi.resource.SkillResource;
+import com.example.jobagapi.resource.SaveSkillResource;
 import com.example.jobagapi.domain.service.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
