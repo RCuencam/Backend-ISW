@@ -15,7 +15,6 @@ public class Employeer extends User{
         @Column(unique = true)
         private String posicion;
 
-
         public Employeer(){
                 super();
         }
