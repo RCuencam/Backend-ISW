@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "studies")
@@ -26,6 +27,11 @@ public class Studies extends AuditModel{
     //@JoinColumn(name = "studies_id", nullable = false)
     //@JsonIgnore
     //private ProfessionalProfile professionalProfile;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "studies")
+    private List<ProfessionalProfile> professionalprofiles;
 
     public Long getId() {
         return id;

@@ -26,18 +26,14 @@ public class Company {
     @Length(max = 100)
     private String logo;
 
-
     private Long ruc;
 
     @NotNull
     @Length(max = 100)
     private String dirección;
 
-
-
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employeer_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeer_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
 

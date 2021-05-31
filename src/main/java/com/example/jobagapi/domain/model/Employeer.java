@@ -25,7 +25,6 @@ public class Employeer extends User{
 
         }
 
-
         public String getPosicion() {
                 return posicion;
         }
@@ -34,9 +33,6 @@ public class Employeer extends User{
                 this.posicion = posicion;
                 return this;
         }
-
-
-
 
 
 }
