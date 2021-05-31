@@ -7,9 +7,12 @@ import com.example.jobagapi.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfessionalProfileImpl implements ProfessionalProfileService {
@@ -21,10 +24,10 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
     private SkillRepository skillRepository;
 
     @Autowired
-    private LanguagesRepository languagesRepository;
+    private StudiesRepository studiesRepository;
 
     @Autowired
-    private StudiesRepository studiesRepository;
+    private LanguagesRepository languagesRepository;
 
     @Autowired
     private ProfessionalProfileRepository professionalprofileRepository;
@@ -41,11 +44,6 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Lead not found with Id" + professionalprofileId+
                                 "and PostulantId" + postulantId));
-    }
-
-    @Override
-    public Page<ProfessionalProfile> getAllProfessionalProfileByStudiesId(Long studiesId, Pageable pageable) {
-        return professionalprofileRepository.findByStudiesId(studiesId,pageable);
     }
 
     @Override
@@ -67,8 +65,12 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
     }
 
     @Override
-    public Page<ProfessionalProfile> getAllProfessionalProfileByLanguagesId(Long languagesId, Pageable pageable) {
-        return professionalprofileRepository.findByLanguagesId(languagesId,pageable);
+    public Page<ProfessionalProfile> getAllProfessionalProfileBySkillsId(Long skillId, Pageable pageable) {
+        return skillRepository.findById(skillId).map(skill -> {
+            List<ProfessionalProfile> professionalprofiles = skill.getProfessionalprofiles();
+            int profilesCount = professionalprofiles.size();
+            return new PageImpl<>(professionalprofiles, pageable, profilesCount); })
+                .orElseThrow(() -> new ResourceNotFoundException("Skill", "Id", skillId));
     }
 
 
@@ -92,8 +94,12 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
     }
 
     @Override
-    public Page<ProfessionalProfile> getAllProfessionalProfileBySkillsId(Long skillId, Pageable pageable) {
-        return professionalprofileRepository.findBySkillId(skillId,pageable);
+    public Page<ProfessionalProfile> getAllProfessionalProfileByStudiesId(Long studiesId, Pageable pageable) {
+        return studiesRepository.findById(studiesId).map(studies -> {
+            List<ProfessionalProfile> professionalprofiles = studies.getProfessionalprofiles();
+            int profilesCount = professionalprofiles.size();
+            return new PageImpl<>(professionalprofiles, pageable, profilesCount); })
+                .orElseThrow(() -> new ResourceNotFoundException("Studies", "Id", studiesId));
     }
 
     @Override
@@ -115,6 +121,15 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
                 professionalprofile -> professionalprofileRepository.save(professionalprofile.removeLanguages(languages)))
                 .orElseThrow(() -> new ResourceNotFoundException("ProfessionalProfile", "Id", professionalprofileId));
 
+    }
+
+    @Override
+    public Page<ProfessionalProfile> getAllProfessionalProfileByLanguagesId(Long languagesId, Pageable pageable) {
+        return languagesRepository.findById(languagesId).map(languages -> {
+            List<ProfessionalProfile> professionalprofiles = languages.getProfessionalprofiles();
+            int profilesCount = professionalprofiles.size();
+            return new PageImpl<>(professionalprofiles, pageable, profilesCount); })
+                .orElseThrow(() -> new ResourceNotFoundException("Languages", "Id", languagesId));
     }
 
     @Override
@@ -156,6 +171,5 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
 
 
     }
-
 
 }

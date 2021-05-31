@@ -4,20 +4,9 @@ import com.example.jobagapi.domain.model.AuditModel;
 
 public class SaveProfessionalProfileResource {
 
-    Long id;
     String ocupation;
     String video;
     String description;
-    String logo;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getOcupation() {
         return ocupation;
@@ -43,11 +32,4 @@ public class SaveProfessionalProfileResource {
         this.description = description;
     }
 
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
 }

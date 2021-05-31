@@ -32,8 +32,8 @@ public class Company {
     @Length(max = 100)
     private String dirección;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeer_id", referencedColumnName = "id")
+    @OneToOne( fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employeer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
 

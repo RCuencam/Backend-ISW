@@ -6,7 +6,6 @@ public class ProfessionalProfileResource {
     String ocupation;
     String video;
     String description;
-    String logo;
 
     public Long getId() {
         return id;
@@ -40,11 +39,5 @@ public class ProfessionalProfileResource {
         this.description = description;
     }
 
-    public String getLogo() {
-        return logo;
-    }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
 }

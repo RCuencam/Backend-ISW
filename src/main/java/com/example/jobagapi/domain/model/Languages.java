@@ -12,7 +12,6 @@ import java.util.List;
 public class Languages extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -22,20 +21,14 @@ public class Languages extends AuditModel{
     @NotNull
     private Long level;
 
-    public Long getId() {
-        return id;
-    }
-
-    //Relacion
-    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "professional_profile", referencedColumnName = "id", nullable = false)
-    private ProfessionalProfile professionalProfile;*/
-
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "languages")
     private List<ProfessionalProfile> professionalprofiles;
 
+    public Long getId() {
+        return id;
+    }
 
     public Languages setId(Long id) {
         this.id = id;
@@ -58,5 +51,13 @@ public class Languages extends AuditModel{
     public Languages setLevel(Long level) {
         this.level = level;
         return this;
+    }
+
+    public List<ProfessionalProfile> getProfessionalprofiles() {
+        return professionalprofiles;
+    }
+
+    public void setProfessionalprofiles(List<ProfessionalProfile> professionalprofiles) {
+        this.professionalprofiles = professionalprofiles;
     }
 }

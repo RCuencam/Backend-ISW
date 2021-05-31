@@ -36,10 +36,10 @@ public class ProfessionalProfile{
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name ="professionalprofile_studies",
+    @JoinTable(name ="professionalprofile_skills",
             joinColumns =  {@JoinColumn(name = "professionalprofile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "studies_id")})
-    private List<Studies> studies;
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")})
+    private List<Skill> skills;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -50,10 +50,10 @@ public class ProfessionalProfile{
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name ="professionalprofile_skill",
+    @JoinTable(name ="professionalprofile_studies",
             joinColumns =  {@JoinColumn(name = "professionalprofile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skill_id")})
-    private List<Skill> skills;
+            inverseJoinColumns = {@JoinColumn(name = "studies_id")})
+    private List<Studies> studies;
 
 
     public ProfessionalProfile(Long id, String ocupation, String video, String description, Postulant postulant, Studies studies, Skill skill, Languages languages) {
@@ -108,28 +108,29 @@ public class ProfessionalProfile{
         this.postulant = postulant;
     }
 
-    public List<Studies> getStudies() {
-        return studies;
-    }
-
-    public void setStudies(List<Studies> studies) {
-        this.studies = studies;
-    }
-
-    public List<Languages> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<Languages> languages) {
-        this.languages = languages;
-    }
-
     public List<Skill> getSkills() {
         return skills;
     }
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    public boolean hasSkill(Skill skill) {
+        return this.getSkills().contains(skill);
+    }
+
+    public ProfessionalProfile addSkill(Skill skill) {
+        if(!hasSkill(skill)) {
+            this.getSkills().add(skill);
+        }
+        return this;
+    }
+
+    public ProfessionalProfile removeSkill(Skill skill) {
+        if (this.hasSkill(skill))
+            this.getSkills().remove(skill);
+        return this;
     }
 
     public boolean hasStudies(Studies studies) {
@@ -166,20 +167,19 @@ public class ProfessionalProfile{
         return this;
     }
 
-    public boolean hasSkill(Skill skill) {
-        return this.getSkills().contains(skill);
+    public List<Languages> getLanguages() {
+        return languages;
     }
 
-    public ProfessionalProfile addSkill(Skill skill) {
-        if(!hasSkill(skill)) {
-            this.getSkills().add(skill);
-        }
-        return this;
+    public void setLanguages(List<Languages> languages) {
+        this.languages = languages;
     }
 
-    public ProfessionalProfile removeSkill(Skill skill) {
-        if (this.hasSkill(skill))
-            this.getSkills().remove(skill);
-        return this;
+    public List<Studies> getStudies() {
+        return studies;
+    }
+
+    public void setStudies(List<Studies> studies) {
+        this.studies = studies;
     }
 }

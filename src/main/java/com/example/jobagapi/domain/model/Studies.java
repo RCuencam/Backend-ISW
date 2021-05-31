@@ -12,7 +12,6 @@ import java.util.List;
 public class Studies extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -21,12 +20,6 @@ public class Studies extends AuditModel{
 
     @NotNull
     private Long degree;
-
-    //Relación
-    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "studies_id", nullable = false)
-    //@JsonIgnore
-    //private ProfessionalProfile professionalProfile;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
@@ -58,5 +51,13 @@ public class Studies extends AuditModel{
     public Studies setDegree(Long degree) {
         this.degree = degree;
         return this;
+    }
+
+    public List<ProfessionalProfile> getProfessionalprofiles() {
+        return professionalprofiles;
+    }
+
+    public void setProfessionalprofiles(List<ProfessionalProfile> professionalprofiles) {
+        this.professionalprofiles = professionalprofiles;
     }
 }

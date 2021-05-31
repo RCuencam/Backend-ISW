@@ -55,6 +55,7 @@ public class ProfessionalProfileLanguagesController {
         List<ProfessionalProfileResource> resources = postsPage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
+
     }
 
     private ProfessionalProfile convertToEntity(SaveProfessionalProfileResource resource) {

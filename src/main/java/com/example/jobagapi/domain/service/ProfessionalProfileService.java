@@ -15,6 +15,10 @@ public interface ProfessionalProfileService {
     ProfessionalProfile updateProfessionalProfile(Long postulantId, Long professionalprofileId, ProfessionalProfile professionalprofileDetails);
     ResponseEntity<?> deleteProfessionalProfile(Long postulantId, Long professionalprofileId);
 
+    ProfessionalProfile assignProfessionalProfileSkill(Long professionalprofileId, Long skillId);
+    ProfessionalProfile unassignProfessionalProfileSkill(Long professionalprofileId, Long skillId);
+    Page<ProfessionalProfile> getAllProfessionalProfileBySkillsId(Long skillId, Pageable pageable);
+
     ProfessionalProfile assignProfessionalProfileLanguage(Long professionalprofileId, Long languagesId);
     ProfessionalProfile unassignProfessionalProfileLanguage(Long professionalprofileId, Long languagesId);
     Page<ProfessionalProfile> getAllProfessionalProfileByLanguagesId(Long languagesId, Pageable pageable);
@@ -22,9 +26,5 @@ public interface ProfessionalProfileService {
     ProfessionalProfile assignProfessionalProfileStudy(Long professionalprofileId, Long studiesId);
     ProfessionalProfile unassignProfessionalProfileStudy(Long professionalprofileId, Long studiesId);
     Page<ProfessionalProfile> getAllProfessionalProfileByStudiesId(Long studiesId, Pageable pageable);
-
-    ProfessionalProfile assignProfessionalProfileSkill(Long professionalprofileId, Long skillId);
-    ProfessionalProfile unassignProfessionalProfileSkill(Long professionalprofileId, Long skillId);
-    Page<ProfessionalProfile> getAllProfessionalProfileBySkillsId(Long skillId, Pageable pageable);
 
 }

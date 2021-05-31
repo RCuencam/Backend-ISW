@@ -12,12 +12,5 @@ import java.util.Optional;
 public interface ProfessionalProfileRepository extends JpaRepository<ProfessionalProfile,Long> {
     Page<ProfessionalProfile> findByPostulantId(Long postulantId, Pageable pageable); //Encontrar por Id
 
-    public Optional<ProfessionalProfile> findByIdAndPostulantId(Long id, Long postulantId);
-
-    Page<ProfessionalProfile> findByStudiesId(Long studiesId, Pageable pageable); //Encontrar por Id
-
-    Page<ProfessionalProfile> findByLanguagesId(Long languagesId, Pageable pageable); //Encontrar por Id
-
-    Page<ProfessionalProfile> findBySkillId(Long skills, Pageable pageable); //Encontrar por Id
-
+    Optional<ProfessionalProfile> findByIdAndPostulantId(Long id, Long postulantId);
 }
