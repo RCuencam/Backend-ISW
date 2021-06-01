@@ -47,6 +47,11 @@ public class ProfessionalProfileLanguagesController {
         return convertToResource(professionalprofileService.unassignProfessionalProfileLanguage(professionalprofileId, languagesId));
     }
 
+
+    @Operation(summary = "List assignment between Languages and ProfessionalProfile",
+            description = "List association between ProfessionalProfile and Languages",
+            tags = {"professionalprofile"}
+    )
     @GetMapping("/languages/{languagesId}/professionalprofile")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByLanguagesId(
             @PathVariable Long languagesId,

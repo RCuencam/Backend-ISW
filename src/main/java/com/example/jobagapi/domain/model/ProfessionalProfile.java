@@ -38,8 +38,9 @@ public class ProfessionalProfile{
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name ="professionalprofile_skills",
             joinColumns =  {@JoinColumn(name = "professionalprofile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skill_id")})
+            inverseJoinColumns = {@JoinColumn(name = "skills_id")})
     private List<Skill> skills;
+
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})

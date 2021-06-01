@@ -47,30 +47,31 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
     }
 
     @Override
-    public ProfessionalProfile assignProfessionalProfileSkill(Long professionalprofileId, Long skillId) {
-        Skill skill = skillRepository.findById(skillId)
-                .orElseThrow(() -> new ResourceNotFoundException("Skill", "Id", skillId));
+    public ProfessionalProfile assignProfessionalProfileSkill(Long professionalprofileId, Long skillsId) {
+        Skill skills = skillRepository.findById(skillsId)
+                .orElseThrow(() -> new ResourceNotFoundException("Skills", "Id", skillsId));
         return professionalprofileRepository.findById(professionalprofileId).map(
-                professionalprofile -> professionalprofileRepository.save(professionalprofile.addSkill(skill)))
+                professionalprofile -> professionalprofileRepository.save(professionalprofile.addSkill(skills)))
                 .orElseThrow(() -> new ResourceNotFoundException("ProfessionalProfile", "Id", professionalprofileId));
     }
 
     @Override
-    public ProfessionalProfile unassignProfessionalProfileSkill(Long professionalprofileId, Long skillId) {
-        Skill skill = skillRepository.findById(skillId)
-                .orElseThrow(() -> new ResourceNotFoundException("Skill", "Id", skillId));
+    public ProfessionalProfile unassignProfessionalProfileSkill(Long professionalprofileId, Long skillsId) {
+        Skill skills = skillRepository.findById(skillsId)
+                .orElseThrow(() -> new ResourceNotFoundException("Skills", "Id", skillsId));
         return professionalprofileRepository.findById(professionalprofileId).map(
-                professionalprofile -> professionalprofileRepository.save(professionalprofile.removeSkill(skill)))
+                professionalprofile -> professionalprofileRepository.save(professionalprofile.removeSkill(skills)))
                 .orElseThrow(() -> new ResourceNotFoundException("ProfessionalProfile", "Id", professionalprofileId));
+
     }
 
     @Override
-    public Page<ProfessionalProfile> getAllProfessionalProfileBySkillsId(Long skillId, Pageable pageable) {
-        return skillRepository.findById(skillId).map(skill -> {
-            List<ProfessionalProfile> professionalprofiles = skill.getProfessionalprofiles();
+    public Page<ProfessionalProfile> getAllProfessionalProfileBySkillId(Long skillsId, Pageable pageable) {
+        return skillRepository.findById(skillsId).map(skills -> {
+            List<ProfessionalProfile> professionalprofiles = skills.getProfessionalprofiles();
             int profilesCount = professionalprofiles.size();
             return new PageImpl<>(professionalprofiles, pageable, profilesCount); })
-                .orElseThrow(() -> new ResourceNotFoundException("Skill", "Id", skillId));
+                .orElseThrow(() -> new ResourceNotFoundException("Skills", "Id", skillsId));
     }
 
 

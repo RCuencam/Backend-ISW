@@ -48,6 +48,12 @@ public class ProfessionalProfileStudiesController {
         return convertToResource(professionalprofileService.unassignProfessionalProfileStudy(professionalprofileId, studiesId));
     }
 
+
+    @Operation(summary = "List assignment between studies and ProfessionalProfile",
+            description = "List association between ProfessionalProfile and studies",
+            tags = {"professionalprofile"}
+    )
+
     @GetMapping("/studies/{studiesId}/professionalprofile")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByStudiesId(
             @PathVariable Long studiesId,

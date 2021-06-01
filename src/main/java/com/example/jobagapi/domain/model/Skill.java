@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
 public class Skill extends AuditModel{
 
     @Id

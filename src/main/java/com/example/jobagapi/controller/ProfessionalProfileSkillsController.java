@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 
-public class ProfessionalProfileSkillController {
+public class ProfessionalProfileSkillsController {
 
     @Autowired
     private ModelMapper mapper;
@@ -30,29 +30,35 @@ public class ProfessionalProfileSkillController {
             description = "Establishes association between Skills and ProfessionalProfile",
             tags = {"professionalprofile"}
     )
-    @PostMapping("/professionalprofile/{professionalprofileId}/skill/{skillId}")
+    @PostMapping("/professionalprofile/{professionalprofileId}/skills/{skillsId}")
     public ProfessionalProfileResource assignProfessionalProfileSkill(
             @PathVariable Long professionalprofileId,
-            @PathVariable Long skillId) {
-        return convertToResource(professionalprofileService.assignProfessionalProfileSkill(professionalprofileId, skillId));
+            @PathVariable Long skillsId) {
+        return convertToResource(professionalprofileService.assignProfessionalProfileSkill(professionalprofileId, skillsId));
     }
 
     @Operation(summary = "Remove assignment between Skills and ProfessionalProfile",
             description = "Ends association between ProfessionalProfile and Skills",
             tags = {"professionalprofile"}
     )
-    @DeleteMapping("/professionalprofile/{professionalprofileId}/skill/{skillId}")
+    @DeleteMapping("/professionalprofile/{professionalprofileId}/skills/{skillsId}")
     public ProfessionalProfileResource unassignProfessionalProfileSkill(
             @PathVariable Long professionalprofileId,
-            @PathVariable Long skillId) {
-        return convertToResource(professionalprofileService.unassignProfessionalProfileSkill(professionalprofileId, skillId));
+            @PathVariable Long skillsId) {
+        return convertToResource(professionalprofileService.unassignProfessionalProfileSkill(professionalprofileId, skillsId));
     }
 
-    @GetMapping("/skill/{skillId}/professionalprofile")
+
+    @Operation(summary = "List assignment between skills and ProfessionalProfile",
+            description = "List association between ProfessionalProfile and skills",
+            tags = {"professionalprofile"}
+    )
+
+    @GetMapping("/skills/{skillsId}/professionalprofile")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileBySkillsId(
-            @PathVariable Long skillId,
+            @PathVariable Long skillsId,
             Pageable pageable) {
-        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileBySkillsId(skillId, pageable);
+        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileBySkillId(skillsId, pageable);
         List<ProfessionalProfileResource> resources = postsPage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
