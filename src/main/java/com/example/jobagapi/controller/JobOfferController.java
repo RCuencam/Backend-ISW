@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class JobOfferController {
+
     @Autowired
     private JobOfferService jobOfferService;
     @Autowired
     private ModelMapper mapper;
 
-    //FALTA MODIFICAR
-    @GetMapping("/jobOffers")
+    @GetMapping("/employeer/{employeerId}/employeers")
     public Page<JobOfferResource> getAllJobOffers(
             @PathVariable Long employeerId,
             Pageable pageable) {
