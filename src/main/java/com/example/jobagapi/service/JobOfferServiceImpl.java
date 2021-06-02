@@ -20,7 +20,7 @@ public class JobOfferServiceImpl implements JobOfferService {
 
     @Override
     public Page<JobOffer> getAllJobOffersByEmployeerId(Long employeerId, Pageable pageable) {
-        return jobOfferRepository.findAll(pageable);
+        return jobOfferRepository.findByEmployeerId(employeerId,pageable);
     }
 
     @Override
@@ -46,7 +46,9 @@ public class JobOfferServiceImpl implements JobOfferService {
         return jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
             jobOffer.setDescription(jobOfferDetails.getDescription())
                     .setDirection(jobOfferDetails.getDirection())
-                    .setSalary(jobOfferDetails.getSalary());
+                    .setSalary(jobOfferDetails.getSalary())
+                    .setBegin_date_offer(jobOfferDetails.getBegin_date_offer())
+                    .setFinal_date_offer(jobOfferDetails.getFinal_date_offer());
             return jobOfferRepository.save(jobOffer);
         }).orElseThrow(() -> new ResourceNotFoundException("Job Offer","Id",jobOfferId));
     }
