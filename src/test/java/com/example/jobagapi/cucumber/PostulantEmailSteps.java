@@ -55,10 +55,10 @@ public class PostulantEmailSteps {
         return generatedString;
     }
 
-    @When("register with email")
-    public void I_register_with_email(){
+    @And("register with id {long} and email")
+    public void I_register_with_email(Long Id){
 
-        Postulant newpostulant = new Postulant(1L, "firstname", "lastname", randomString(), 123L, "password","document","civil");
+        Postulant newpostulant = new Postulant(Id, "firstname", "lastname", randomString(), 123L, "password","document","civil");
         String url=postUrl + "/api" + "/postulants/";
         Postulant postulant=restTemplate.postForObject(url,newpostulant,Postulant.class);
 
@@ -93,10 +93,10 @@ public class PostulantEmailSteps {
     }
 
 
-    @Then("I should see a message error")
-    public void iShouldSeeAMessageError() {
-        String errorMessage="El email ya esta en uso";
-        assertEquals(errorMessage,error);
+    @Then("I should see a message {string}")
+    public void i_Should_See_A_MessageError(String string) {
+
+        assertEquals(string,error);
     }
 }
 

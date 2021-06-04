@@ -3,17 +3,17 @@ Feature: Postulant functionality
   Scenario Outline: As a Postulant i want to register my email.
 
     Given I am in the register seccion
-    And register with email
+    And register with id <id> and email
     Then I should be able to register
     Examples:
-      |email  |
-      |s      |
+      |id  |
+      |1  |
 
   Scenario Outline: As a Postulant i want to see a error if the email is in use.
 
     Given I am in the register seccion
     And register a repeat email
-    Then I should see a message error
+    Then I should see a message <errors>
     Examples:
-      |error|
-      |El email ya esta en uso|
+     |errors|
+     |"El email ya esta en uso"|

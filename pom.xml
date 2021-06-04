@@ -15,6 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <cucumber.version>6.8.1</cucumber.version>
     </properties>
     <dependencies>
         <dependency>
