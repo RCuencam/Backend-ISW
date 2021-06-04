@@ -1,5 +1,6 @@
 package com.example.jobagapi;
 
+import com.example.jobagapi.domain.model.Postulant;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,5 +19,7 @@ public class JobagApiApplication {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
+
+
 }
 

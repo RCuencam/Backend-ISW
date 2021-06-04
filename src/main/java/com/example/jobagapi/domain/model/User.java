@@ -1,5 +1,10 @@
 package com.example.jobagapi.domain.model;
 
+import org.apache.logging.log4j.message.Message;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,14 +14,19 @@ import javax.validation.constraints.NotNull;
 
 public class User extends AuditModel{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
     private String firstname;
     @NotNull
     private String lastname;
+
+
+
     @Column(unique = true)
+
+
     @NotNull
     private String email;
     @NotNull

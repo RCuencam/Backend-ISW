@@ -11,4 +11,5 @@ public interface UserService {
     Page<User> getAllUsers(Pageable pageable);
     User getUserById(Long userId);
     User updateUser(Long userId, User userRequest);
+    Boolean getByEmail(String email);
 }

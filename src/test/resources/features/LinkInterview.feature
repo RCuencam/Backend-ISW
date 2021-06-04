@@ -6,3 +6,6 @@ Feature: Validate Link Interview
     Examples:
       | link                                                                         | message                             |
       | "https://us04web.zoom.us/j" | "successful access to the platform" |
+
+
+

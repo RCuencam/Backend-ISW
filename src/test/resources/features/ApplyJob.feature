@@ -1,5 +1,6 @@
 Feature: Post Job Functionality
 
+
   Scenario Outline: As a postulant i want to postulate a new job.
     Given I want a new job
     And The job offer have a stable minimum <salary> and <id>
