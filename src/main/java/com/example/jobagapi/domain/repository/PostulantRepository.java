@@ -12,4 +12,6 @@ import java.util.Optional;
 @Repository
 public interface PostulantRepository extends JpaRepository<Postulant,Long> {
     public Page<Postulant> findById(Long Id, Pageable page);
+
+
 }

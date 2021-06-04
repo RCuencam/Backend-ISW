@@ -33,6 +33,8 @@ public class JobOfferServiceImpl implements JobOfferService {
 
     @Override
     public JobOffer createJobOffer(Long employeerId, JobOffer jobOffer) {
+        if(jobOffer.getSalary()<930)
+            throw  new ResourceNotFoundException("El salario debe ser mayor o igual a 930");
         return employeerRepository.findById(employeerId).map(employeer -> {
             jobOffer.setEmployeer(employeer);
             return jobOfferRepository.save(jobOffer);

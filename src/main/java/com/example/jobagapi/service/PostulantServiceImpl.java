@@ -12,12 +12,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.persistence.UniqueConstraint;
 
 @Service
 public class PostulantServiceImpl implements PostulantService {
 
     @Autowired
     private PostulantRepository postulantRepository;
+
+    @Autowired UserRepository userRepository;
 
 
 
@@ -34,6 +39,10 @@ public class PostulantServiceImpl implements PostulantService {
 
     @Override
     public Postulant createPostulant(Postulant postulant) {
+        if(userRepository.existsByEmail(postulant.getEmail()))
+        {
+            throw  new ResourceNotFoundException("El email ya esta en uso");
+        }
         return postulantRepository.save(postulant);
     }
 
@@ -56,6 +65,8 @@ public class PostulantServiceImpl implements PostulantService {
         postulantRepository.delete(postulant);
         return ResponseEntity.ok().build();
     }
+
+
 
     public PostulantRepository getPostulantRepository() {
         return postulantRepository;

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,8 +56,8 @@ public class PostulantController {
     @Operation(summary="Delete Postulant By Id", description="DeletePostulantById", tags={"Postulants"})
     @DeleteMapping("/postulant/{postulantId}}")
 
-    public ResponseEntity<?> deletePostulant(@PathVariable Long postId) {
-        return postulantService.deletePostulant(postId);
+    public ResponseEntity<?> deletePostulant(@PathVariable Long postulantId) {
+        return postulantService.deletePostulant(postulantId);
     }
 
 
@@ -70,5 +71,13 @@ public class PostulantController {
     {
         return mapper.map(entity, PostulantResource.class);
     }
+
+
+
+
+
+
+
+
 
 }

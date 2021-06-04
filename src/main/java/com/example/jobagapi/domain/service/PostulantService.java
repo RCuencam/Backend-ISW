@@ -12,4 +12,5 @@ public interface PostulantService {
     Postulant createPostulant(Postulant postulant );
     Postulant updatePostulant(Long postulantId, Postulant postulantRequest);
     ResponseEntity<?> deletePostulant(Long postulantId);
+
 }
