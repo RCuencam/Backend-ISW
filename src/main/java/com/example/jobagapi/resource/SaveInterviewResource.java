@@ -12,7 +12,7 @@ public class SaveInterviewResource {
     @DateTimeFormat
     private LocalDate final_date_Interview;
 
-    @Size(max = 30)
+    @Size(max = 100)
     private String link_Interview;
 
     public LocalDate getDate_Interview() {

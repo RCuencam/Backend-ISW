@@ -27,21 +27,21 @@ public class InterviewController {
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping("/interview/{postulantId}/interview")
+    @PostMapping("/postulants/{postulantId}/interviews")
     public InterviewResource createInterview(
             @PathVariable Long postulantId,
             @Valid @RequestBody SaveInterviewResource resource) {
         return convertToResource(interviewService.createInterview(postulantId, convertToEntity(resource)));
     }
 
-    @DeleteMapping("/postulant/{postulantId}/interview/{interviewId}")
+    @DeleteMapping("/postulants/{postulantId}/interviews/{interviewId}")
     public ResponseEntity<?> deleteInterview(
             @PathVariable Long postulantId,
             @PathVariable Long interviewId) {
         return interviewService.deleteInterview(postulantId, interviewId);
     }
 
-    @PutMapping("/postulant/{postulantId}/interview/{interviewId}")
+    @PutMapping("/postulants/{postulantId}/interviews/{interviewId}")
     public InterviewResource updateInterview(
             @PathVariable Long postulantId,
             @PathVariable Long interviewId,
@@ -49,14 +49,14 @@ public class InterviewController {
         return convertToResource(interviewService.updateInterview(postulantId, interviewId, convertToEntity(resource)));
     }
 
-    @GetMapping("/interview/{interviewId}/postulant/{postulantId}")
+    @GetMapping("/interviews/{interviewId}/postulants/{postulantId}")
     public InterviewResource getInterviewByIdAndPostulantId(
             @PathVariable Long postulantId,
             @PathVariable Long interviewId) {
         return convertToResource(interviewService.getInterviewByIdAndPostulantId(interviewId, postulantId));
     }
 
-    @GetMapping("/postulant/{postulantId}/postulants")
+    @GetMapping("/postulants/{postulantId}/interviews")
     public Page<InterviewResource> getAllInterviewsByPostulantId(@PathVariable Long postulantId, Pageable pageable) {
         Page<Interview> interviewPage = interviewService.getAllInterviewsByPostulantId(postulantId, pageable);
         List<InterviewResource> resources = interviewPage.getContent()

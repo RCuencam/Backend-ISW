@@ -26,7 +26,7 @@ public class JobOfferController {
     @Autowired
     private ModelMapper mapper;
 
-    @GetMapping("/employeer/{employeerId}/employeers")
+    @GetMapping("/employeer/{employeerId}/joboffers")
     public Page<JobOfferResource> getAllJobOffers(
             @PathVariable Long employeerId,
             Pageable pageable) {
@@ -45,7 +45,7 @@ public class JobOfferController {
         return convertToResource(jobOfferService.getJobOfferByIdAndEmployeerId(jobOfferId, employeerId));
     }
 
-    @PostMapping("/jobOffer/{employeerId}/jobOffers")
+    @PostMapping("/employeers/{employeerId}/joboffers")
     public JobOfferResource createJobOffer(
             @PathVariable Long employeerId,
             @Valid @RequestBody SaveJobOfferResource resource) {

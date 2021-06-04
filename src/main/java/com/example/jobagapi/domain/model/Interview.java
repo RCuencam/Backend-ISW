@@ -35,7 +35,7 @@ public class Interview extends AuditModel {
     private LocalDate final_date_Interview;
 
     @NotNull
-    @Size(max = 30)
+    @Size(max = 100)
     private String link_Interview;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
