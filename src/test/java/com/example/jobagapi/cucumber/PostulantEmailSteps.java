@@ -4,6 +4,7 @@ import com.example.jobagapi.domain.model.Employeer;
 import com.example.jobagapi.domain.model.Interview;
 import com.example.jobagapi.domain.model.JobOffer;
 import com.example.jobagapi.domain.model.Postulant;
+import com.example.jobagapi.exception.ResourceNotFoundException;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -72,23 +73,14 @@ public class PostulantEmailSteps {
         String url=postUrl+"/api" +"/postulants";
         Postulant postulant=restTemplate.getForObject(url,Postulant.class);
         assertNotNull(postulant);
-
-
-
-
     }
 
 
 
     @Given("register a repeat email")
     public void register_a_repeat_email() {
-        Postulant newpostulant = new Postulant(1L, "firstname", "lastname", randomString(), 123L, "password","document","civil");
+        Postulant newpostulant = new Postulant(1L, "firstname", "lastname", "a", 123L, "password","document","civil");
         String url=postUrl + "/api" + "/postulants/";
-        Postulant postulant=restTemplate.postForObject(url,newpostulant,Postulant.class);
-
-        log.info(postulant);
-
-        assertNotNull(postulant);
 
         try
         {
@@ -99,11 +91,13 @@ public class PostulantEmailSteps {
         }
         assertEquals(error,"El email ya esta en uso");
     }
-    @Then("I should see a message error {string}")
-    public void i_should_be_able_to_see_error(String errorMessage) {
+
+
+    @Then("I should see a message error")
+    public void iShouldSeeAMessageError() {
+        String errorMessage="El email ya esta en uso";
         assertEquals(errorMessage,error);
     }
-
 }
 
 

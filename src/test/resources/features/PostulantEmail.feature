@@ -7,13 +7,13 @@ Feature: Postulant functionality
     Then I should be able to register
     Examples:
       |email  |
-    |s      |
+      |s      |
 
   Scenario Outline: As a Postulant i want to see a error if the email is in use.
 
     Given I am in the register seccion
     And register a repeat email
-    Then I should see a message error <error>
+    Then I should see a message error
     Examples:
       |error|
       |El email ya esta en uso|
