@@ -55,9 +55,10 @@ public class ApplyJobSteps {
         String employeerurl=postUrl + "/api/employeers";
 
         LocalDate data=LocalDate.now();
-
-        Employeer newEmployeer=new Employeer();
-        String url=postUrl + "/api/employeers/" + 2 + "/joboffers";
+        String employeerUrl=postUrl+"/api/employeers";
+        Employeer newEmployeer=new Employeer(id,"example","example","example",123L,"example","example","example");
+        Employeer employeer=restTemplate.postForObject(employeerUrl,newEmployeer,Employeer.class);
+        String url=postUrl + "/api/employeers/" + 1 + "/joboffers";
         JobOffer newJob= new JobOffer();
         newJob.setId(id);
         newJob.setSalary(salary);
@@ -65,7 +66,7 @@ public class ApplyJobSteps {
         newJob.setBegin_date_offer(data);
         newJob.setFinal_date_offer(data);
         newJob.setDirection("aea");
-        newJob.setEmployeer(newEmployeer);
+        newJob.setEmployeer(employeer);
 
 
         JobOffer job=restTemplate.postForObject(url,newJob,JobOffer.class);
@@ -76,7 +77,7 @@ public class ApplyJobSteps {
 
     @Then("I should be able to see my newly job")
     public void iShouldBeAbleToSeeMyNewlyJob() {
-        String url=postUrl + "/api/jobOffer/" + jobOfferId + "/employeer/2";
+        String url=postUrl + "/api/jobOffer/" + jobOfferId + "/employeer/1";
         JobOffer job=restTemplate.getForObject(url,JobOffer.class);
         assertNotNull(job);
     }

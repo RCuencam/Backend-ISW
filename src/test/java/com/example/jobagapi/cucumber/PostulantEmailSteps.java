@@ -55,7 +55,7 @@ public class PostulantEmailSteps {
         return generatedString;
     }
 
-    @And("register with id {long} and email")
+    @Given("register with id {long} and email")
     public void I_register_with_email(Long Id){
 
         Postulant newpostulant = new Postulant(Id, "firstname", "lastname", randomString(), 123L, "password","document","civil");

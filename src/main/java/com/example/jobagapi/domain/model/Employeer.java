@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 public class Employeer extends User{
 
         @NotNull
-        @Column(unique = true)
         private String posicion;
 
         public Employeer(){
