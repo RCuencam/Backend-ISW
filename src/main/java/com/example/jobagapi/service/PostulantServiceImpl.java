@@ -6,6 +6,7 @@ import com.example.jobagapi.domain.model.User;
 import com.example.jobagapi.domain.repository.PostulantRepository;
 import com.example.jobagapi.domain.repository.UserRepository;
 import com.example.jobagapi.domain.service.PostulantService;
+import com.example.jobagapi.exception.ResourceIncorrectData;
 import com.example.jobagapi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,7 @@ public class PostulantServiceImpl implements PostulantService {
     public Postulant createPostulant(Postulant postulant) {
         if(userRepository.existsByEmail(postulant.getEmail()))
         {
-            throw  new ResourceNotFoundException("El email ya esta en uso");
+            throw  new ResourceIncorrectData("El email ya esta en uso");
         }
         return postulantRepository.save(postulant);
     }

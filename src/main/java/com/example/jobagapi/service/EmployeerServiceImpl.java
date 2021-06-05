@@ -4,6 +4,7 @@ import com.example.jobagapi.domain.repository.CompanyRepository;
 import com.example.jobagapi.domain.repository.EmployeerRepository;
 import com.example.jobagapi.domain.repository.UserRepository;
 import com.example.jobagapi.domain.service.EmployeerService;
+import com.example.jobagapi.exception.ResourceIncorrectData;
 import com.example.jobagapi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,10 @@ public class EmployeerServiceImpl implements EmployeerService {
     @Override
     public Employeer createEmployeer(Employeer employeer) {
 
-
+        if(userRepository.existsByEmail(employeer.getEmail()))
+        {
+            throw  new ResourceIncorrectData("El email ya esta en uso");
+        }
         return employeerRepository.save(employeer);
     }
 
