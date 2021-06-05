@@ -53,8 +53,7 @@ public class ProfessionalProfileAddinSkillsSteps {
         String allProfessionalProfile=restTemplate.getForObject(url, String.class);
         log.info(allProfessionalProfile);
         assertTrue(!allProfessionalProfile.isEmpty());
-        String url3=postUrl+"/api" +"/postulant/1";
-        restTemplate.delete(url3,postulant);
+
 
     }
 
