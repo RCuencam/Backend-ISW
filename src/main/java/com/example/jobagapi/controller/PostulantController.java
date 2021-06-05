@@ -40,7 +40,7 @@ public class PostulantController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Postulants", description="Post Postulants", tags={"Postulants"})
+    @Operation(summary="Post Postulants", description="Create Postulants", tags={"Postulants"})
     @PostMapping("/postulants")
     public PostulantResource createPostulant(@Valid @RequestBody SavePostulantResource resource) {
         Postulant postulant = convertToEntity(resource);

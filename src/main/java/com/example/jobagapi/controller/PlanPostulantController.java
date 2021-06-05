@@ -4,6 +4,7 @@ import com.example.jobagapi.domain.model.PlanPostulant;
 import com.example.jobagapi.domain.service.PlanPostulantService;
 import com.example.jobagapi.resource.PlanPostulantResource;
 import com.example.jobagapi.resource.SavePlanPostulantResource;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ public class PlanPostulantController {
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary="Get planpostulants", description="Get all PlanPostulants", tags={"planpostulants"})
     @GetMapping("/postulants/{postulantId}/planpostulants")
     public Page<PlanPostulantResource> getAllPlanPostulantsByPostulantId(@PathVariable Long postulantId, Pageable pageable) {
         Page<PlanPostulant> planpostulantPage = planPostulantService.getAllPlanPostulantsByPostulantId(postulantId, pageable);
@@ -34,17 +36,20 @@ public class PlanPostulantController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary="Get planpostulants", description="Get PlanPostulants by postulant Id", tags={"planpostulants"})
     @GetMapping("/postulants/{postulantId}/planpostulants/{planpostulantId}")
     public PlanPostulantResource getPlanemployeerByIdAndEmployeerId(@PathVariable Long postulantId, @PathVariable Long planpostulantId) {
         return convertToResource(planPostulantService.getPlanPostulantByIdAndPostulantId(planpostulantId, postulantId));
     }
 
+    @Operation(summary="Post planpostulants", description="Create PlanPostulant", tags={"planpostulants"})
     @PostMapping("/postulants/{postulantId}/planpostulants")
     public PlanPostulantResource createPlanPostulant(
             @PathVariable Long postulantId,@Valid @RequestBody SavePlanPostulantResource resource) {
         return convertToResource(planPostulantService.createPlanPostulant(postulantId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Put planpostulants", description="Update PlanPostulant", tags={"planpostulants"})
     @PutMapping("/postulants/{postulantId}/planpostulants/{planpostulantId}")
     public PlanPostulantResource updatePlanemployeer(
             @PathVariable Long postulantId,
@@ -53,6 +58,7 @@ public class PlanPostulantController {
         return convertToResource(planPostulantService.updatePlanPostulant(postulantId, planpostulantId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Delete planpostulants", description="Delete PlanPostulant", tags={"planpostulants"})
     @DeleteMapping("/postulants/{postulantId}/planpostulants/{planpostulantId}")
     public ResponseEntity<?> deletePlanemployeer(
             @PathVariable Long postulantId,

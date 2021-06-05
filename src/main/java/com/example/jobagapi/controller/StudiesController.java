@@ -44,7 +44,7 @@ public class StudiesController {
         return new PageImpl<>(resources,pageable, resources.size());
     }
 
-    @Operation(summary = "Post Studies", description = "Post Studies", tags = {"Studies"})
+    @Operation(summary = "Post Studies", description = "Create Studies", tags = {"Studies"})
     @PostMapping("/studies")
     public  StudiesResource createStudies(@Valid @RequestBody SaveStudiesResource resource){
         Studies studies = convertToEntity(resource);

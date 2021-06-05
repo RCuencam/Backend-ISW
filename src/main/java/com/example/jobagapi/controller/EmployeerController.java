@@ -45,7 +45,7 @@ public class EmployeerController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Employeers", description="Post Employeers", tags={"Employeers"})
+    @Operation(summary="Post Employeers", description="Create Employeers", tags={"Employeers"})
     @PostMapping("/employeers")
     public EmployeerResource createEmployeer(@Valid @RequestBody SaveEmployeerResource resource) {
         Employeer employeer = convertToEntity(resource);
