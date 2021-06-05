@@ -26,7 +26,7 @@ public class ProfessionalProfileLanguagesController {
     private ProfessionalProfileService professionalprofileService;
 
     @Operation(summary = "Assign Languages to ProfessionalProfile",
-            description = "Establishes association between Languages and ProfessionalProfile",
+            description = "Establishes association between languages and professionalProfile",
             tags = {"professionalprofile"}
     )
     @PostMapping("/professionalprofile/{professionalprofileId}/languages/{languagesId}")
@@ -37,7 +37,7 @@ public class ProfessionalProfileLanguagesController {
     }
 
     @Operation(summary = "Remove assignment between Languages and ProfessionalProfile",
-            description = "Ends association between ProfessionalProfile and Languages",
+            description = "Ends association between languages and professionalProfile",
             tags = {"professionalprofile"}
     )
     @DeleteMapping("/professionalprofile/{professionalprofileId}/languages/{languagesId}")
@@ -49,7 +49,7 @@ public class ProfessionalProfileLanguagesController {
 
 
     @Operation(summary = "List assignment between Languages and ProfessionalProfile",
-            description = "List association between ProfessionalProfile and Languages",
+            description = "List association between languages and professionalProfile",
             tags = {"professionalprofile"}
     )
     @GetMapping("/languages/{languagesId}/professionalprofile")

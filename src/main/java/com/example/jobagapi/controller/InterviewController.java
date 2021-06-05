@@ -6,6 +6,7 @@ import com.example.jobagapi.domain.service.InterviewService;
 import com.example.jobagapi.resource.InterviewResource;
 import com.example.jobagapi.resource.PlanPostulantResource;
 import com.example.jobagapi.resource.SaveInterviewResource;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ public class InterviewController {
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary="Post interviews", description="Create interviews by postulant Id", tags={"interviews"})
     @PostMapping("/postulants/{postulantId}/interviews")
     public InterviewResource createInterview(
             @PathVariable Long postulantId,
@@ -34,6 +36,7 @@ public class InterviewController {
         return convertToResource(interviewService.createInterview(postulantId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Delete interviews", description="Delete interviews by postulant Id", tags={"interviews"})
     @DeleteMapping("/postulants/{postulantId}/interviews/{interviewId}")
     public ResponseEntity<?> deleteInterview(
             @PathVariable Long postulantId,
@@ -41,6 +44,7 @@ public class InterviewController {
         return interviewService.deleteInterview(postulantId, interviewId);
     }
 
+    @Operation(summary="Put interviews", description="Update interviews by postulant Id", tags={"interviews"})
     @PutMapping("/postulants/{postulantId}/interviews/{interviewId}")
     public InterviewResource updateInterview(
             @PathVariable Long postulantId,
@@ -49,6 +53,7 @@ public class InterviewController {
         return convertToResource(interviewService.updateInterview(postulantId, interviewId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Get interviews", description="Get interviews by postulant Id", tags={"interviews"})
     @GetMapping("/interviews/{interviewId}/postulants/{postulantId}")
     public InterviewResource getInterviewByIdAndPostulantId(
             @PathVariable Long postulantId,
@@ -56,6 +61,7 @@ public class InterviewController {
         return convertToResource(interviewService.getInterviewByIdAndPostulantId(interviewId, postulantId));
     }
 
+    @Operation(summary="Get interviews", description="Get all interviews by postulant Id", tags={"interviews"})
     @GetMapping("/postulants/{postulantId}/interviews")
     public Page<InterviewResource> getAllInterviewsByPostulantId(@PathVariable Long postulantId, Pageable pageable) {
         Page<Interview> interviewPage = interviewService.getAllInterviewsByPostulantId(postulantId, pageable);

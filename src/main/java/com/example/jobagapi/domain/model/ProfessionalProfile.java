@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "professional_profile")
+@Table(name = "professional_profiles")
 public class ProfessionalProfile{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

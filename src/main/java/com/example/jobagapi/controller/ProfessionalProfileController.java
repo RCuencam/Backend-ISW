@@ -30,6 +30,7 @@ public class ProfessionalProfileController {
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary="Get professionalprofile", description="Get all professionalprofiles", tags={"ProfessionalProfile"})
     @GetMapping("/postulants/{postulantId}/professionalprofile")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByPostulantId(@PathVariable Long postulantId, Pageable pageable) {
         Page<ProfessionalProfile> professionalprofilePage = professionalprofileService.getAllProfessionalProfileByPostulantId(postulantId, pageable);
@@ -38,18 +39,21 @@ public class ProfessionalProfileController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary="Get professionalprofile", description="Get professionalprofile by postulant Id", tags={"ProfessionalProfile"})
     @GetMapping("/postulants/{postulantId}/professionalprofile/{professionalprofileId}")
     public ProfessionalProfileResource getProfessionalProfileByIdAndPostulantId(@PathVariable Long postulantId, @PathVariable Long professionalprofileId) {
         return convertToResource(professionalprofileService.getProfessionalProfileByIdAndPostulantId(postulantId, professionalprofileId));
     }
 
 
+    @Operation(summary="Post professionalprofile", description="Create professionalprofile", tags={"ProfessionalProfile"})
     @PostMapping("/postulants/{postulantId}/professionalprofile")
     public ProfessionalProfileResource createProfessionalProfile(
             @PathVariable Long postulantId,@Valid @RequestBody SaveProfessionalProfileResource resource) {
         return convertToResource(professionalprofileService.createProfessionalProfile(postulantId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Put professionalprofile", description="Update professionalprofile", tags={"ProfessionalProfile"})
     @PutMapping("/postulants/{postulantId}/professionalprofile/{professionalprofileId}")
     public ProfessionalProfileResource updateProfessionalProfile(
             @PathVariable Long postulantId,
@@ -58,6 +62,7 @@ public class ProfessionalProfileController {
         return convertToResource(professionalprofileService.updateProfessionalProfile(postulantId, professionalprofileId, convertToEntity(resource)));
     }
 
+    @Operation(summary="Delete professionalprofile", description="Delete professionalprofile", tags={"ProfessionalProfile"})
     @DeleteMapping("/postulants/{postulantId}/professionalprofile/{professionalprofileId}")
     public ResponseEntity<?> deleteProfessionalProfile(
             @PathVariable Long postulantId,

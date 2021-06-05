@@ -37,7 +37,7 @@ public class SectorController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Sectors", description="Post Sectors", tags={"Sectors"})
+    @Operation(summary="Post Sectors", description="Create Sectors", tags={"Sectors"})
     @PostMapping("/sectors")
     public SectorResource createSector(@Valid @RequestBody SaveSectorResource resource) {
         Sector sector = convertToEntity(resource);
