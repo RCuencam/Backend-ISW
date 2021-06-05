@@ -10,8 +10,6 @@ import javax.validation.constraints.NotNull;
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 @OnDelete(action = OnDeleteAction.CASCADE)
 public class Employeer extends User{
-
-        @NotNull
         private String posicion;
 
         public Employeer(){

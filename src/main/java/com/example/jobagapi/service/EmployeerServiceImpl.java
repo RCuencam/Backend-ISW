@@ -35,8 +35,12 @@ public class EmployeerServiceImpl implements EmployeerService {
 
     @Override
     public Employeer createEmployeer(Employeer employeer) {
-
-
+        if (userRepository.existsByEmail(employeer.getEmail())) {
+            throw new ResourceNotFoundException("El email ya esta en uso");
+        }
+        if (userRepository.existsByNumber(employeer.getNumber())) {
+            throw new ResourceNotFoundException("El numero ya esta en uso");
+        }
         return employeerRepository.save(employeer);
     }
 
