@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get Users", description="Get All Users", tags={"Users"})
+    @Operation(summary="Get Users", description="Get All Users", tags={"users"})
     @GetMapping("/users")
     public Page<UserResource> getAllUsers(Pageable pageable){
         Page<User> userPage = userService.getAllUsers(pageable);
@@ -37,15 +37,15 @@ public class UserController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Update Users", description="Update Users", tags={"Users"})
+    @Operation(summary="Update Users", description="Update Users", tags={"users"})
     @PutMapping("/users/{userId}")
     public UserResource updateUser(@PathVariable Long userId, @Valid @RequestBody SaveUserResource resource) {
         User user = convertToEntity(resource);
         return convertToResource(userService.updateUser(userId, user));
     }
 
-    @Operation(summary="Get UsersById", description="Get UsersById", tags={"Users"})
-    @GetMapping("/user/{id}")
+    @Operation(summary="Get UsersById", description="Get UsersById", tags={"users"})
+    @GetMapping("/users/{userId}")
     public UserResource getUserById(@PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
