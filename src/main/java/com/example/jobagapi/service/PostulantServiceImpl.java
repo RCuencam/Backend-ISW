@@ -51,11 +51,11 @@ public class PostulantServiceImpl implements PostulantService {
     public Postulant updatePostulant(Long postulantId, Postulant postulantRequest) {
         Postulant postulant = postulantRepository.findById(postulantId)
                 .orElseThrow(() ->new ResourceNotFoundException("Postulant","Id",postulantId));
-    return postulantRepository.save(
+        return postulantRepository.save(
 
                 postulant.setCivil_status(postulantRequest.getCivil_status())
 
-    );
+        );
     }
 
 

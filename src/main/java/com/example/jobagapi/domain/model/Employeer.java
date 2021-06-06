@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @OnDelete(action = OnDeleteAction.CASCADE)
 @Table(name = "employeers")
 public class Employeer extends User{
-
-        @NotNull
         private String posicion;
 
         public Employeer(){
