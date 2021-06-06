@@ -27,7 +27,7 @@ public class PostulantJobController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get all postulant job by postulant ID", description="Get all postulant job by postulant ID", tags={"postulantjobs"})
+    @Operation(summary="Get all postulant job by postulant ID", description="Get all postulant job by postulant ID", tags={"postulant_jobs"})
     @GetMapping("/postulants/{postulantId}/postulantjobs")
     public Page<PostulantJobResource> getAllPostulantJobByPostulantId(
             @PathVariable Long postulantId,
