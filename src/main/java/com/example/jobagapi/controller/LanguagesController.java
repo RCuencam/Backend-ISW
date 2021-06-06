@@ -28,14 +28,14 @@ public class LanguagesController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Update Languages", description="Update Languages", tags={"Languages"})
+    @Operation(summary="Update Languages", description="Update Languages", tags={"languages"})
     @PutMapping("/languages/{languagesId}")
     public LanguagesResource updateLanguages(@PathVariable Long languagesId, @Valid @RequestBody SaveLanguaguesResource resource){
         Languages languages = convertToEntity(resource);
         return convertToResource(languagesService.updateLanguages(languagesId,languages));
     }
 
-    @Operation(summary = "Get Languages", description = "Get All Languages", tags = {"Languages"})
+    @Operation(summary = "Get Languages", description = "Get All Languages", tags = {"languages"})
     @GetMapping("/languages")
     public Page<LanguagesResource> getAllLanguages(Pageable pageable){
         Page<Languages> languagesPage = languagesService.getAllLanguages(pageable);
@@ -45,19 +45,19 @@ public class LanguagesController {
                 .collect(Collectors.toList());
         return new PageImpl<>(resources,pageable, resources.size());
     }
-    @Operation(summary = "Post Languages", description = "Post Languages", tags = {"Languages"})
+    @Operation(summary = "Post Languages", description = "Post Languages", tags = {"languages"})
     @PostMapping("/languages")
     public LanguagesResource createLanguages(@Valid @RequestBody SaveLanguaguesResource resource){
         Languages languages = convertToEntity(resource);
         return  convertToResource(languagesService.createLanguages(languages));
     }
 
-    @Operation(summary = "Get Languages by Id", description = "Get Languages by Id", tags = {"Languages"})
+    @Operation(summary = "Get Languages by Id", description = "Get Languages by Id", tags = {"languages"})
     @GetMapping("/languages/{languagesId}")
     public LanguagesResource getLanguaesById(@PathVariable Long languagesId){
         return convertToResource(languagesService.getLanguagesById(languagesId));
     }
-    @Operation(summary = "Delete Language", description = "Delete Language", tags = {"Languages"})
+    @Operation(summary = "Delete Language", description = "Delete Language", tags = {"languages"})
     @DeleteMapping("/languages/{languagesId}")
     public ResponseEntity<?> deleteLanguage(@PathVariable Long languagesId) {
         return languagesService.deleteLanguages(languagesId);
