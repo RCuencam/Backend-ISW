@@ -30,15 +30,20 @@ public class JobOffer extends AuditModel {
     @JoinColumn(name = "employeer_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employeer employeer;
+
     @NotNull
     @Size(max = 200)
     private String description;
+
     @DateTimeFormat
     private LocalDate begin_date_offer;
+
     @DateTimeFormat
     private LocalDate final_date_offer;
+
     @NotNull
     private Long salary;
+
     @NotNull
     @Size(max = 60)
     private String direction;
