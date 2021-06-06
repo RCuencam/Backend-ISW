@@ -34,7 +34,7 @@ public class EmployeerController {
 
 
 
-    @Operation(summary="Get Employeers", description="Get All Employeers", tags={"Employeers"})
+    @Operation(summary="Get Employeers", description="Get All Employeers", tags={"employeers"})
     @GetMapping("/employeers")
     public Page<EmployeerResource> getAllEmployeers(Pageable pageable){
         Page<Employeer> employeerPage = employeerService.getAllEmployeers(pageable);
@@ -45,21 +45,21 @@ public class EmployeerController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Employeers", description="Create Employeers", tags={"Employeers"})
+    @Operation(summary="Post Employeers", description="Create Employeers", tags={"employeers"})
     @PostMapping("/employeers")
     public EmployeerResource createEmployeer(@Valid @RequestBody SaveEmployeerResource resource) {
         Employeer employeer = convertToEntity(resource);
         return convertToResource(employeerService.createEmployeer(employeer));
     }
 
-    @Operation(summary="Get EmployeersById", description="Get EmployeersById", tags={"Employeers"})
-    @GetMapping("/employeer/{id}")
+    @Operation(summary="Get EmployeersById", description="Get EmployeersById", tags={"employeers"})
+    @GetMapping("/employeers/{id}")
     public EmployeerResource getEmployeerById(@PathVariable(name = "id") Long employeerId) {
         return convertToResource(employeerService.getEmployeerById(employeerId));
     }
 
-    @Operation(summary="Delete Employeer By Id", description="DeleteEmployeerById", tags={"Employeers"})
-    @DeleteMapping("/employeer/{postId}}")
+    @Operation(summary="Delete Employeer By Id", description="DeleteEmployeerById", tags={"employeers"})
+    @DeleteMapping("/employeers/{postId}}")
 
     public ResponseEntity<?> deleteEmployeer(@PathVariable Long postId) {
         return employeerService.deleteEmployeer(postId);
