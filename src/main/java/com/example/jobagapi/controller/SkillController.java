@@ -32,14 +32,14 @@ public class SkillController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Update Skill", description="Create Skill", tags={"Skills"})
+    @Operation(summary="Update Skill", description="Create Skill", tags={"skills"})
     @PutMapping("/skills/{skillId}")
     public SkillResource updateSector(@PathVariable Long skillId, @Valid @RequestBody SaveSkillResource resource){
         Skill skill = convertToEntity(resource);
         return convertToResource(skillService.updateSkill(skillId,skill));
     }
 
-    @Operation(summary="Get Skills", description="Get All Skills", tags={"Skills"})
+    @Operation(summary="Get Skills", description="Get All Skills", tags={"skills"})
     @GetMapping("/skills")
     public Page<SkillResource> getAllSkills(Pageable pageable){
         Page<Skill> skillPage = skillService.getAllSkills(pageable);
@@ -50,21 +50,21 @@ public class SkillController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Skill", description="Post Skill", tags={"Skills"})
+    @Operation(summary="Post Skill", description="Post Skill", tags={"skills"})
     @PostMapping("/skills")
     public SkillResource createSkill(@Valid @RequestBody SaveSkillResource resource) {
         Skill skill = convertToEntity(resource);
         return convertToResource(skillService.createSkill(skill));
     }
 
-    @Operation(summary="Get Skill By Id", description="Get Skill", tags={"Skills"})
-    @GetMapping("/skill/{skillId}}")
+    @Operation(summary="Get Skill By Id", description="Get Skill", tags={"skills"})
+    @GetMapping("/skills/{skillId}}")
     public SkillResource getSkillById(@PathVariable Long skillId) {
         return convertToResource(skillService.getSkillById(skillId));
     }
 
-    @Operation(summary="Delete Skill", description="Delete Skill", tags={"Skills"})
-    @DeleteMapping("/skill/{skillId}}")
+    @Operation(summary="Delete Skill", description="Delete Skill", tags={"skills"})
+    @DeleteMapping("/skills/{skillId}}")
 
     public ResponseEntity<?> deleteSkill(@PathVariable Long skillId) {
         return skillService.deleteSkill(skillId);
