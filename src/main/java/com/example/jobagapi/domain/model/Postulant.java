@@ -32,4 +32,3 @@ public class Postulant extends User{
     }
 
 }
-
