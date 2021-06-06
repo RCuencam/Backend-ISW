@@ -26,22 +26,22 @@ public class ProfessionalProfileStudiesController {
     @Autowired
     private ProfessionalProfileService professionalprofileService;
 
-    @Operation(summary = "Assign Studies to ProfessionalProfile",
-            description = "Establishes association between Studies and ProfessionalProfile",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Assign Study to Profile",
+            description = "Establishes association between Study and  Profile",
+             tags = {"profiles"}
     )
-    @PostMapping("/professionalprofile/{professionalprofileId}/studies/{studiesId}")
+    @PostMapping("/profiles/{profileId}/studies/{studyId}")
     public ProfessionalProfileResource assignProfessionalProfileStudy(
             @PathVariable Long professionalprofileId,
             @PathVariable Long studiesId) {
         return convertToResource(professionalprofileService.assignProfessionalProfileStudy(professionalprofileId, studiesId));
     }
 
-    @Operation(summary = "Remove assignment between Studies and ProfessionalProfile",
-            description = "Ends association between ProfessionalProfile and Studies",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Remove assignment between Study and  Profile",
+            description = "Ends association between  Profile and Study",
+              tags = {"profiles"}
     )
-    @DeleteMapping("/professionalprofile/{professionalprofileId}/studies/{studiesId}")
+    @DeleteMapping("/profiles/{profileId}/studies/{studyId}")
     public ProfessionalProfileResource unassignProfessionalProfileStudy(
             @PathVariable Long professionalprofileId,
             @PathVariable Long studiesId) {
@@ -49,12 +49,12 @@ public class ProfessionalProfileStudiesController {
     }
 
 
-    @Operation(summary = "List assignment between studies and ProfessionalProfile",
-            description = "List association between ProfessionalProfile and studies",
-            tags = {"professionalprofile"}
+    @Operation(summary = "List assignment between Study and  Profile",
+            description = "List association between  Profile and Study",
+            tags = {"profiles"}
     )
 
-    @GetMapping("/studies/{studiesId}/professionalprofile")
+    @GetMapping("/studies/{studyId}/profiles")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByStudiesId(
             @PathVariable Long studiesId,
             Pageable pageable) {
