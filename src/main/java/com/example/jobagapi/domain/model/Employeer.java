@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 @OnDelete(action = OnDeleteAction.CASCADE)
+@Table(name = "employeers")
 public class Employeer extends User{
         private String posicion;
 

@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "jobOffer")
+@Table(name = "jobOffers")
 public class JobOffer extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

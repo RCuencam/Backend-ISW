@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name ="planspostulant")
+@Table(name ="planspostulants")
 public class PlanPostulant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
