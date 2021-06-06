@@ -27,7 +27,7 @@ public class JobOfferController {
     private ModelMapper mapper;
 
     @Operation(summary="Get joboffers", description="Get all joboffers", tags={"joboffers"})
-    @GetMapping("/employeer/{employeerId}/joboffers")
+    @GetMapping("/employeers/{employeerId}/joboffers")
     public Page<JobOfferResource> getAllJobOffers(
             @PathVariable Long employeerId,
             Pageable pageable) {
@@ -40,7 +40,7 @@ public class JobOfferController {
     }
 
     @Operation(summary="Get joboffers", description="Get joboffers by employeerId", tags={"joboffers"})
-    @GetMapping("/jobOffer/{jobOfferId}/employeer/{employeerId}")
+    @GetMapping("/jobOffers/{jobOfferId}/employeers/{employeerId}")
     public JobOfferResource getJobOfferByIdAndEmployeerId(
             @PathVariable Long employeerId,
             @PathVariable Long jobOfferId) {
@@ -56,7 +56,7 @@ public class JobOfferController {
     }
 
     @Operation(summary="Put joboffers", description="Update joboffers", tags={"joboffers"})
-    @PutMapping("/employeer/{employeerId}/jobOffer/{jobOfferId}")
+    @PutMapping("/employeers/{employeerId}/jobOffers/{jobOfferId}")
     public JobOfferResource updateFarmland(
             @PathVariable Long employeerId,
             @PathVariable Long jobOfferId,
@@ -65,7 +65,7 @@ public class JobOfferController {
     }
 
     @Operation(summary="Delete joboffers", description="Delete joboffer by employeer Id", tags={"joboffers"})
-    @DeleteMapping("/employeer/{employeerId}/jobOffer/{jobOfferId}")
+    @DeleteMapping("/employeers/{employeerId}/jobOffers/{jobOfferId}")
     public ResponseEntity<?> deleteJobOffer(
             @PathVariable Long employeerId,
             @PathVariable Long jobOfferId) {
