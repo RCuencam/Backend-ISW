@@ -29,7 +29,7 @@ public class PostulantController {
 
 
 
-    @Operation(summary="Get Postulants", description="Get All Postulants", tags={"Postulants"})
+    @Operation(summary="Get Postulants", description="Get All Postulants", tags={"postulants"})
     @GetMapping("/postulants")
     public Page<PostulantResource> getAllPostulants(Pageable pageable){
         Page<Postulant> postulantPage = postulantService.getAllPostulants(pageable);
@@ -40,21 +40,21 @@ public class PostulantController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Postulants", description="Create Postulants", tags={"Postulants"})
+    @Operation(summary="Post Postulants", description="Create Postulants", tags={"postulants"})
     @PostMapping("/postulants")
     public PostulantResource createPostulant(@Valid @RequestBody SavePostulantResource resource) {
         Postulant postulant = convertToEntity(resource);
         return convertToResource(postulantService.createPostulant(postulant));
     }
 
-    @Operation(summary="Get PostulantsById", description="Get PostulantsById", tags={"Postulants"})
-    @GetMapping("/postulant/{id}")
+    @Operation(summary="Get PostulantsById", description="Get PostulantsById", tags={"postulants"})
+    @GetMapping("/postulants/{id}")
     public PostulantResource getPostulantById(@PathVariable(name = "id") Long postulantId) {
         return convertToResource(postulantService.getPostulantById(postulantId));
     }
 
-    @Operation(summary="Delete Postulant By Id", description="DeletePostulantById", tags={"Postulants"})
-    @DeleteMapping("/postulant/{postulantId}}")
+    @Operation(summary="Delete Postulant By Id", description="DeletePostulantById", tags={"postulants"})
+    @DeleteMapping("/postulants/{postulantId}}")
 
     public ResponseEntity<?> deletePostulant(@PathVariable Long postulantId) {
         return postulantService.deletePostulant(postulantId);
