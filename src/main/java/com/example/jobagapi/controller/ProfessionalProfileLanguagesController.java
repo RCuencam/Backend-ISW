@@ -25,22 +25,22 @@ public class ProfessionalProfileLanguagesController {
     @Autowired
     private ProfessionalProfileService professionalprofileService;
 
-    @Operation(summary = "Assign Languages to ProfessionalProfile",
-            description = "Establishes association between languages and professionalProfile",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Assign Languages to Profiles",
+            description = "Establishes association between languages and Profiles",
+            tags = {"profiles"}
     )
-    @PostMapping("/professionalprofile/{professionalprofileId}/languages/{languagesId}")
+    @PostMapping("/profiles/{profileId}/languages/{languageId}")
     public ProfessionalProfileResource assignProfessionalProfileLanguage(
             @PathVariable Long professionalprofileId,
             @PathVariable Long languagesId) {
         return convertToResource(professionalprofileService.assignProfessionalProfileLanguage(professionalprofileId, languagesId));
     }
 
-    @Operation(summary = "Remove assignment between Languages and ProfessionalProfile",
-            description = "Ends association between languages and professionalProfile",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Remove assignment between Languages and  Profiles",
+            description = "Ends association between Languages and  Profiles",
+             tags = {"profiles"}
     )
-    @DeleteMapping("/professionalprofile/{professionalprofileId}/languages/{languagesId}")
+    @DeleteMapping("/profiles/{profileId}/languages/{languageId}")
     public ProfessionalProfileResource unassignProfessionalProfileLanguage(
             @PathVariable Long professionalprofileId,
             @PathVariable Long languagesId) {
@@ -48,11 +48,11 @@ public class ProfessionalProfileLanguagesController {
     }
 
 
-    @Operation(summary = "List assignment between Languages and ProfessionalProfile",
-            description = "List association between languages and professionalProfile",
-            tags = {"professionalprofile"}
+    @Operation(summary = "List assignment between Languages and Profiles",
+            description = "List association between Languages and Profiles",
+             tags = {"profiles"}
     )
-    @GetMapping("/languages/{languagesId}/professionalprofile")
+    @GetMapping("/languages/{languageId}/profiles")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByLanguagesId(
             @PathVariable Long languagesId,
             Pageable pageable) {
