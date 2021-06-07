@@ -26,14 +26,14 @@ public class StudiesController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Update Studies", description="Update Studies", tags={"Studies"})
+    @Operation(summary="Update Studies", description="Update Studies", tags={"studies"})
     @PutMapping("/studies/{studiesId}")
     public StudiesResource updateStudies(@PathVariable Long studiesId, @Valid @RequestBody SaveStudiesResource resource){
         Studies studies = convertToEntity(resource);
         return convertToResource(studiesService.updateStudies(studiesId,studies));
     }
 
-    @Operation(summary = "Get Studies", description = "Get All Studies", tags = {"Studies"})
+    @Operation(summary = "Get Studies", description = "Get All Studies", tags={"studies"})
     @GetMapping("/studies")
     public Page<StudiesResource> getAllStudies(Pageable pageable){
         Page<Studies> studiesPage = studiesService.getAllStudies(pageable);
@@ -44,20 +44,20 @@ public class StudiesController {
         return new PageImpl<>(resources,pageable, resources.size());
     }
 
-    @Operation(summary = "Post Studies", description = "Create Studies", tags = {"Studies"})
+    @Operation(summary = "Post Studies", description = "Create Studies", tags={"studies"})
     @PostMapping("/studies")
     public  StudiesResource createStudies(@Valid @RequestBody SaveStudiesResource resource){
         Studies studies = convertToEntity(resource);
         return convertToResource(studiesService.createStudies(studies));
     }
 
-    @Operation(summary = "Get Studies by Id", description = "Get Studies by Id", tags = {"Studies"})
-    @GetMapping("/studies/{studiesId}")
+    @Operation(summary = "Get Studies by Id", description = "Get Studies by Id", tags={"studies"})
+    @GetMapping("/studies/{studyId}")
     public StudiesResource getStudiesById(@PathVariable Long studiesId){
         return convertToResource(studiesService.getStudiesById(studiesId));
     }
-    @Operation(summary = "Delete Studies", description = "Delete Studies", tags = {"Studies"})
-    @DeleteMapping("/studies/{studiesId}")
+    @Operation(summary = "Delete Studies", description = "Delete Studies", tags={"studies"})
+    @DeleteMapping("/studies/{studyId}")
     public ResponseEntity<?> deleteStudies(@PathVariable Long studiesId) {
         return studiesService.deleteStudies(studiesId);
     }

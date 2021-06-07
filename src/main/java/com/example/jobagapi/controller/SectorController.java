@@ -26,7 +26,7 @@ public class SectorController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get Sectors", description="Get All Sectors", tags={"Sectors"})
+    @Operation(summary="Get Sectors", description="Get All Sectors", tags={"sectors"})
     @GetMapping("/sectors")
     public Page<SectorResource> getAllSectors(Pageable pageable){
         Page<Sector> sectorPage = sectorService.getAllSectors(pageable);
@@ -37,28 +37,28 @@ public class SectorController {
 
         return new PageImpl<>(resources, pageable, resources.size());
     }
-    @Operation(summary="Post Sectors", description="Create Sectors", tags={"Sectors"})
+    @Operation(summary="Post Sectors", description="Create Sectors", tags={"sectors"})
     @PostMapping("/sectors")
     public SectorResource createSector(@Valid @RequestBody SaveSectorResource resource) {
         Sector sector = convertToEntity(resource);
         return convertToResource(sectorService.createSector(sector));
     }
 
-    @Operation(summary="Update Sector", description="Update Sector", tags={"Sectors"})
-    @PutMapping("/sector/{sectorId}")
+    @Operation(summary="Update Sector", description="Update Sector", tags={"sectors"})
+    @PutMapping("/sectors/{sectorId}")
     public SectorResource updateSector(@PathVariable Long sectorId, @Valid @RequestBody SaveSectorResource resource){
         Sector sector = convertToEntity(resource);
         return convertToResource(sectorService.updateSector(sectorId,sector));
     }
 
-    @Operation(summary="Get SectorsById", description="Get SectorsById", tags={"Sectors"})
-    @GetMapping("/sector/{id}")
+    @Operation(summary="Get SectorsById", description="Get SectorsById", tags={"sectors"})
+    @GetMapping("/sectors/{sectorId}")
     public SectorResource getSectorById(@PathVariable(name = "id") Long sectorId) {
         return convertToResource(sectorService.getSectorById(sectorId));
     }
 
-    @Operation(summary="Delete Sector By Id", description="DeleteSectorById", tags={"Sectors"})
-    @DeleteMapping("/sector/{sectorId}}")
+    @Operation(summary="Delete Sector By Id", description="DeleteSectorById", tags={"sectors"})
+    @DeleteMapping("/sectors/{sectorId}}")
     public ResponseEntity<?> deleteSector(@PathVariable Long sectorId) {
         return sectorService.deleteSector(sectorId);
     }

@@ -26,22 +26,22 @@ public class ProfessionalProfileSkillsController {
     @Autowired
     private ProfessionalProfileService professionalprofileService;
 
-    @Operation(summary = "Assign Skills to ProfessionalProfile",
-            description = "Establishes association between Skills and ProfessionalProfile",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Assign Skill to Profile",
+            description = "Establishes association between Skills and Profiles",
+            tags = {"profiles"}
     )
-    @PostMapping("/professionalprofile/{professionalprofileId}/skills/{skillsId}")
+    @PostMapping("/profiles/{profilesId}/skills/{skillId}")
     public ProfessionalProfileResource assignProfessionalProfileSkill(
             @PathVariable Long professionalprofileId,
             @PathVariable Long skillsId) {
         return convertToResource(professionalprofileService.assignProfessionalProfileSkill(professionalprofileId, skillsId));
     }
 
-    @Operation(summary = "Remove assignment between Skills and ProfessionalProfile",
-            description = "Ends association between ProfessionalProfile and Skills",
-            tags = {"professionalprofile"}
+    @Operation(summary = "Remove assignment between Skill and Profile",
+            description = "Ends association between Profile and Skill",
+             tags = {"profiles"}
     )
-    @DeleteMapping("/professionalprofile/{professionalprofileId}/skills/{skillsId}")
+    @DeleteMapping("/profiles/{profilesId}/skills/{skillId}")
     public ProfessionalProfileResource unassignProfessionalProfileSkill(
             @PathVariable Long professionalprofileId,
             @PathVariable Long skillsId) {
@@ -49,12 +49,12 @@ public class ProfessionalProfileSkillsController {
     }
 
 
-    @Operation(summary = "List assignment between skills and ProfessionalProfile",
-            description = "List association between ProfessionalProfile and skills",
-            tags = {"professionalprofile"}
+    @Operation(summary = "List assignment between Skill and Profile",
+            description = "List association between Profile and Skill",
+              tags = {"profiles"}
     )
 
-    @GetMapping("/skills/{skillsId}/professionalprofile")
+    @GetMapping("/skills/{skillId}/profiles")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileBySkillsId(
             @PathVariable Long skillsId,
             Pageable pageable) {

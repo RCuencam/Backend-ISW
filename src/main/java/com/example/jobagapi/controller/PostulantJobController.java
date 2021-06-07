@@ -27,8 +27,8 @@ public class PostulantJobController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get all postulant job by postulant ID", description="Get all postulant job by postulant ID", tags={"postulantjobs"})
-    @GetMapping("/postulant/{postulantId}/postulantjobs")
+    @Operation(summary="Get all postulant job by postulant ID", description="Get all postulant job by postulant ID", tags={"postulant_jobs"})
+    @GetMapping("/postulants/{postulantId}/postulantjobs")
     public Page<PostulantJobResource> getAllPostulantJobByPostulantId(
             @PathVariable Long postulantId,
             Pageable pageable) {
@@ -40,16 +40,16 @@ public class PostulantJobController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Get postulants by jobofferId", description="Get postulants by jobofferId", tags={"postulantjobs"})
-    @GetMapping("/postulant/{postulantId}/joboffer/{jobofferId}")
+    @Operation(summary="Get postulants by jobofferId", description="Get postulants by jobofferId", tags={"postulant_jobs"})
+    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}")
     public PostulantJobResource getPostulantByIdAndJobOfferId(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId) {
         return convertToResource(postulantJobService.getPostulantIdByIdAndJobOfferId(postulantId, jobofferId));
     }
 
-    @Operation(summary="Postulant Jobs", description="Create postulantjobs", tags={"postulantjobs"})
-    @PostMapping("/postulant/{postulantId}/joboffer/{jobofferId}/postulantjobs")
+    @Operation(summary="Postulant Jobs", description="Create postulantjobs",  tags={"postulant_jobs"})
+    @PostMapping("/postulants/{postulantId}/joboffers/{jobofferId}/postulantjobs")
     public PostulantJobResource createJobOffer(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
@@ -57,8 +57,8 @@ public class PostulantJobController {
         return convertToResource(postulantJobService.createPostulantJob(postulantId,jobofferId,convertToEntity(resource)));
     }
 
-    @Operation(summary="Put Postulant Jobs", description="Update postulantjobs", tags={"postulantjobs"})
-    @PutMapping("/postulant/{postulantId}/joboffer/{jobofferId}/postulantjobs/{postulanjobtId}")
+    @Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
+    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulanjobId}")
     public PostulantJobResource updatePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
@@ -67,8 +67,8 @@ public class PostulantJobController {
         return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,postulanjobtId,convertToEntity(resource)));
     }
 
-    @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and job offer ID", tags={"postulantjobs"})
-    @DeleteMapping("/postulant/{postulantId}/joboffer/{jobofferId}/postulantjobs/{postulanjobtId}")
+    @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and job offer ID",  tags={"postulant_jobs"})
+    @DeleteMapping("/postulants/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulantjobId}")
     public ResponseEntity<?> deletePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,

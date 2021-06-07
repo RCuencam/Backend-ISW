@@ -26,7 +26,7 @@ public class PlanemployeerController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get planemployeers", description="Get all PlanEmployeers", tags={"planemployeers"})
+    @Operation(summary="Get planemployeers", description="Get all PlanEmployeers", tags={"plan_employeers"})
     @GetMapping("/employeers/{employeerId}/planemployeers")
     public Page<PlanemployeerResource> getAllPlanemployeersByEmployeerId(@PathVariable Long employeerId, Pageable pageable) {
         Page<Planemployeer> planemployeerPage = planemployeerService.getAllPlanemployeersByEmployeerId(employeerId, pageable);
@@ -35,19 +35,19 @@ public class PlanemployeerController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Get planemployeers", description="Get PlanEmployeer by Employeer ID", tags={"planemployeers"})
+    @Operation(summary="Get planemployeers", description="Get PlanEmployeer by Employeer ID", tags={"plan_employeers"})
     @GetMapping("/employeers/{employeerId}/planemployeers/{planemployeerId}")
     public PlanemployeerResource getPlanemployeerByIdAndEmployeerId(@PathVariable Long employeerId, @PathVariable Long planemployeerId) {
         return convertToResource(planemployeerService.getPlanemployeerByIdAndEmployeerId(planemployeerId, employeerId));
     }
 
-    @Operation(summary="Post planemployeers", description="Create PlanEmployeer", tags={"planemployeers"})
+    @Operation(summary="Post planemployeers", description="Create PlanEmployeer", tags={"plan_employeers"})
     @PostMapping("/employeers/{employeerId}/planemployeers")
     public PlanemployeerResource createPlanemployeer(
             @PathVariable Long employeerId,@Valid @RequestBody SavePlanemployeerResource resource) {
         return convertToResource(planemployeerService.createPlanemployeer(employeerId, convertToEntity(resource)));
     }
-    @Operation(summary="Put planemployeers", description="Update PlanEmployeer", tags={"planemployeers"})
+    @Operation(summary="Put planemployeers", description="Update PlanEmployeer", tags={"plan_employeers"})
     @PutMapping("/employeers/{employeerId}/planemployeers/{planemployeerId}")
     public PlanemployeerResource updatePlanemployeer(
             @PathVariable Long employeerId,
@@ -56,7 +56,7 @@ public class PlanemployeerController {
         return convertToResource(planemployeerService.updatePlanemployeer(employeerId, planemployeerId, convertToEntity(resource)));
     }
 
-    @Operation(summary="Delete planemployeers", description="Delete PlanEmployeer", tags={"planemployeers"})
+    @Operation(summary="Delete planemployeers", description="Delete PlanEmployeer", tags={"plan_employeers"})
     @DeleteMapping("/employeers/{employeerId}/planemployeers/{planemployeerId}")
     public ResponseEntity<?> deletePlanemployeer(
             @PathVariable Long employeerId,
