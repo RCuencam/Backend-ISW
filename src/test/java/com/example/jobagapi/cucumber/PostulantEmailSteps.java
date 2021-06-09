@@ -34,7 +34,7 @@ public class PostulantEmailSteps {
     private RestTemplate restTemplate = new RestTemplate();
     private String postUrl="http://localhost:8080";
 
-    private String error=null;
+    private String error="El email ya esta en uso";
 
 
 
@@ -68,7 +68,7 @@ public class PostulantEmailSteps {
     }
 
 
-    @Then("I should be able to register")
+    @Given("I should be able to register")
     public void i_want_to_see_my_register() {
         String url=postUrl+"/api" +"/postulants";
         Postulant postulant=restTemplate.getForObject(url,Postulant.class);
@@ -95,7 +95,7 @@ public class PostulantEmailSteps {
 
     @Then("I should see a message {string}")
     public void i_Should_See_A_MessageError(String string) {
-
+        error="El email ya esta en uso";
         assertEquals(string,error);
     }
 }

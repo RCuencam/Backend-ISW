@@ -38,10 +38,27 @@ public class Interview extends AuditModel {
     @Size(max = 100)
     private String link_Interview;
 
+    //Relacion con Postulante
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "postulant_id", nullable = false)
+    @JoinColumn(name = "fk_postulant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Postulant postulant;
+
+    //Relacion con JobOffer
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_joboffer_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private JobOffer jobOffer;
+
+    public Interview() {
+    }
+
+    public Interview(Long id, LocalDate date_Interview, LocalDate final_date_Interview, String link_Interview) {
+        this.id = id;
+        this.date_Interview = date_Interview;
+        this.final_date_Interview = final_date_Interview;
+        this.link_Interview = link_Interview;
+    }
 
 
     public Long getId() {
@@ -86,6 +103,15 @@ public class Interview extends AuditModel {
 
     public Interview setPostulant(Postulant postulant) {
         this.postulant = postulant;
+        return this;
+    }
+
+    public JobOffer getJobOffer() {
+        return jobOffer;
+    }
+
+    public Interview setJobOffer(JobOffer jobOffer) {
+        this.jobOffer = jobOffer;
         return this;
     }
 }

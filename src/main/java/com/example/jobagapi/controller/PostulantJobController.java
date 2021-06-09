@@ -27,7 +27,8 @@ public class PostulantJobController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary="Get all postulant job by postulant ID", description="Get all postulant job by postulant ID", tags={"postulant_jobs"})
+    @Operation(summary="Get all postulant_jobs by postulantId", description="Get all postulant_job by postulantId", tags={"postulant_jobs"})
+
     @GetMapping("/postulants/{postulantId}/postulantjobs")
     public Page<PostulantJobResource> getAllPostulantJobByPostulantId(
             @PathVariable Long postulantId,
@@ -40,7 +41,9 @@ public class PostulantJobController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Operation(summary="Get postulants by jobofferId", description="Get postulants by jobofferId", tags={"postulant_jobs"})
+
+    @Operation(summary="Get postulants by jobofferId", description="Get postulants_job by jobofferId", tags={"postulant_jobs"})
+
     @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}")
     public PostulantJobResource getPostulantByIdAndJobOfferId(
             @PathVariable Long postulantId,
