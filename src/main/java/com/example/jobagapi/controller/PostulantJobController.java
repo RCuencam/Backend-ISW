@@ -60,14 +60,14 @@ public class PostulantJobController {
         return convertToResource(postulantJobService.createPostulantJob(postulantId,jobofferId,convertToEntity(resource)));
     }
 
-    @Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
-    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulanjobId}")
+@Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
+    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulantjobId}")
     public PostulantJobResource updatePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
-            @PathVariable Long postulanjobtId,
+            @PathVariable Long postulantjobId,
             @Valid @RequestBody SavePostulantJobResource resource) {
-        return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,postulanjobtId,convertToEntity(resource)));
+        return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,postulantjobId,convertToEntity(resource)));
     }
 
     @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and job offer ID",  tags={"postulant_jobs"})
@@ -75,8 +75,8 @@ public class PostulantJobController {
     public ResponseEntity<?> deletePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
-            @PathVariable Long postulanjobtId) {
-        return postulantJobService.deletePostulantJob(postulantId, jobofferId, postulanjobtId);
+            @PathVariable Long postulantjobId) {
+        return postulantJobService.deletePostulantJob(postulantId, jobofferId, postulantjobId);
     }
 
     private PostulantJob convertToEntity(SavePostulantJobResource resource){
