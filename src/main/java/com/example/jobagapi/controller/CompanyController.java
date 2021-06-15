@@ -31,7 +31,7 @@ public class CompanyController {
     private ModelMapper mapper;
 
 
-    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companys"})
+    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companies"})
     @GetMapping("/employeers/{employeerId}/companys")
     public Page<CompanyResource> getAllCompanysByEmployeerId(@PathVariable Long employeerId, Pageable pageable) {
         Page<Company> companyPage = companyService.getAllCompanysByEmployeerId(employeerId, pageable);
@@ -41,21 +41,21 @@ public class CompanyController {
     }
 
 
-    @Operation(summary="Get companys", description="Get companys by employeer Id", tags={"companys"})
+    @Operation(summary="Get companys", description="Get companys by employeer Id", tags={"companies"})
     @GetMapping("/employeers/{employeerId}/companys/{companyId}")
     public CompanyResource getCompanyByIdAndEmployeerId(@PathVariable Long employeerId, @PathVariable Long companyId) {
         return convertToResource(companyService.getCompanyByIdAndEmployeerId(employeerId, companyId));
     }
 
 
-    @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companys"})
+    @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companies"})
     @PostMapping("/employeers/{employeerId}/companys")
     public CompanyResource createCompany(
             @PathVariable Long employeerId, @PathVariable Long sectorId,@Valid @RequestBody SaveCompanyResource resource) {
         return convertToResource(companyService.createCompany(employeerId, convertToEntity(resource)));
     }
 
-    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companys"})
+    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companies"})
     @PutMapping("/employeers/{employeerId}/companys/{companyId}")
     public CompanyResource updateCompany(
             @PathVariable Long employeerId,
@@ -64,7 +64,7 @@ public class CompanyController {
         return convertToResource(companyService.updateCompany(employeerId, companyId, convertToEntity(resource)));
     }
 
-    @Operation(summary="Delete companys", description="Delete companys by employeer Id", tags={"companys"})
+    @Operation(summary="Delete companys", description="Delete companys by employeer Id", tags={"companies"})
     @DeleteMapping("/employeers/{employeerId}/companys/{companyId}")
     public ResponseEntity<?> deleteCompany(
             @PathVariable Long employeerId,
