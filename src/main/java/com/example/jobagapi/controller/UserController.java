@@ -44,8 +44,8 @@ public class UserController {
         return convertToResource(userService.updateUser(userId, user));
     }
 
-    @Operation(summary="Get UsersById", description="Get UsersById", tags={"users"})
-    @GetMapping("/users/{userId}")
+@Operation(summary="Get UsersById", description="Get UsersById", tags={"users"})
+    @GetMapping("/user/{id}")
     public UserResource getUserById(@PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
