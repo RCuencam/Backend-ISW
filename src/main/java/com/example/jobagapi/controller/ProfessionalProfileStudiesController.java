@@ -32,9 +32,9 @@ public class ProfessionalProfileStudiesController {
     )
     @PostMapping("/profiles/{profileId}/studies/{studyId}")
     public ProfessionalProfileResource assignProfessionalProfileStudy(
-            @PathVariable Long professionalprofileId,
-            @PathVariable Long studiesId) {
-        return convertToResource(professionalprofileService.assignProfessionalProfileStudy(professionalprofileId, studiesId));
+            @PathVariable Long profileId,
+            @PathVariable Long studyId) {
+        return convertToResource(professionalprofileService.assignProfessionalProfileStudy(profileId, studyId));
     }
 
     @Operation(summary = "Remove assignment between Study and  Profile",
@@ -43,9 +43,9 @@ public class ProfessionalProfileStudiesController {
     )
     @DeleteMapping("/profiles/{profileId}/studies/{studyId}")
     public ProfessionalProfileResource unassignProfessionalProfileStudy(
-            @PathVariable Long professionalprofileId,
-            @PathVariable Long studiesId) {
-        return convertToResource(professionalprofileService.unassignProfessionalProfileStudy(professionalprofileId, studiesId));
+            @PathVariable Long profileId,
+            @PathVariable Long studyId) {
+        return convertToResource(professionalprofileService.unassignProfessionalProfileStudy(profileId, studyId));
     }
 
 
@@ -56,9 +56,9 @@ public class ProfessionalProfileStudiesController {
 
     @GetMapping("/studies/{studyId}/profiles")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileByStudiesId(
-            @PathVariable Long studiesId,
+            @PathVariable Long studyId,
             Pageable pageable) {
-        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileByStudiesId(studiesId, pageable);
+        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileByStudiesId(studyId, pageable);
         List<ProfessionalProfileResource> resources = postsPage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
