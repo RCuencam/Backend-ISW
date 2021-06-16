@@ -45,8 +45,8 @@ public class ProfessionalProfileController {
     @Operation(summary="Get profiles", description="Get profiles by postulantId", tags={"profiles"})
 
     @GetMapping("/postulants/{postulantId}/profiles/{profileId}")
-    public ProfessionalProfileResource getProfessionalProfileByIdAndPostulantId(@PathVariable Long postulantId, @PathVariable Long professionalprofileId) {
-        return convertToResource(professionalprofileService.getProfessionalProfileByIdAndPostulantId(postulantId, professionalprofileId));
+    public ProfessionalProfileResource getProfessionalProfileByIdAndPostulantId(@PathVariable Long postulantId, @PathVariable Long profileId) {
+        return convertToResource(professionalprofileService.getProfessionalProfileByIdAndPostulantId(postulantId, profileId));
     }
 
 
@@ -65,9 +65,9 @@ public class ProfessionalProfileController {
     @PutMapping("/postulants/{postulantId}/profiles/{profileId}")
     public ProfessionalProfileResource updateProfessionalProfile(
             @PathVariable Long postulantId,
-            @PathVariable Long professionalprofileId,
+            @PathVariable Long profileId,
             @Valid @RequestBody SaveProfessionalProfileResource resource) {
-        return convertToResource(professionalprofileService.updateProfessionalProfile(postulantId, professionalprofileId, convertToEntity(resource)));
+        return convertToResource(professionalprofileService.updateProfessionalProfile(postulantId, profileId, convertToEntity(resource)));
     }
 
 
@@ -76,8 +76,8 @@ public class ProfessionalProfileController {
     @DeleteMapping("/postulants/{postulantId}/profiles/{profileId}")
     public ResponseEntity<?> deleteProfessionalProfile(
             @PathVariable Long postulantId,
-            @PathVariable Long professionalprofileId) {
-        return professionalprofileService.deleteProfessionalProfile(postulantId, professionalprofileId);
+            @PathVariable Long profileId) {
+        return professionalprofileService.deleteProfessionalProfile(postulantId, profileId);
     }
 
 
