@@ -30,22 +30,23 @@ public class ProfessionalProfileSkillsController {
             description = "Establishes association between Skills and Profiles",
             tags = {"profiles"}
     )
-    @PostMapping("/profiles/{profilesId}/skills/{skillId}")
+
+    @PostMapping("/profiles/{profileId}/skills/{skillId}")
     public ProfessionalProfileResource assignProfessionalProfileSkill(
-            @PathVariable Long professionalprofileId,
-            @PathVariable Long skillsId) {
-        return convertToResource(professionalprofileService.assignProfessionalProfileSkill(professionalprofileId, skillsId));
+            @PathVariable Long profileId,
+            @PathVariable Long skillId) {
+        return convertToResource(professionalprofileService.assignProfessionalProfileSkill(profileId, skillId));
     }
 
     @Operation(summary = "Remove assignment between Skill and Profile",
             description = "Ends association between Profile and Skill",
              tags = {"profiles"}
     )
-    @DeleteMapping("/profiles/{profilesId}/skills/{skillId}")
+    @DeleteMapping("/profiles/{profileId}/skills/{skillId}")
     public ProfessionalProfileResource unassignProfessionalProfileSkill(
-            @PathVariable Long professionalprofileId,
-            @PathVariable Long skillsId) {
-        return convertToResource(professionalprofileService.unassignProfessionalProfileSkill(professionalprofileId, skillsId));
+            @PathVariable Long profileId,
+            @PathVariable Long skillId) {
+        return convertToResource(professionalprofileService.unassignProfessionalProfileSkill(profileId, skillId));
     }
 
 
@@ -56,9 +57,9 @@ public class ProfessionalProfileSkillsController {
 
     @GetMapping("/skills/{skillId}/profiles")
     public Page<ProfessionalProfileResource> getAllProfessionalProfileBySkillsId(
-            @PathVariable Long skillsId,
+            @PathVariable Long skillId,
             Pageable pageable) {
-        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileBySkillId(skillsId, pageable);
+        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileBySkillId(skillId, pageable);
         List<ProfessionalProfileResource> resources = postsPage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
