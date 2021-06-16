@@ -27,10 +27,10 @@ public class StudiesController {
     private ModelMapper mapper;
 
     @Operation(summary="Update Studies", description="Update Studies", tags={"studies"})
-    @PutMapping("/studies/{studiesId}")
-    public StudiesResource updateStudies(@PathVariable Long studiesId, @Valid @RequestBody SaveStudiesResource resource){
-        Studies studies = convertToEntity(resource);
-        return convertToResource(studiesService.updateStudies(studiesId,studies));
+    @PutMapping("/studies/{studyId}")
+    public StudiesResource updateStudies(@PathVariable Long studyId, @Valid @RequestBody SaveStudiesResource resource){
+        Studies study = convertToEntity(resource);
+        return convertToResource(studiesService.updateStudies(studyId,study));
     }
 
     @Operation(summary = "Get Studies", description = "Get All Studies", tags={"studies"})
@@ -53,13 +53,13 @@ public class StudiesController {
 
     @Operation(summary = "Get Studies by Id", description = "Get Studies by Id", tags={"studies"})
     @GetMapping("/studies/{studyId}")
-    public StudiesResource getStudiesById(@PathVariable Long studiesId){
-        return convertToResource(studiesService.getStudiesById(studiesId));
+    public StudiesResource getStudiesById(@PathVariable Long studyId){
+        return convertToResource(studiesService.getStudiesById(studyId));
     }
     @Operation(summary = "Delete Studies", description = "Delete Studies", tags={"studies"})
     @DeleteMapping("/studies/{studyId}")
-    public ResponseEntity<?> deleteStudies(@PathVariable Long studiesId) {
-        return studiesService.deleteStudies(studiesId);
+    public ResponseEntity<?> deleteStudies(@PathVariable Long studyId) {
+        return studiesService.deleteStudies(studyId);
     }
 
     private Studies convertToEntity(SaveStudiesResource resource){
@@ -71,3 +71,4 @@ public class StudiesController {
     }
 
 }
+
