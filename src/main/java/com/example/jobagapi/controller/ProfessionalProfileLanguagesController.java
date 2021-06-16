@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-
-public class ProfessionalProfileStudiesController {
+public class ProfessionalProfileLanguagesController {
 
     @Autowired
     private ModelMapper mapper;
@@ -26,42 +25,42 @@ public class ProfessionalProfileStudiesController {
     @Autowired
     private ProfessionalProfileService professionalprofileService;
 
-    @Operation(summary = "Assign Study to Profile",
-            description = "Establishes association between Study and  Profile",
-             tags = {"profiles"}
-    )
-    @PostMapping("/profiles/{profileId}/studies/{studyId}")
-    public ProfessionalProfileResource assignProfessionalProfileStudy(
-            @PathVariable Long profileId,
-            @PathVariable Long studyId) {
-        return convertToResource(professionalprofileService.assignProfessionalProfileStudy(profileId, studyId));
-    }
-
-    @Operation(summary = "Remove assignment between Study and  Profile",
-            description = "Ends association between  Profile and Study",
-              tags = {"profiles"}
-    )
-    @DeleteMapping("/profiles/{profileId}/studies/{studyId}")
-    public ProfessionalProfileResource unassignProfessionalProfileStudy(
-            @PathVariable Long profileId,
-            @PathVariable Long studyId) {
-        return convertToResource(professionalprofileService.unassignProfessionalProfileStudy(profileId, studyId));
-    }
-
-
-    @Operation(summary = "List assignment between Study and  Profile",
-            description = "List association between  Profile and Study",
+    @Operation(summary = "Assign Languages to Profiles",
+            description = "Establishes association between languages and Profiles",
             tags = {"profiles"}
     )
+    @PostMapping("/profiles/{profileId}/languages/{languageId}")
+    public ProfessionalProfileResource assignProfessionalProfileLanguage(
+            @PathVariable Long profileId,
+            @PathVariable Long languageId) {
+        return convertToResource(professionalprofileService.assignProfessionalProfileLanguage(profileId, languageId));
+    }
 
-    @GetMapping("/studies/{studyId}/profiles")
-    public Page<ProfessionalProfileResource> getAllProfessionalProfileByStudiesId(
-            @PathVariable Long studyId,
+    @Operation(summary = "Remove assignment between Languages and  Profiles",
+            description = "Ends association between Languages and  Profiles",
+             tags = {"profiles"}
+    )
+    @DeleteMapping("/profiles/{profileId}/languages/{languageId}")
+    public ProfessionalProfileResource unassignProfessionalProfileLanguage(
+            @PathVariable Long profileId,
+            @PathVariable Long languageId) {
+        return convertToResource(professionalprofileService.unassignProfessionalProfileLanguage(profileId, languageId));
+    }
+
+
+    @Operation(summary = "List assignment between Languages and Profiles",
+            description = "List association between Languages and Profiles",
+             tags = {"profiles"}
+    )
+    @GetMapping("/languages/{languageId}/profiles")
+    public Page<ProfessionalProfileResource> getAllProfessionalProfileByLanguagesId(
+            @PathVariable Long languageId,
             Pageable pageable) {
-        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileByStudiesId(studyId, pageable);
+        Page<ProfessionalProfile> postsPage = professionalprofileService.getAllProfessionalProfileByLanguagesId(languageId, pageable);
         List<ProfessionalProfileResource> resources = postsPage.getContent().stream()
                 .map(this::convertToResource).collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
+
     }
 
     private ProfessionalProfile convertToEntity(SaveProfessionalProfileResource resource) {
@@ -71,4 +70,5 @@ public class ProfessionalProfileStudiesController {
     private ProfessionalProfileResource convertToResource(ProfessionalProfile entity) {
         return mapper.map(entity, ProfessionalProfileResource.class);
     }
+
 }
