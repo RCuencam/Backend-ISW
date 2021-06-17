@@ -48,7 +48,7 @@ public class CompanyController {
     }
 
 
-    @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companies"})
+ @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companies"})
     @PostMapping("/employeers/{employeerId}/companys")
     public CompanyResource createCompany(
             @PathVariable Long employeerId, @PathVariable Long sectorId,@Valid @RequestBody SaveCompanyResource resource) {
