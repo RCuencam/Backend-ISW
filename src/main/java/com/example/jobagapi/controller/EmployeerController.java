@@ -59,7 +59,7 @@ public class EmployeerController {
     }
 
     @Operation(summary="Delete Employeer By Id", description="DeleteEmployeerById", tags={"employeers"})
-    @DeleteMapping("/employeers/{postId}}")
+    @DeleteMapping("/employeers/{postId}")
 
     public ResponseEntity<?> deleteEmployeer(@PathVariable Long postId) {
         return employeerService.deleteEmployeer(postId);
