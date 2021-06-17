@@ -58,7 +58,7 @@ public class SectorController {
     }
 
     @Operation(summary="Delete Sector By Id", description="DeleteSectorById", tags={"sectors"})
-    @DeleteMapping("/sectors/{sectorId}}")
+    @DeleteMapping("/sectors/{sectorId}")
     public ResponseEntity<?> deleteSector(@PathVariable Long sectorId) {
         return sectorService.deleteSector(sectorId);
     }
