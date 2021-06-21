@@ -47,6 +47,7 @@ public class EmployeerController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
     @Operation(summary="Post Employeers", description="Create Employeers", tags={"employeers"})
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping("/employeers")
     public EmployeerResource createEmployeer(@Valid @RequestBody SaveEmployeerResource resource) {
         Employeer employeer = convertToEntity(resource);
