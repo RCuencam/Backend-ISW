@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/api")
 public class ProfessionalProfileController {
     @Autowired
