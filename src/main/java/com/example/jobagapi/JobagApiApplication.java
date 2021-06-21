@@ -19,7 +19,8 @@ public class JobagApiApplication {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
-
+	
+ @Bean
 public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
