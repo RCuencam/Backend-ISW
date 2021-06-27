@@ -1,6 +1,7 @@
 package com.example.jobagapi.domain.service;
 
 import com.example.jobagapi.domain.model.Interview;
+import com.example.jobagapi.domain.model.JobOffer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,4 +19,8 @@ public interface InterviewService {
     Page<Interview> getAllInterviewsByJobOfferId(Long jobOfferId, Pageable pageable);
     //Retorna todas las entrevistas segun el  id del postulante y de la oferta de trabajo
     Page<Interview> getAllInterviewByPostulantIdAndJobOfferId(Long postulantId, Long jobOfferId, Pageable pageable);
+
+    Page<Interview> getAllInterview(Pageable pageable);
+    Interview getInterviewById(Long interviewId);
+
 }
