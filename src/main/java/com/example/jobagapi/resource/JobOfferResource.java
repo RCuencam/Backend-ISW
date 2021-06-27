@@ -1,9 +1,12 @@
 package com.example.jobagapi.resource;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class JobOfferResource {
     private Long id;
+    private String type;
+    private String title;
     private String description;
     private LocalDate begin_date_offer;
     private LocalDate final_date_offer;
@@ -61,6 +64,24 @@ public class JobOfferResource {
 
     public JobOfferResource setDirection(String direction) {
         this.direction = direction;
+        return this;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public JobOfferResource setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public JobOfferResource setTitle(String title) {
+        this.title = title;
         return this;
     }
 }
