@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 public interface JobOfferService {
     Page<JobOffer> getAllJobOffersByEmployeerId(Long employeerId, Pageable pageable);
     JobOffer getJobOfferByIdAndEmployeerId(Long employeerId, Long jobOfferId);
+    JobOffer getJobOfferById(Long jobOfferId);
     JobOffer createJobOffer(Long employeerId, JobOffer jobOffer);
     JobOffer updateJobOffer(Long employeerId, Long jobOfferId, JobOffer jobOfferDetails);
+    Page<JobOffer> getAllJobOffer(Pageable pageable);
     ResponseEntity<?> deleteJobOffer(Long employeerId, Long jobOfferId);
 }
