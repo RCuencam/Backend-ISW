@@ -96,7 +96,7 @@ public class JobOfferController {
             @PathVariable Long jobOfferId) {
         return convertToResource(jobOfferService.getJobOfferById(jobOfferId));
     }
-
+/*abr*/
     private JobOffer convertToEntity(SaveJobOfferResource resource){
         return mapper.map(resource, JobOffer.class);
     }
