@@ -80,7 +80,7 @@ public class JobOfferController {
     }
 
     @Operation(summary = "Get All Job Offer", description = "Get All Job Offer", tags = {"job_offers"})
-    @GetMapping("/jobOfferId")
+    @GetMapping("/jobOffers")
     public Page<JobOfferResource> getAllJobOffer(Pageable pageable){
         Page<JobOffer> jobOfferPage = jobOfferService.getAllJobOffer(pageable);
         List<JobOfferResource> resources = jobOfferPage.getContent()
