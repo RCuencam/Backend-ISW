@@ -53,7 +53,9 @@ public class JobOfferServiceImpl implements JobOfferService {
         if(!employeerRepository.existsById(employeerId))
             throw  new ResourceNotFoundException("Employeer","Id",employeerId);
         return jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
-            jobOffer.setDescription(jobOfferDetails.getDescription())
+            jobOffer.setTitle(jobOfferDetails.getTitle())
+                    .setType(jobOfferDetails.getType())
+                    .setDescription(jobOfferDetails.getDescription())
                     .setDirection(jobOfferDetails.getDirection())
                     .setSalary(jobOfferDetails.getSalary())
                     .setBegin_date_offer(jobOfferDetails.getBegin_date_offer())
