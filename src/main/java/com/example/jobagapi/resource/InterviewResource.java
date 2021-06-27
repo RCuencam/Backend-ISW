@@ -8,6 +8,8 @@ public class InterviewResource {
     private LocalDate final_date_Interview;
     private String link_Interview;
 
+    private Long jobOfferId;
+
     public Long getId() {
         return id;
     }
@@ -41,6 +43,15 @@ public class InterviewResource {
 
     public InterviewResource setLink_Interview(String link_Interview) {
         this.link_Interview = link_Interview;
+        return this;
+    }
+
+    public Long getJobOfferId() {
+        return jobOfferId;
+    }
+
+    public InterviewResource setJobOfferId(Long jobOfferId) {
+        this.jobOfferId = jobOfferId;
         return this;
     }
 }
