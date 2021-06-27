@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/api")
 public class JobOfferController {
 
@@ -44,7 +43,6 @@ public class JobOfferController {
 
 
     @Operation(summary="Get joboffers", description="Get joboffers by employeerId", tags={"job_offers"})
-
     @GetMapping("/jobOffers/{jobOfferId}/employeers/{employeerId}")
     public JobOfferResource getJobOfferByIdAndEmployeerId(
             @PathVariable Long employeerId,
@@ -81,6 +79,24 @@ public class JobOfferController {
         return jobOfferService.deleteJobOffer(employeerId, jobOfferId);
     }
 
+    @Operation(summary = "Get All Job Offer", description = "Get All Job Offer", tags = {"job_offers"})
+    @GetMapping("/jobOfferId")
+    public Page<JobOfferResource> getAllJobOffer(Pageable pageable){
+        Page<JobOffer> jobOfferPage = jobOfferService.getAllJobOffer(pageable);
+        List<JobOfferResource> resources = jobOfferPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
+    }
+
+    @Operation(summary="Get Job Offer by Id", description="Get Job Offer by Id", tags={"job_offers"})
+    @GetMapping("/jobOffers/{jobOfferId}")
+    public JobOfferResource getJobOfferById(
+            @PathVariable Long jobOfferId) {
+        return convertToResource(jobOfferService.getJobOfferById(jobOfferId));
+    }
+
     private JobOffer convertToEntity(SaveJobOfferResource resource){
         return mapper.map(resource, JobOffer.class);
     }
@@ -89,3 +105,4 @@ public class JobOfferController {
         return mapper.map(entity,JobOfferResource.class);
     }
 }
+
