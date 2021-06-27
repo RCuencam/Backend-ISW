@@ -89,4 +89,15 @@ public class InterviewImpl  implements InterviewService {
     public Page<Interview> getAllInterviewByPostulantIdAndJobOfferId(Long postulantId, Long jobOfferId, Pageable pageable) {
         return interviewRepository.findByPostulantIdAndJobOfferId(postulantId,jobOfferId,pageable);
     }
+
+    @Override
+    public Page<Interview> getAllInterview(Pageable pageable) {
+        return interviewRepository.findAll(pageable);
+    }
+
+    @Override
+    public Interview getInterviewById(Long interviewId) {
+        return interviewRepository.findById(interviewId)
+                .orElseThrow(() -> new ResourceNotFoundException("Interview", "Id", interviewId));
+    }
 }
