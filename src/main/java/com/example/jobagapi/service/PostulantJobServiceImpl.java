@@ -79,6 +79,11 @@ public class PostulantJobServiceImpl implements PostulantJobService {
     }
 
     @Override
+    public Page<PostulantJob> getAllPostulantByJobOfferId(Long jobOfferId, Pageable pageable) {
+        return postulantJobRepository.findByJobOfferId(jobOfferId,pageable);
+    }
+
+    @Override
     public PostulantJob getPostulantIdByIdAndJobOfferId(Long postulantId, Long jobOfferId) {
         return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId,jobOfferId)
                 .orElseThrow(() -> new ResourceNotFoundException(
