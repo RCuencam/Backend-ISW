@@ -51,7 +51,7 @@ public class PostulantJobController {
 
     @Operation(summary="Get all postulants by jobofferId", description="Get postulants_job by jobofferId", tags={"postulant_jobs"})
 
-    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}")
+    @GetMapping("/joboffers/{jobofferId}/postulantjobs")
     public PageImpl<PostulantJobResource> getAllPostulantByJobOfferId(
             @PathVariable Long jobofferId,
             Pageable pageable) {
