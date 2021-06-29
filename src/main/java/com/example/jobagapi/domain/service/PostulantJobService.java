@@ -10,5 +10,6 @@ public interface PostulantJobService {
     PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId, PostulantJob postulantJobDetails);
     ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId);
     Page<PostulantJob> getAllPostulantJobByPostulantId(Long postulantId, Pageable pageable);
+    Page<PostulantJob> getAllPostulantByJobOfferId(Long jobOfferId, Pageable pageable);
     PostulantJob getPostulantIdByIdAndJobOfferId(Long postulantId, Long jobOfferId);
 }
