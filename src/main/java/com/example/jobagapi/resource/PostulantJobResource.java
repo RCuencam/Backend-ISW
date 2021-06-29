@@ -2,10 +2,7 @@ package com.example.jobagapi.resource;
 
 public class PostulantJobResource {
     private Long id;
-    private boolean aceppt;
-
-    private Long jobOfferId;
-    private String titleJobOffer;
+    private boolean accept;
     private Long postulantId;
     private String firstNamePostulant;
     private String lastNamePostulant;
@@ -20,30 +17,12 @@ public class PostulantJobResource {
         return this;
     }
 
-    public boolean isAceppt() {
-        return aceppt;
+    public boolean isAccept() {
+        return accept;
     }
 
-    public PostulantJobResource setAceppt(boolean aceppt) {
-        this.aceppt = aceppt;
-        return this;
-    }
-
-    public Long getJobOfferId() {
-        return jobOfferId;
-    }
-
-    public PostulantJobResource setJobOfferId(Long jobOfferId) {
-        this.jobOfferId = jobOfferId;
-        return this;
-    }
-
-    public String getTitleJobOffer() {
-        return titleJobOffer;
-    }
-
-    public PostulantJobResource setTitleJobOffer(String titleJobOffer) {
-        this.titleJobOffer = titleJobOffer;
+    public PostulantJobResource setAccept(boolean accept) {
+        this.accept = accept;
         return this;
     }
 
@@ -51,35 +30,32 @@ public class PostulantJobResource {
         return postulantId;
     }
 
-    public PostulantJobResource setPostulantId(Long postulantId) {
+    public void setPostulantId(Long postulantId) {
         this.postulantId = postulantId;
-        return this;
     }
 
     public String getFirstNamePostulant() {
         return firstNamePostulant;
     }
 
-    public PostulantJobResource setFirstNamePostulant(String firstNamePostulant) {
+    public void setFirstNamePostulant(String firstNamePostulant) {
         this.firstNamePostulant = firstNamePostulant;
-        return this;
     }
 
     public String getLastNamePostulant() {
         return lastNamePostulant;
     }
 
-    public PostulantJobResource setLastNamePostulant(String lastNamePostulant) {
+    public void setLastNamePostulant(String lastNamePostulant) {
         this.lastNamePostulant = lastNamePostulant;
-        return this;
     }
 
     public String getEmailPostulant() {
         return emailPostulant;
     }
 
-    public PostulantJobResource setEmailPostulant(String emailPostulant) {
+    public void setEmailPostulant(String emailPostulant) {
         this.emailPostulant = emailPostulant;
-        return this;
     }
 }
+
