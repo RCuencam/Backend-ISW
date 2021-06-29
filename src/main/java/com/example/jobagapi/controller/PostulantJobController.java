@@ -1,9 +1,7 @@
 package com.example.jobagapi.controller;
 
-import com.example.jobagapi.domain.model.JobOffer;
 import com.example.jobagapi.domain.model.PostulantJob;
 import com.example.jobagapi.domain.service.PostulantJobService;
-import com.example.jobagapi.resource.JobOfferResource;
 import com.example.jobagapi.resource.PostulantJobResource;
 import com.example.jobagapi.resource.SavePostulantJobResource;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/api")
 public class PostulantJobController {
     @Autowired
@@ -42,14 +39,28 @@ public class PostulantJobController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary="Get postulants by Id and jobofferId", description="Get postulants by Id and jobofferId", tags={"postulant_jobs"})
 
-    @Operation(summary="Get postulants by jobofferId", description="Get postulants_job by jobofferId", tags={"postulant_jobs"})
-
-    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}")
+    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}/postulantjobs")
     public PostulantJobResource getPostulantByIdAndJobOfferId(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId) {
         return convertToResource(postulantJobService.getPostulantIdByIdAndJobOfferId(postulantId, jobofferId));
+    }
+
+
+    @Operation(summary="Get all postulants by jobofferId", description="Get postulants_job by jobofferId", tags={"postulant_jobs"})
+
+    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}")
+    public PageImpl<PostulantJobResource> getAllPostulantByJobOfferId(
+            @PathVariable Long jobofferId,
+            Pageable pageable) {
+        Page<PostulantJob> postulantJobPage = postulantJobService.getAllPostulantByJobOfferId(jobofferId, pageable);
+        List<PostulantJobResource> resources = postulantJobPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<PostulantJobResource>(resources, pageable, resources.size());
     }
 
     @Operation(summary="Postulant Jobs", description="Create postulantjobs",  tags={"postulant_jobs"})
@@ -61,14 +72,14 @@ public class PostulantJobController {
         return convertToResource(postulantJobService.createPostulantJob(postulantId,jobofferId,convertToEntity(resource)));
     }
 
-@Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
-    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulantjobId}")
+    @Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
+    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs/{postulanjobId}")
     public PostulantJobResource updatePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
-            @PathVariable Long postulantjobId,
+            @PathVariable Long postulanjobtId,
             @Valid @RequestBody SavePostulantJobResource resource) {
-        return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,postulantjobId,convertToEntity(resource)));
+        return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,postulanjobtId,convertToEntity(resource)));
     }
 
     @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and job offer ID",  tags={"postulant_jobs"})
@@ -76,8 +87,8 @@ public class PostulantJobController {
     public ResponseEntity<?> deletePostulantJob(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
-            @PathVariable Long postulantjobId) {
-        return postulantJobService.deletePostulantJob(postulantId, jobofferId, postulantjobId);
+            @PathVariable Long postulanjobtId) {
+        return postulantJobService.deletePostulantJob(postulantId, jobofferId, postulanjobtId);
     }
 
     private PostulantJob convertToEntity(SavePostulantJobResource resource){
