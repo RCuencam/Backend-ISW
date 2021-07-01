@@ -6,10 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface PostulantJobService {
+
     PostulantJob createPostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJob);
-    PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId, PostulantJob postulantJobDetails);
-    ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId);
-    Page<PostulantJob> getAllPostulantJobByPostulantId(Long postulantId, Pageable pageable);
-    Page<PostulantJob> getAllPostulantByJobOfferId(Long jobOfferId, Pageable pageable);
-    PostulantJob getPostulantIdByIdAndJobOfferId(Long postulantId, Long jobOfferId);
+    PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJobRequest);
+    ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId);
+    PostulantJob getPostulantJobById(Long postulantJobId);
+    Page<PostulantJob> getAllPostulantJob(Pageable pageable);
 }
