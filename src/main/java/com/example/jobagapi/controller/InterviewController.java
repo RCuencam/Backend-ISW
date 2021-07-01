@@ -1,12 +1,8 @@
-package com.example.jobagapi.controller;
+ackage com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Interview;
-import com.example.jobagapi.domain.model.JobOffer;
-import com.example.jobagapi.domain.model.PlanPostulant;
 import com.example.jobagapi.domain.service.InterviewService;
 import com.example.jobagapi.resource.InterviewResource;
-import com.example.jobagapi.resource.JobOfferResource;
-import com.example.jobagapi.resource.PlanPostulantResource;
 import com.example.jobagapi.resource.SaveInterviewResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
@@ -43,9 +39,8 @@ public class InterviewController {
     @DeleteMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews/{interviewId}")
     public ResponseEntity<?> deleteInterview(
             @PathVariable Long postulantId,
-            @PathVariable Long jobofferId,
-            @PathVariable Long interviewId) {
-        return interviewService.deleteInterview(postulantId, jobofferId, interviewId);
+            @PathVariable Long jobofferId) {
+        return interviewService.deleteInterview(postulantId, jobofferId);
     }
 
     @Operation(summary="Update interviews by postulant Id and job offer Id", description="Update interviews by postulant Id and job offer Id", tags={"interviews"})
@@ -53,9 +48,27 @@ public class InterviewController {
     public InterviewResource updateInterview(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
-            @PathVariable Long interviewId,
             @Valid @RequestBody SaveInterviewResource resource) {
-        return convertToResource(interviewService.updateInterview(postulantId, jobofferId, interviewId, convertToEntity(resource)));
+        return convertToResource(interviewService.updateInterview(postulantId, jobofferId, convertToEntity(resource)));
+    }
+
+
+    @Operation(summary = "Get All Interview", description = "Get All Interview", tags = {"interviews"})
+    @GetMapping("/interviews")
+    public Page<InterviewResource> getAllInterview(Pageable pageable){
+        Page<Interview> interviewPage = interviewService.getAllInterview(pageable);
+        List<InterviewResource> resources = interviewPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
+    }
+
+    @Operation(summary="Get Interview by Id", description="Get Interview by Id", tags={"interviews"})
+    @GetMapping("/interviews/{interviewId}")
+    public InterviewResource getInterviewById(
+            @PathVariable Long interviewId) {
+        return convertToResource(interviewService.getInterviewById(interviewId));
     }
 
     @Operation(summary="Get interviews", description="Get all interviews by postulant Id", tags={"interviews"})
@@ -80,37 +93,6 @@ public class InterviewController {
                 .map(this::convertToResource)
                 .collect(Collectors.toList());
         return new PageImpl<>(resources, pageable, resources.size());
-    }
-    @Operation(summary="Get interviews by postulant Id and job offer Id", description="Get interviews by postulant Id and job offer Id", tags={"interviews"})
-    @GetMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews")
-    public Page<InterviewResource> getAllInterviewByPostulantIdAndJobOfferId(
-            @PathVariable Long postulantId,
-            @PathVariable Long jobofferId,
-            Pageable pageable) {
-        Page<Interview> interviewPage = interviewService.getAllInterviewByPostulantIdAndJobOfferId(postulantId, jobofferId, pageable);
-        List<InterviewResource> resources = interviewPage.getContent()
-                .stream()
-                .map(this::convertToResource)
-                .collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
-    }
-
-    @Operation(summary = "Get All Interview", description = "Get All Interview", tags = {"interviews"})
-    @GetMapping("/interviews")
-    public Page<InterviewResource> getAllInterview(Pageable pageable){
-        Page<Interview> interviewPage = interviewService.getAllInterview(pageable);
-        List<InterviewResource> resources = interviewPage.getContent()
-                .stream()
-                .map(this::convertToResource)
-                .collect(Collectors.toList());
-        return new PageImpl<>(resources,pageable, resources.size());
-    }
-
-    @Operation(summary="Get Interview by Id", description="Get Interview by Id", tags={"interviews"})
-    @GetMapping("/interviews/{interviewId}")
-    public InterviewResource getInterviewById(
-            @PathVariable Long interviewId) {
-        return convertToResource(interviewService.getInterviewById(interviewId));
     }
 
     private Interview convertToEntity(SaveInterviewResource resource){
