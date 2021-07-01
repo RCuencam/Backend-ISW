@@ -11,12 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company,Long> {
-    Page<Company> findByEmployeerId(Long employeerId, Pageable pageable); //Encontrar por Id
+    public Page<Company> findById (Long Id, Pageable pageable);
 
-    public Optional<Company> findByIdAndEmployeerId(Long id, Long employeerId);
+    Optional<Company> findByEmployeerIdAndSectorId(Long EmployeerId, Long SectorId);
 
-    Page<Company> findBySectorId(Long sectorId, Pageable pageable); //Encontrar por Id
-
-    public Optional<Company> findByIdAndSectorId(Long id, Long sectorId);
-
+    Boolean existsByEmployeerId(Long employeerId);
 }
+
