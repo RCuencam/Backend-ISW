@@ -10,10 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface PostulantJobRepository extends JpaRepository<PostulantJob, Long> {
-    public Page<PostulantJob> findById (Long Id, Pageable pageable);
-    public Optional<PostulantJob> findByPostulantIdAndJobOfferId(Long postulantId, Long jobOfferId);
-    Page<PostulantJob> findByPostulantId(Long postulantId, Pageable pageable);
-    Page<PostulantJob> findByJobOfferId(Long jobOfferId, Pageable pageable);
-    Boolean existsByPostulantId(Long postulantId);
-    Boolean existsByJobOfferId(Long jobOfferId);
+    public Page<PostulantJob> findById(Long Id, Pageable pageable);
+
+    Optional <PostulantJob> findByPostulantIdAndJobOfferId (Long PostulantId, Long JobOfferId);
+
+    Boolean existsByPostulantId (Long postulantId);
+
+    Boolean existsByJobOfferId (Long jobOfferId);
 }
