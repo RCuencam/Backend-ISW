@@ -3,9 +3,10 @@ package com.example.jobagapi.service;
 import com.example.jobagapi.domain.model.Company;
 import com.example.jobagapi.domain.repository.CompanyRepository;
 import com.example.jobagapi.domain.repository.EmployeerRepository;
+import com.example.jobagapi.domain.repository.SectorRepository;
 import com.example.jobagapi.domain.service.CompanyService;
-import com.example.jobagapi.exception.ResourceNotFoundException;
 
+import com.example.jobagapi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,79 +20,74 @@ public class CompanyServiceImpl implements CompanyService {
     private EmployeerRepository employeerRepository;
 
     @Autowired
+    private SectorRepository sectorRepository;
+
+    @Autowired
     private CompanyRepository companyRepository;
 
-
-
     @Override
-    public Page<Company> getAllCompanysByEmployeerId(Long employeerId, Pageable pageable) {
-        return companyRepository.findByEmployeerId(employeerId,pageable);
-    }
+    public Company createCompany(Long employeerId, Long sectorId, Company company) {
+        if (companyRepository.existsByEmployeerId(employeerId))
+            throw  new ResourceNotFoundException("La compania ya fue registrado por el empleador");
 
-    @Override
-    public Company getCompanyByIdAndEmployeerId(Long employeerId, Long companyId) {
-        return companyRepository.findByIdAndEmployeerId(employeerId,companyId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Lead not found with Id" + companyId+
-                                "and EmployeerId" + employeerId));
-
-    }
-
-    @Override
-    public Page<Company> getAllCompanysBySectorId(Long sectorId, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Company getCompanyByIdAndSectorId(Long sectorId, Long companysId) {
-        return null;
-    }
-
-    @Override
-    public Company createCompany(Long employeerId, Company company) {
-
-        return employeerRepository.findById(employeerId).map(employeer -> {
-
-            company.setEmployeer(employeer);
-            return companyRepository.save(company);
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "Employeer", "Id",employeerId));
-
-    }
-
-
-
-
-
-
-    @Override
-    public Company updateCompany(Long employeerId, Long companyId, Company companyDetails) {
         if(!employeerRepository.existsById(employeerId))
             throw new ResourceNotFoundException("Employeer","Id",employeerId);
 
-        return companyRepository.findById(companyId).map(company -> {
+        else if (!sectorRepository.existsById(sectorId))
+            throw new ResourceNotFoundException("Sector","Id", sectorId);
 
-            company.setName(companyDetails.getName())
-                   ;
-
+        return employeerRepository.findById(employeerId).map(employeer -> {
+            company.setEmployeer(employeer);
+            sectorRepository.findById(sectorId).map(sector -> {
+                company.setSector(sector);
+                return companyRepository.save(company);
+            }).orElseThrow(() -> new ResourceNotFoundException("Employeer Id" + employeer));
             return companyRepository.save(company);
-
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "Company","Id",companyId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Sector Id" + sectorId));
     }
 
     @Override
-    public ResponseEntity<?> deleteCompany(Long employeerId, Long companyId) {
-        if (!companyRepository.existsById(companyId))
+    public Company updateCompany(Long employeerId, Long sectorId, Company companyRequest) {
+
+        if(!employeerRepository.existsById(employeerId))
             throw new ResourceNotFoundException("Employeer","Id",employeerId);
 
-        return companyRepository.findById(companyId).map(company -> {
+        else if (!sectorRepository.existsById(sectorId))
+            throw new ResourceNotFoundException("Sector","Id", sectorId);
+
+        return companyRepository.findByEmployeerIdAndSectorId(employeerId,sectorId).map(company -> {
+            company.setName(companyRequest.getName())
+                    .setDirección(companyRequest.getDirección())
+                    .setRuc(companyRequest.getRuc())
+                    .setLogo(companyRequest.getLogo())
+                    .setDescription(companyRequest.getDescription());
+            return companyRepository.save(company);
+        }).orElseThrow(() -> new ResourceNotFoundException("Employeer Id" + employeerId + "Sector Id" + sectorId));
+    }
+
+    @Override
+    public ResponseEntity<?> deleteCompany(Long employeerId, Long sectorId) {
+
+        if(!employeerRepository.existsById(employeerId))
+            throw new ResourceNotFoundException("Employeer","Id",employeerId);
+
+        else if (!sectorRepository.existsById(sectorId))
+            throw new ResourceNotFoundException("Sector","Id", sectorId);
+
+        return companyRepository.findByEmployeerIdAndSectorId(employeerId,sectorId).map(company -> {
             companyRepository.delete(company);
             return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Employeer Id" +  employeerId + "Sector Id" + sectorId));
+    }
 
+    @Override
+    public Company getCompanyById(Long companyId) {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Company", "Id", companyId));
+    }
 
-        }).orElseThrow(()-> new ResourceNotFoundException(
-                "Company", "Id",companyId));
-
+    @Override
+    public Page<Company> getAllCompany(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 }
