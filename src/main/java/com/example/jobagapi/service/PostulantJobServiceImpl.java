@@ -24,19 +24,16 @@ public class PostulantJobServiceImpl implements PostulantJobService {
     @Override
     public PostulantJob createPostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJob) {
         if(postulantJobRepository.existsByPostulantId(postulantId) && postulantJobRepository.existsByJobOfferId(jobOfferId))
-            throw  new ResourceNotFoundException("El postulante ya postulo a esta oferta");
+            throw  new ResourceNotFoundException("El postulante ya postulo a esta oferta de trabajo");
 
-        //Compruebo que exista el postulant
         if(!postulantRepository.existsById(postulantId))
             throw new ResourceNotFoundException("Postulant","Id",postulantId);
 
-            // Comprobar si exisite el joboffer
         else if (!jobOfferRepository.existsById(jobOfferId))
             throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
 
         return postulantRepository.findById(postulantId).map(postulant -> {
             postulantJob.setPostulant(postulant);
-            //EMPLOYEERREPOSITORY
             jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
                 postulantJob.setJobOffer(jobOffer);
                 return postulantJobRepository.save(postulantJob);
@@ -46,49 +43,40 @@ public class PostulantJobServiceImpl implements PostulantJobService {
     }
 
     @Override
-    public PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId, PostulantJob postulantJobDetails) {
-        //Compruebo que exista el postulant
+    public PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJobDetails) {
         if(!postulantRepository.existsById(postulantId))
             throw new ResourceNotFoundException("Postulant","Id",postulantId);
+
         else if (!jobOfferRepository.existsById(jobOfferId))
             throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
 
-        return postulantJobRepository.findById(postulantJobId).map(postulantJob -> {
+        return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId, jobOfferId).map(postulantJob -> {
             postulantJob.setAceppt(postulantJobDetails.isAceppt());
             return  postulantJobRepository.save(postulantJob);
         }).orElseThrow(() -> new ResourceNotFoundException("Postulant Id" + postulantId + "Job Offer Id" + jobOfferId));
     }
 
     @Override
-    public ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId, Long postulantJobId) {
-        //Compruebo que exista el postulant
+    public ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId) {
         if(!postulantRepository.existsById(postulantId))
             throw new ResourceNotFoundException("Postulant","Id",postulantId);
         else if (!jobOfferRepository.existsById(jobOfferId))
             throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
 
-        return postulantJobRepository.findById(postulantJobId).map(postulantJob -> {
+        return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId, jobOfferId).map(postulantJob -> {
             postulantJobRepository.delete(postulantJob);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Postulant Job","Id",postulantJobId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Postulant Id" + postulantId + "Job Offer Id" + jobOfferId));
     }
 
     @Override
-    public Page<PostulantJob> getAllPostulantJobByPostulantId(Long postulantId, Pageable pageable) {
-        return postulantJobRepository.findByPostulantId(postulantId,pageable);
+    public PostulantJob getPostulantJobById(Long postulantJobId) {
+        return postulantJobRepository.findById(postulantJobId)
+                .orElseThrow(() -> new ResourceNotFoundException("Postulant Job", "Id", postulantJobId));
     }
 
     @Override
-    public Page<PostulantJob> getAllPostulantByJobOfferId(Long jobOfferId, Pageable pageable) {
-        return postulantJobRepository.findByJobOfferId(jobOfferId,pageable);
+    public Page<PostulantJob> getAllPostulantJob(Pageable pageable) {
+        return postulantJobRepository.findAll(pageable);
     }
-
-    @Override
-    public PostulantJob getPostulantIdByIdAndJobOfferId(Long postulantId, Long jobOfferId) {
-        return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId,jobOfferId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "postulantid not found with id" + postulantId +
-                                "and jobOfferId" + jobOfferId));
-    }
-
 }
