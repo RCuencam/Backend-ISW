@@ -3,17 +3,29 @@ package com.example.jobagapi.resource;
 import java.time.LocalDate;
 
 public class InterviewResource {
+
     private Long id;
     private LocalDate date_Interview;
     private LocalDate final_date_Interview;
     private String link_Interview;
-    private Long jobOfferId;
+
+    private Long idPostulant;
+    private String firstnamePostulant;
+    private String lastnamePostulant;
+    private String emailPostulant;
+    private Long numberPostulant;
+    private String passwordPostulant;
+    private String documentPostulant;
+
+    private Long idJobOffer;
+    private String typeJobOffer;
     private String titleJobOffer;
     private String descriptionJobOffer;
-    private Long postulantId;
-    private String firstNamePostulant;
-    private String lastNamePostulant;
-    private String emailPostulant;
+    private LocalDate begin_date_offerJobOffer;
+    private LocalDate final_date_offerJobOffer;
+    private Long salaryJobOffer;
+    private String directionJobOffer;
+
 
     public Long getId() {
         return id;
@@ -51,21 +63,85 @@ public class InterviewResource {
         return this;
     }
 
-    public Long getJobOfferId() {
-        return jobOfferId;
+
+    public Long getIdPostulant() {
+        return idPostulant;
     }
 
-    public InterviewResource setJobOfferId(Long jobOfferId) {
-        this.jobOfferId = jobOfferId;
+    public InterviewResource setIdPostulant(Long idPostulant) {
+        this.idPostulant = idPostulant;
         return this;
     }
 
-    public String getFirstNamePostulant() {
-        return firstNamePostulant;
+    public String getFirstnamePostulant() {
+        return firstnamePostulant;
     }
 
-    public InterviewResource setFirstNamePostulant(String firstNamePostulant) {
-        this.firstNamePostulant = firstNamePostulant;
+    public InterviewResource setFirstnamePostulant(String firstnamePostulant) {
+        this.firstnamePostulant = firstnamePostulant;
+        return this;
+    }
+
+    public String getLastnamePostulant() {
+        return lastnamePostulant;
+    }
+
+    public InterviewResource setLastnamePostulant(String lastnamePostulant) {
+        this.lastnamePostulant = lastnamePostulant;
+        return this;
+    }
+
+    public String getEmailPostulant() {
+        return emailPostulant;
+    }
+
+    public InterviewResource setEmailPostulant(String emailPostulant) {
+        this.emailPostulant = emailPostulant;
+        return this;
+    }
+
+    public Long getNumberPostulant() {
+        return numberPostulant;
+    }
+
+    public InterviewResource setNumberPostulant(Long numberPostulant) {
+        this.numberPostulant = numberPostulant;
+        return this;
+    }
+
+    public String getPasswordPostulant() {
+        return passwordPostulant;
+    }
+
+    public InterviewResource setPasswordPostulant(String passwordPostulant) {
+        this.passwordPostulant = passwordPostulant;
+        return this;
+    }
+
+    public String getDocumentPostulant() {
+        return documentPostulant;
+    }
+
+    public InterviewResource setDocumentPostulant(String documentPostulant) {
+        this.documentPostulant = documentPostulant;
+        return this;
+    }
+
+    public Long getIdJobOffer() {
+        return idJobOffer;
+    }
+
+    public InterviewResource setIdJobOffer(Long idJobOffer) {
+        this.idJobOffer = idJobOffer;
+        return this;
+    }
+
+    public String getTypeJobOffer() {
+        return typeJobOffer;
+    }
+
+    public InterviewResource setTypeJobOffer(String typeJobOffer) {
+        this.typeJobOffer = typeJobOffer;
         return this;
     }
 
@@ -87,39 +163,39 @@ public class InterviewResource {
         return this;
     }
 
-    public Long getPostulantId() {
-        return postulantId;
+    public LocalDate getBegin_date_offerJobOffer() {
+        return begin_date_offerJobOffer;
     }
 
-    public InterviewResource setPostulantId(Long postulantId) {
-        this.postulantId = postulantId;
+    public InterviewResource setBegin_date_offerJobOffer(LocalDate begin_date_offerJobOffer) {
+        this.begin_date_offerJobOffer = begin_date_offerJobOffer;
         return this;
     }
 
-    public String getLasttNamePostulant() {
-        return lastNamePostulant;
+    public LocalDate getFinal_date_offerJobOffer() {
+        return final_date_offerJobOffer;
     }
 
-    public InterviewResource setLasttNamePostulant(String lasttNamePostulant) {
-        this.lastNamePostulant = lasttNamePostulant;
+    public InterviewResource setFinal_date_offerJobOffer(LocalDate final_date_offerJobOffer) {
+        this.final_date_offerJobOffer = final_date_offerJobOffer;
         return this;
     }
 
-    public String getLastNamePostulant() {
-        return lastNamePostulant;
+    public Long getSalaryJobOffer() {
+        return salaryJobOffer;
     }
 
-    public InterviewResource setLastNamePostulant(String lastNamePostulant) {
-        this.lastNamePostulant = lastNamePostulant;
+    public InterviewResource setSalaryJobOffer(Long salaryJobOffer) {
+        this.salaryJobOffer = salaryJobOffer;
         return this;
     }
 
-    public String getEmailPostulant() {
-        return emailPostulant;
+    public String getDirectionJobOffer() {
+        return directionJobOffer;
     }
 
-    public InterviewResource setEmailPostulant(String emailPostulant) {
-        this.emailPostulant = emailPostulant;
+    public InterviewResource setDirectionJobOffer(String directionJobOffer) {
+        this.directionJobOffer = directionJobOffer;
         return this;
     }
 }
