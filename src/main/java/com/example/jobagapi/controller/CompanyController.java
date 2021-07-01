@@ -1,9 +1,12 @@
 package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Company;
+import com.example.jobagapi.domain.model.Interview;
 import com.example.jobagapi.domain.service.CompanyService;
 import com.example.jobagapi.resource.CompanyResource;
+import com.example.jobagapi.resource.InterviewResource;
 import com.example.jobagapi.resource.SaveCompanyResource;
+import com.example.jobagapi.resource.SaveInterviewResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,46 +35,50 @@ public class CompanyController {
     private ModelMapper mapper;
 
 
-    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companies"})
-    @GetMapping("/employeers/{employeerId}/companys")
-    public Page<CompanyResource> getAllCompanysByEmployeerId(@PathVariable Long employeerId, Pageable pageable) {
-        Page<Company> companyPage = companyService.getAllCompanysByEmployeerId(employeerId, pageable);
-        List<CompanyResource> resources = companyPage.getContent().stream().map(
-                this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
-    }
-
-
-    @Operation(summary="Get companys", description="Get companys by employeer Id", tags={"companies"})
-    @GetMapping("/employeers/{employeerId}/companys/{companyId}")
-    public CompanyResource getCompanyByIdAndEmployeerId(@PathVariable Long employeerId, @PathVariable Long companyId) {
-        return convertToResource(companyService.getCompanyByIdAndEmployeerId(employeerId, companyId));
-    }
-
-
- @Operation(summary="Post companys", description="Create companys by employeer Id", tags={"companies"})
-    @PostMapping("/employeers/{employeerId}/companys")
+    @Operation(summary = "Post companys", description = "Create companys by employeer Id", tags = {"companies"})
+    @PostMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource createCompany(
-            @PathVariable Long employeerId, @Valid @RequestBody SaveCompanyResource resource) {
-        return convertToResource(companyService.createCompany(employeerId,convertToEntity(resource)));
+            @PathVariable Long employeerId,
+            @PathVariable Long sectorId,
+            @Valid @RequestBody SaveCompanyResource resource) {
+        return convertToResource(companyService.createCompany(employeerId, sectorId, convertToEntity(resource)));
     }
 
-    @Operation(summary="Put companys", description="Update companys by employeer Id", tags={"companies"})
-    @PutMapping("/employeers/{employeerId}/companys/{companyId}")
+    @Operation(summary="Update Company by Employeer Id and Sector Id", description="Update Company by Employeer Id and Sector Id", tags={"companies"})
+    @PutMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource updateCompany(
             @PathVariable Long employeerId,
-            @PathVariable Long companyId,
+            @PathVariable Long sectorId,
             @Valid @RequestBody SaveCompanyResource resource) {
-        return convertToResource(companyService.updateCompany(employeerId, companyId, convertToEntity(resource)));
+        return convertToResource(companyService.updateCompany(employeerId, sectorId, convertToEntity(resource)));
     }
 
-    @Operation(summary="Delete companys", description="Delete companys by employeer Id", tags={"companies"})
-    @DeleteMapping("/employeers/{employeerId}/companys/{companyId}")
+    @Operation(summary="Delete Company by Employeer Id and Sector Id", description="Delete Company by Employeer Id and Sector Id", tags={"companies"})
+    @DeleteMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public ResponseEntity<?> deleteCompany(
             @PathVariable Long employeerId,
-            @PathVariable Long companyId) {
-        return companyService.deleteCompany(employeerId, companyId);
+            @PathVariable Long sectorId) {
+        return companyService.deleteCompany(employeerId, sectorId);
     }
+
+    @Operation(summary = "Get All Company", description = "Get All Company", tags = {"companies"})
+    @GetMapping("/companys")
+    public Page<CompanyResource> getAllCompany(Pageable pageable){
+        Page<Company> companyPage = companyService.getAllCompany(pageable);
+        List<CompanyResource> resources = companyPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
+    }
+
+    @Operation(summary="Get Company by Id", description="Get Company by Id", tags={"companies"})
+    @GetMapping("/companys/{companyId}")
+    public CompanyResource getInterviewById(
+            @PathVariable Long companyId) {
+        return convertToResource(companyService.getCompanyById(companyId));
+    }
+
 
 
     private Company convertToEntity(SaveCompanyResource resource) {
