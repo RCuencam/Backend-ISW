@@ -1,4 +1,4 @@
-ackage com.example.jobagapi.controller;
+package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.Interview;
 import com.example.jobagapi.domain.service.InterviewService;
@@ -36,7 +36,7 @@ public class InterviewController {
     }
 
     @Operation(summary="Delete interviews by Postulant ID and Job Offer ID", description="Delete interviews by Postulant ID and Job Offer ID", tags={"interviews"})
-    @DeleteMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews/{interviewId}")
+    @DeleteMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews")
     public ResponseEntity<?> deleteInterview(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId) {
@@ -44,7 +44,7 @@ public class InterviewController {
     }
 
     @Operation(summary="Update interviews by postulant Id and job offer Id", description="Update interviews by postulant Id and job offer Id", tags={"interviews"})
-    @PutMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews/{interviewId}")
+    @PutMapping("/postulants/{postulantId}/joboffers/{jobofferId}/interviews")
     public InterviewResource updateInterview(
             @PathVariable Long postulantId,
             @PathVariable Long jobofferId,
