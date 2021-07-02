@@ -1,5 +1,6 @@
 package com.example.jobagapi.domain.repository;
 
+
 import com.example.jobagapi.domain.model.PostulantJob;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,12 @@ public interface PostulantJobRepository extends JpaRepository<PostulantJob, Long
 
     Optional <PostulantJob> findByPostulantIdAndJobOfferId (Long PostulantId, Long JobOfferId);
 
+    Page<PostulantJob> findByPostulantId(Long PostulantId, Pageable pageable);
+
+    Page<PostulantJob> findByJobOfferId(Long JobOfferId, Pageable pageable);
+
     Boolean existsByPostulantId (Long postulantId);
 
     Boolean existsByJobOfferId (Long jobOfferId);
+
 }
