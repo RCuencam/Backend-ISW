@@ -76,6 +76,16 @@ public class PostulantJobServiceImpl implements PostulantJobService {
     }
 
     @Override
+    public Page<PostulantJob> getAllPostulantJobByPostulantId(Long postulantId, Pageable pageable) {
+        return postulantJobRepository.findByPostulantId(postulantId,pageable);
+    }
+
+    @Override
+    public Page<PostulantJob> getAllPostulantJobByJobOfferId(Long jobOfferId, Pageable pageable) {
+        return postulantJobRepository.findByJobOfferId(jobOfferId,pageable);
+    }
+
+    @Override
     public Page<PostulantJob> getAllPostulantJob(Pageable pageable) {
         return postulantJobRepository.findAll(pageable);
     }
