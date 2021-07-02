@@ -1,92 +1,105 @@
-package com.example.jobagapi.service;
+package com.example.jobagapi.controller;
 
 import com.example.jobagapi.domain.model.PostulantJob;
-import com.example.jobagapi.domain.repository.JobOfferRepository;
-import com.example.jobagapi.domain.repository.PostulantJobRepository;
-import com.example.jobagapi.domain.repository.PostulantRepository;
 import com.example.jobagapi.domain.service.PostulantJobService;
-import com.example.jobagapi.exception.ResourceNotFoundException;
+import com.example.jobagapi.resource.PostulantJobResource;
+import com.example.jobagapi.resource.SavePostulantJobResource;
+import io.swagger.v3.oas.annotations.Operation;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
-@Service
-public class PostulantJobServiceImpl implements PostulantJobService {
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
+@RequestMapping("/api")
+public class PostulantJobController {
     @Autowired
-    private PostulantRepository postulantRepository;
+    private PostulantJobService postulantJobService;
     @Autowired
-    private PostulantJobRepository postulantJobRepository;
-    @Autowired
-    private JobOfferRepository jobOfferRepository;
+    private ModelMapper mapper;
 
-    @Override
-    public PostulantJob createPostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJob) {
-        if(postulantJobRepository.existsByPostulantId(postulantId) && postulantJobRepository.existsByJobOfferId(jobOfferId))
-            throw  new ResourceNotFoundException("El postulante ya postulo a esta oferta de trabajo");
 
-        if(!postulantRepository.existsById(postulantId))
-            throw new ResourceNotFoundException("Postulant","Id",postulantId);
-
-        else if (!jobOfferRepository.existsById(jobOfferId))
-            throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
-
-        return postulantRepository.findById(postulantId).map(postulant -> {
-            postulantJob.setPostulant(postulant);
-            jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
-                postulantJob.setJobOffer(jobOffer);
-                return postulantJobRepository.save(postulantJob);
-            }).orElseThrow(() -> new ResourceNotFoundException("Job Offer Id" + jobOfferId));
-            return postulantJobRepository.save(postulantJob);
-        }).orElseThrow(() -> new ResourceNotFoundException("Postulant Id" + postulantId));
+    @Operation(summary="Postulant Jobs", description="Create postulantjobs",  tags={"postulant_jobs"})
+    @PostMapping("/postulants/{postulantId}/joboffers/{jobofferId}/postulantjobs")
+    public PostulantJobResource createJobOffer(
+            @PathVariable Long postulantId,
+            @PathVariable Long jobofferId,
+            @Valid @RequestBody SavePostulantJobResource resource) {
+        return convertToResource(postulantJobService.createPostulantJob(postulantId,jobofferId,convertToEntity(resource)));
     }
 
-    @Override
-    public PostulantJob updatePostulantJob(Long postulantId, Long jobOfferId, PostulantJob postulantJobDetails) {
-        if(!postulantRepository.existsById(postulantId))
-            throw new ResourceNotFoundException("Postulant","Id",postulantId);
-
-        else if (!jobOfferRepository.existsById(jobOfferId))
-            throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
-
-        return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId, jobOfferId).map(postulantJob -> {
-            postulantJob.setAceppt(postulantJobDetails.isAceppt());
-            return  postulantJobRepository.save(postulantJob);
-        }).orElseThrow(() -> new ResourceNotFoundException("Postulant Id" + postulantId + "Job Offer Id" + jobOfferId));
+    @Operation(summary="Put Postulant Jobs", description="Update postulantjobs",  tags={"postulant_jobs"})
+    @PutMapping("/postulant/{postulantId}/joboffers/{jobofferId}/postulantjobs")
+    public PostulantJobResource updatePostulantJob(
+            @PathVariable Long postulantId,
+            @PathVariable Long jobofferId,
+            @Valid @RequestBody SavePostulantJobResource resource) {
+        return convertToResource(postulantJobService.updatePostulantJob(postulantId, jobofferId,convertToEntity(resource)));
     }
 
-    @Override
-    public ResponseEntity<?> deletePostulantJob(Long postulantId, Long jobOfferId) {
-        if(!postulantRepository.existsById(postulantId))
-            throw new ResourceNotFoundException("Postulant","Id",postulantId);
-        else if (!jobOfferRepository.existsById(jobOfferId))
-            throw new ResourceNotFoundException("Job Offer","Id", jobOfferId);
-
-        return postulantJobRepository.findByPostulantIdAndJobOfferId(postulantId, jobOfferId).map(postulantJob -> {
-            postulantJobRepository.delete(postulantJob);
-            return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Postulant Id" + postulantId + "Job Offer Id" + jobOfferId));
+    @Operation(summary="Delete postulant job by postulant ID and job offer ID", description="Delete postulant job by postulant ID and job offer ID",  tags={"postulant_jobs"})
+    @DeleteMapping("/postulants/{postulantId}/joboffers/{jobofferId}/postulantjobs")
+    public ResponseEntity<?> deletePostulantJob(
+            @PathVariable Long postulantId,
+            @PathVariable Long jobofferId) {
+        return postulantJobService.deletePostulantJob(postulantId, jobofferId);
     }
 
-    @Override
-    public PostulantJob getPostulantJobById(Long postulantJobId) {
-        return postulantJobRepository.findById(postulantJobId)
-                .orElseThrow(() -> new ResourceNotFoundException("Postulant Job", "Id", postulantJobId));
+    @Operation(summary = "Get All Postulant Job", description = "Get All Postulant Job", tags = {"postulant_jobs"})
+    @GetMapping("/postulantjobs")
+    public Page<PostulantJobResource> getAllPostulantJob(Pageable pageable){
+        Page<PostulantJob> postulantJobPage = postulantJobService.getAllPostulantJob(pageable);
+        List<PostulantJobResource> resources = postulantJobPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
     }
 
-    @Override
-    public Page<PostulantJob> getAllPostulantJobByPostulantId(Long postulantId, Pageable pageable) {
-        return postulantJobRepository.findByPostulantId(postulantId,pageable);
+    @Operation(summary="Get Postulant Job by Id", description="Get Postulant Job by Id", tags={"postulant_jobs"})
+    @GetMapping("/postulantjobs/{postulantJobId}")
+    public PostulantJobResource getPostulantJobById(
+            @PathVariable Long postulantJobId) {
+        return convertToResource(postulantJobService.getPostulantJobById(postulantJobId));
     }
 
-    @Override
-    public Page<PostulantJob> getAllPostulantJobByJobOfferId(Long jobOfferId, Pageable pageable) {
-        return postulantJobRepository.findByJobOfferId(jobOfferId,pageable);
+    @Operation(summary="Get Postulant Job", description="Get all Postulant Job by postulant Id", tags={"postulant_jobs"})
+    @GetMapping("/postulants/{postulantId}/postulantjobs")
+    public Page<PostulantJobResource> getAllPostulantJobByPostulantId(@PathVariable Long postulantId, Pageable pageable) {
+        Page<PostulantJob> postulantJobPage = postulantJobService.getAllPostulantJobByPostulantId(postulantId, pageable);
+        List<PostulantJobResource> resources = postulantJobPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @Override
-    public Page<PostulantJob> getAllPostulantJob(Pageable pageable) {
-        return postulantJobRepository.findAll(pageable);
+    @Operation(summary="Get Postulant Job", description="Get all Postulant Job by postulant Id", tags={"postulant_jobs"})
+    @GetMapping("/joboffers/{jobofferId}/postulantjobs")
+    public Page<PostulantJobResource> getAllPostulantJobByJobOfferId(
+            @PathVariable Long jobofferId,
+            Pageable pageable) {
+        Page<PostulantJob> postulantJobPage = postulantJobService.getAllPostulantJobByJobOfferId(jobofferId, pageable);
+        List<PostulantJobResource> resources = postulantJobPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    private PostulantJob convertToEntity(SavePostulantJobResource resource){
+        return mapper.map(resource, PostulantJob.class);
+    }
+
+    private PostulantJobResource convertToResource(PostulantJob entity){
+        return mapper.map(entity,PostulantJobResource.class);
     }
 }
