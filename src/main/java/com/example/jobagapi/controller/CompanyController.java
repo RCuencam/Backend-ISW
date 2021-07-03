@@ -36,7 +36,7 @@ public class CompanyController {
 
 
     @Operation(summary = "Post companys", description = "Create companys by employeer Id", tags = {"companies"})
-    @PostMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
+    @PostMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource createCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId,
@@ -45,7 +45,7 @@ public class CompanyController {
     }
 
     @Operation(summary="Update Company by Employeer Id and Sector Id", description="Update Company by Employeer Id and Sector Id", tags={"companies"})
-    @PutMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
+    @PutMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource updateCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId,
@@ -54,7 +54,7 @@ public class CompanyController {
     }
 
     @Operation(summary="Delete Company by Employeer Id and Sector Id", description="Delete Company by Employeer Id and Sector Id", tags={"companies"})
-    @DeleteMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
+    @DeleteMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
     public ResponseEntity<?> deleteCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId) {
@@ -77,6 +77,14 @@ public class CompanyController {
     public CompanyResource getInterviewById(
             @PathVariable Long companyId) {
         return convertToResource(companyService.getCompanyById(companyId));
+    }
+
+    @Operation(summary="Get Company by Employeer Id And Sector Id", description="Get Company by Employeer Id And Sector Id", tags={"companies"})
+    @GetMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
+    public CompanyResource getCompanyByEmployeerIdAndSectorId(
+            @PathVariable Long employeerId,
+            @PathVariable Long sectorId) {
+        return convertToResource(companyService.getCompanyByEmployeerIdAndSectorId(employeerId, sectorId));
     }
     
         @Operation(summary = "Get All Company By Employeer Id", description = "Get All Company By Employeer Id", tags = {"companies"})
