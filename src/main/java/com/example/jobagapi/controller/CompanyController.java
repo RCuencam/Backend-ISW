@@ -80,7 +80,7 @@ public class CompanyController {
     }
     
         @Operation(summary = "Get All Company By Employeer Id", description = "Get All Company By Employeer Id", tags = {"companies"})
-    @GetMapping("/employeer/{employeerId}/companys")
+    @GetMapping("/employeers/{employeerId}/companys")
     public Page<CompanyResource> getAllCompanyByEmployeerId(
             @PathVariable Long employeerId,
             Pageable pageable){
