@@ -145,16 +145,13 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
 
     @Override
     public ProfessionalProfile updateProfessionalProfile(Long postulantId, Long professionalprofileId, ProfessionalProfile professionalprofileDetails) {
-        if(!postulantRepository.existsById(postulantId))
-            throw new ResourceNotFoundException("Postulant","Id",postulantId);
+        ProfessionalProfile professionalProfile = professionalprofileRepository.findById(professionalprofileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Professional Profile","Id",professionalprofileId));
 
-        return professionalprofileRepository.findById(professionalprofileId).map(professionalProfile -> {
-            professionalProfile.setDescription(professionalprofileDetails.getDescription());
-            return professionalprofileRepository.save(professionalProfile);
-
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "ProfessionalProfile","Id",professionalprofileId));
-
+        return professionalprofileRepository.save(
+                professionalProfile.setOcupation(professionalprofileDetails.getOcupation())
+                        .setVideo(professionalprofileDetails.getVideo())
+                        .setDescription(professionalProfile.getDescription()));
     }
 
     @Override
