@@ -80,7 +80,7 @@ public class CompanyController {
     }
 
     @Operation(summary="Get Company by Employeer Id And Sector Id", description="Get Company by Employeer Id And Sector Id", tags={"companies"})
-    @GetMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
+    @GetMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource getCompanyByEmployeerIdAndSectorId(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId) {
