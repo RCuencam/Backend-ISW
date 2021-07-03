@@ -57,7 +57,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         return companyRepository.findByEmployeerIdAndSectorId(employeerId,sectorId).map(company -> {
             company.setName(companyRequest.getName())
-                    .setDirección(companyRequest.getDirección())
+                    .setDireccion(companyRequest.getDireccion())
                     .setRuc(companyRequest.getRuc())
                     .setLogo(companyRequest.getLogo())
                     .setDescription(companyRequest.getDescription());
