@@ -85,8 +85,8 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Company", "Id", companyId));
     }
-    
-        @Override
+
+    @Override
     public Page<Company> getAllCompanyByEmployeerId(Long employeerId, Pageable pageable) {
         return companyRepository.findByEmployeerId(employeerId, pageable);
     }
