@@ -73,48 +73,54 @@ public class ProfessionalProfile{
         return id;
     }
 
-    public void setId(Long id) {
+    public ProfessionalProfile setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getOcupation() {
         return ocupation;
     }
 
-    public void setOcupation(String ocupation) {
+    public ProfessionalProfile setOcupation(String ocupation) {
         this.ocupation = ocupation;
+        return this;
     }
 
     public String getVideo() {
         return video;
     }
 
-    public void setVideo(String video) {
+    public ProfessionalProfile setVideo(String video) {
         this.video = video;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public ProfessionalProfile setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Postulant getPostulant() {
         return postulant;
     }
 
-    public void setPostulant(Postulant postulant) {
+    public ProfessionalProfile setPostulant(Postulant postulant) {
         this.postulant = postulant;
+        return this;
     }
 
     public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public ProfessionalProfile setSkills(List<Skill> skills) {
         this.skills = skills;
+        return this;
     }
 
     public boolean hasSkill(Skill skill) {
@@ -172,15 +178,17 @@ public class ProfessionalProfile{
         return languages;
     }
 
-    public void setLanguages(List<Languages> languages) {
+    public ProfessionalProfile setLanguages(List<Languages> languages) {
         this.languages = languages;
+        return this;
     }
 
     public List<Studies> getStudies() {
         return studies;
     }
 
-    public void setStudies(List<Studies> studies) {
+    public ProfessionalProfile setStudies(List<Studies> studies) {
         this.studies = studies;
+        return this;
     }
 }
