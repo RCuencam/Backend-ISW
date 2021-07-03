@@ -78,6 +78,19 @@ public class CompanyController {
             @PathVariable Long companyId) {
         return convertToResource(companyService.getCompanyById(companyId));
     }
+    
+        @Operation(summary = "Get All Company By Employeer Id", description = "Get All Company By Employeer Id", tags = {"companies"})
+    @GetMapping("/employeer/{employeerId}/companys")
+    public Page<CompanyResource> getAllCompanyByEmployeerId(
+            @PathVariable Long employeerId,
+            Pageable pageable){
+        Page<Company> companyPage = companyService.getAllCompanyByEmployeerId(employeerId, pageable);
+        List<CompanyResource> resources = companyPage.getContent()
+                .stream()
+                .map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources,pageable, resources.size());
+    }
 
 
 
