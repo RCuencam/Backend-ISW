@@ -87,6 +87,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public Company getCompanyByEmployeerIdAndSectorId(Long employeerId, Long sectorId) {
+        return companyRepository.findByEmployeerIdAndSectorId(employeerId, sectorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employeer", "Id", employeerId));
+    }
+
+    @Override
     public Page<Company> getAllCompanyByEmployeerId(Long employeerId, Pageable pageable) {
         return companyRepository.findByEmployeerId(employeerId, pageable);
     }
