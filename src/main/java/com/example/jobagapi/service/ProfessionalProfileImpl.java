@@ -151,7 +151,7 @@ public class ProfessionalProfileImpl implements ProfessionalProfileService {
         return professionalprofileRepository.save(
                 professionalProfile.setOcupation(professionalprofileDetails.getOcupation())
                         .setVideo(professionalprofileDetails.getVideo())
-                        .setDescription(professionalProfile.getDescription()));
+                        .setDescription(professionalprofileDetails.getDescription()));
     }
 
     @Override
