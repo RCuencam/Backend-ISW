@@ -8,6 +8,7 @@ import com.example.jobagapi.domain.service.PostulantService;
 import com.example.jobagapi.domain.service.UserService;
 import com.example.jobagapi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

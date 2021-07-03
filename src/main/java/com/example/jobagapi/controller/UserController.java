@@ -7,6 +7,7 @@ import com.example.jobagapi.domain.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +19,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
+
 @CrossOrigin(origins="http://localhost:4200")
 public class UserController {
+    @Qualifier("userServiceImpl")
     @Autowired
     private UserService userService;
 
