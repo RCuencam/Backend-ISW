@@ -36,7 +36,7 @@ public class CompanyController {
 
 
     @Operation(summary = "Post companys", description = "Create companys by employeer Id", tags = {"companies"})
-    @PostMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
+    @PostMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource createCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId,
@@ -45,7 +45,7 @@ public class CompanyController {
     }
 
     @Operation(summary="Update Company by Employeer Id and Sector Id", description="Update Company by Employeer Id and Sector Id", tags={"companies"})
-    @PutMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
+    @PutMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
     public CompanyResource updateCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId,
@@ -54,7 +54,7 @@ public class CompanyController {
     }
 
     @Operation(summary="Delete Company by Employeer Id and Sector Id", description="Delete Company by Employeer Id and Sector Id", tags={"companies"})
-    @DeleteMapping("/employeer/{employeerId}/sector/{sectorId}/companys")
+    @DeleteMapping("/employeers/{employeerId}/sector/{sectorId}/companys")
     public ResponseEntity<?> deleteCompany(
             @PathVariable Long employeerId,
             @PathVariable Long sectorId) {
