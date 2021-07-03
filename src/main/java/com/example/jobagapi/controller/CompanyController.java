@@ -25,9 +25,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-
-@RequestMapping("/api")
 @CrossOrigin
+@RequestMapping("/api")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
