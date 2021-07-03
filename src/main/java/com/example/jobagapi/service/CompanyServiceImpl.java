@@ -57,7 +57,7 @@ public class CompanyServiceImpl implements CompanyService {
 
         return companyRepository.findByEmployeerIdAndSectorId(employeerId,sectorId).map(company -> {
             company.setName(companyRequest.getName())
-                    .setDirección(companyRequest.getDirección())
+                    .setDireccion(companyRequest.getDireccion())
                     .setRuc(companyRequest.getRuc())
                     .setLogo(companyRequest.getLogo())
                     .setDescription(companyRequest.getDescription());
@@ -84,6 +84,11 @@ public class CompanyServiceImpl implements CompanyService {
     public Company getCompanyById(Long companyId) {
         return companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Company", "Id", companyId));
+    }
+
+    @Override
+    public Page<Company> getAllCompanyByEmployeerId(Long employeerId, Pageable pageable) {
+        return companyRepository.findByEmployeerId(employeerId, pageable);
     }
 
     @Override

@@ -16,7 +16,8 @@ public class SaveCompanyResource {
     private Long ruc;
 
     @Size(max = 100)
-    private String dirección;
+    private String direccion;
+
 
     public String getName() {
         return name;
@@ -54,12 +55,12 @@ public class SaveCompanyResource {
         return this;
     }
 
-    public String getDirección() {
-        return dirección;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public SaveCompanyResource setDirección(String dirección) {
-        this.dirección = dirección;
+    public SaveCompanyResource setDireccion(String direccion) {
+        this.direccion = direccion;
         return this;
     }
 }

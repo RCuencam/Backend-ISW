@@ -7,7 +7,7 @@ public class CompanyResource {
     private String description;
     private String logo;
     private Long ruc;
-    private String dirección;
+    private String direccion;
 
     //Employeer
     private Long idEmployeer;
@@ -69,12 +69,12 @@ public class CompanyResource {
         return this;
     }
 
-    public String getDirección() {
-        return dirección;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public CompanyResource setDirección(String dirección) {
-        this.dirección = dirección;
+    public CompanyResource setDireccion(String direccion) {
+        this.direccion = direccion;
         return this;
     }
 
@@ -168,4 +168,3 @@ public class CompanyResource {
         return this;
     }
 }
-

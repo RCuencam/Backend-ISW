@@ -30,7 +30,7 @@ public class Company extends AuditModel {
 
     @NotNull
     @Size(max = 100)
-    private String dirección;
+    private String direccion;
 
     @OneToOne( fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_employeer_id", nullable = false)
@@ -45,15 +45,15 @@ public class Company extends AuditModel {
     public Company() {
     }
 
-    public Company(Long id, String name, String description, String logo, Long ruc, String dirección) {
+
+    public Company(Long id, String name, String description, String logo, Long ruc, String direccion) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.logo = logo;
         this.ruc = ruc;
-        this.dirección = dirección;
+        this.direccion = direccion;
     }
-
 
     public Long getId() {
         return id;
@@ -100,12 +100,12 @@ public class Company extends AuditModel {
         return this;
     }
 
-    public String getDirección() {
-        return dirección;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public Company setDirección(String dirección) {
-        this.dirección = dirección;
+    public Company setDireccion(String direccion) {
+        this.direccion = direccion;
         return this;
     }
 
