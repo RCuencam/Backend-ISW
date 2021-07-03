@@ -12,5 +12,6 @@ public interface CompanyService {
     Company updateCompany(Long employeerId, Long sectorId, Company companyRequest);
     ResponseEntity<?> deleteCompany(Long employeerId, Long sectorId);
     Company getCompanyById(Long companyId);
+    Page<Company> getAllCompanyByEmployeerId(Long employeerId, Pageable pageable);
     Page<Company> getAllCompany(Pageable pageable);
 }
