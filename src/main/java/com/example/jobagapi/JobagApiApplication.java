@@ -28,7 +28,7 @@ public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://vibrant-ardinghelli-f0df80.netlify.app");
+				registry.addMapping("/**").allowedOrigins("/**");
 			}
 		};
 	}
