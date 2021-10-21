@@ -36,7 +36,7 @@ public class ApplyJobSteps {
 
     @Given("I want a new job")
     public void iWantANewJob() {
-        String url=postUrl + "/api/employeer/" + 2 + "/joboffers";
+        String url=postUrl + "/api/employeers/" + 2 + "/joboffers";
         String allJobs=restTemplate.getForObject(url, String.class);
         log.info(allJobs);
         assertTrue(!allJobs.isEmpty());
@@ -77,7 +77,7 @@ public class ApplyJobSteps {
 
     @Then("I should be able to see my newly job")
     public void iShouldBeAbleToSeeMyNewlyJob() {
-        String url=postUrl + "/api/jobOffer/" + jobOfferId + "/employeer/1";
+        String url=postUrl + "/api/jobOffers/" + jobOfferId + "/employeers/1";
         JobOffer job=restTemplate.getForObject(url,JobOffer.class);
         assertNotNull(job);
     }

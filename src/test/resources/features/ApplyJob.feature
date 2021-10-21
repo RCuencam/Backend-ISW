@@ -8,7 +8,7 @@ Feature: Post Job Functionality
 
     Examples:
     | id | salary |
-    | 1  | 940    |
+    | 10  | 940    |
 
   Scenario Outline: As a postulant i dont want postulate a jobs with low minimum salary
     Given I want a new job

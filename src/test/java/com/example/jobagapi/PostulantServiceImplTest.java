@@ -37,10 +37,10 @@ public class PostulantServiceImplTest {
     @Test
     @DisplayName("when SavePostulant With Valid Postulant Then Returns Success") //happy path
     public void whenSavePostulantWithValidPostulantThenReturnsSuccess() {
-        Long id = 1L;
+        Long id = 10L;
         String name = "example@upc.edu.pe";
         String password = "Nota#20";
-        Postulant postulant = new Postulant(id, name, "Villegas", "email", 2L, password, "document","civil");
+        Postulant postulant = new Postulant(id, name, "Villegas", "email", 254L, password, "document","civil");
         Postulant savedPostulant = postulantRepository.save(postulant);
         assertNotNull(savedPostulant);
     }
