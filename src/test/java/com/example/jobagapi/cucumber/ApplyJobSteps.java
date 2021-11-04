@@ -8,7 +8,10 @@ import io.cucumber.java.en.Then;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.jni.Local;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,10 +22,9 @@ import java.time.LocalDate;
 import java.util.Random;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 @Log4j2
-@RunWith(SpringRunner.class)
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class ApplyJobSteps {
 
@@ -56,9 +58,9 @@ public class ApplyJobSteps {
 
         LocalDate data=LocalDate.now();
         String employeerUrl=postUrl+"/api/employeers";
-        Employeer newEmployeer=new Employeer(id,"example","example","example",123L,"example","example","example");
+        Employeer newEmployeer=new Employeer(id,"example","example","example2",1232L,"example","example","example");
         Employeer employeer=restTemplate.postForObject(employeerUrl,newEmployeer,Employeer.class);
-        String url=postUrl + "/api/employeers/" + 1 + "/joboffers";
+        String url=postUrl + "/api/employeers/" + 7 + "/joboffers";
         JobOffer newJob= new JobOffer();
         newJob.setId(id);
         newJob.setSalary(salary);
